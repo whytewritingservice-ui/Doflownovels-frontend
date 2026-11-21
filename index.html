@@ -1,0 +1,7704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#07070b">
+<title>Doflownovels — Read. Discover. Support Authors.</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg: #07070b;
+  --bg-soft: #0d0d14;
+  --text: #f4f4f5;
+  --muted: #a1a1aa;
+  --accent: #8b5cf6;
+  --accent-2: #6366f1;
+  --card: rgba(20, 20, 28, 0.72);
+  --glass-border: rgba(255, 255, 255, 0.10);
+  --success: #10b981;
+  --danger: #ef4444;
+  --warning: #f59e0b;
+  --radius: 18px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Poppins", system-ui, sans-serif;
+  overflow-x: hidden;
+  padding-bottom: 96px;
+}
+
+body.light-mode {
+  --bg: #f8fafc;
+  --bg-soft: #ffffff;
+  --text: #1e293b;
+  --muted: #64748b;
+  --card: rgba(255, 255, 255, 0.88);
+  --glass-border: rgba(15, 23, 42, 0.10);
+}
+
+body.sepia-mode {
+  --bg: #f4ecd8;
+  --bg-soft: #fffaf0;
+  --text: #433422;
+  --muted: #7c6a52;
+  --card: rgba(255, 250, 240, 0.90);
+  --glass-border: rgba(67, 52, 34, 0.12);
+  --accent: #b45309;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.glow-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(139, 92, 246, 0.18), transparent 45%),
+    radial-gradient(circle at 85% 15%, rgba(99, 102, 241, 0.16), transparent 45%),
+    radial-gradient(circle at 50% 100%, rgba(139, 92, 246, 0.10), transparent 55%);
+  pointer-events: none;
+}
+
+#weather-container {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.container {
+  width: 100%;
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 18px 16px 120px;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  padding: 20px;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.28);
+  margin-bottom: 18px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  border: none;
+  border-radius: 14px;
+  padding: 15px 18px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform 0.18s ease, opacity 0.18s ease;
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn-ghost {
+  background: transparent;
+  border: 1px solid var(--glass-border);
+  color: var(--text);
+}
+
+.btn-danger {
+  background: var(--danger);
+}
+
+.btn-sm {
+  width: auto;
+  padding: 9px 14px;
+  font-size: 13px;
+  border-radius: 10px;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid var(--glass-border);
+  background: rgba(0, 0, 0, 0.22);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 14px;
+  outline: none;
+  margin-bottom: 14px;
+}
+
+body.light-mode input,
+body.light-mode select,
+body.light-mode textarea {
+  background: rgba(255, 255, 255, 0.78);
+}
+
+body.sepia-mode input,
+body.sepia-mode select,
+body.sepia-mode textarea {
+  background: rgba(255, 250, 240, 0.80);
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--accent);
+}
+
+label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.25;
+}
+
+.muted {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 24px 0 12px;
+}
+
+.section-title h2 {
+  font-size: 19px;
+  font-weight: 800;
+}
+
+.chip-row {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 6px;
+  scrollbar-width: none;
+}
+
+.chip-row::-webkit-scrollbar {
+  display: none;
+}
+
+.chip {
+  flex: 0 0 auto;
+  padding: 9px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--glass-border);
+  background: var(--card);
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.chip.active {
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  border-color: transparent;
+  color: #ffffff;
+}
+
+.book-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 14px;
+}
+
+.book-card {
+  background: var(--card);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.18s ease;
+}
+
+.book-card:active {
+  transform: scale(0.97);
+}
+
+.book-cover {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  display: block;
+  background: #17171f;
+}
+
+.book-info {
+  padding: 10px 12px 12px;
+}
+
+.book-title {
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.3;
+  margin-bottom: 3px;
+}
+
+.book-author {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.05),
+    rgba(255, 255, 255, 0.14),
+    rgba(255, 255, 255, 0.05)
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+  border-radius: 12px;
+}
+
+@keyframes shimmer {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}
+
+.app-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 16px;
+  background: rgba(7, 7, 11, 0.72);
+  border-bottom: 1px solid var(--glass-border);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+body.light-mode .app-topbar,
+body.sepia-mode .app-topbar {
+  background: rgba(255, 255, 255, 0.75);
+}
+
+.brand {
+  font-size: 19px;
+  font-weight: 900;
+  background: linear-gradient(135deg, #c4b5fd, #818cf8);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.icon-btn {
+  background: var(--card);
+  border: 1px solid var(--glass-border);
+  color: var(--text);
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.search-wrap {
+  margin-bottom: 14px;
+}
+
+.search-wrap input {
+  margin-bottom: 0;
+  border-radius: 999px;
+  padding: 15px 18px;
+}
+
+.page {
+  display: none;
+}
+
+.page.active {
+  display: block;
+  animation: fadeIn 0.25s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.bottom-nav {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 4px;
+  padding: 8px 10px calc(8px + env(safe-area-inset-bottom));
+  background: rgba(7, 7, 11, 0.82);
+  border-top: 1px solid var(--glass-border);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+body.light-mode .bottom-nav,
+body.sepia-mode .bottom-nav {
+  background: rgba(255, 255, 255, 0.88);
+}
+
+.nav-btn {
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 7px 0;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.nav-btn span {
+  font-size: 10px;
+}
+
+.nav-btn.active {
+  color: var(--accent);
+  background: rgba(139, 92, 246, 0.12);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+</style>
+  </head>
+  <body>
+<div class="glow-bg"></div>
+<div id="weather-container"></div>
+
+<div id="toast" class="hidden"></div>
+
+<div id="login-screen" class="container" style="min-height:100dvh;display:flex;flex-direction:column;justify-content:center;text-align:center;">
+  <img
+    id="login-logo"
+    src="https://i.postimg.cc/FR8HwMSk/Messenger-creation-2478717422960483.jpg"
+    alt="Doflownovels"
+    style="width:170px;border-radius:24px;margin:0 auto 22px;display:block;box-shadow:0 0 45px rgba(139,92,246,0.35);">
+
+  <h1 style="font-size:34px;font-weight:900;margin-bottom:8px;">Doflownovels</h1>
+  <p class="muted" style="margin-bottom:28px;">
+    Discover stories. Support authors. Unlock worlds.
+  </p>
+
+  <button class="btn" style="max-width:320px;margin:0 auto;" onclick="loginWithGoogle()">
+    Continue with Google
+  </button>
+
+  <p class="muted" style="margin-top:18px;">
+    Free to join. Authors can publish and receive tips immediately.
+  </p>
+</div>
+
+<div id="app" class="hidden">
+  <header class="app-topbar">
+    <div>
+      <h1 class="brand">Doflownovels</h1>
+      <p class="muted" id="welcome-text">Welcome back</p>
+    </div>
+
+    <button class="icon-btn" onclick="openMenu()">☰</button>
+  </header>
+
+  <main id="page-home" class="page active">
+    <div class="container">
+      <div class="search-wrap">
+        <input
+          id="search-input"
+          type="search"
+          placeholder="Search books, authors or genres..."
+          oninput="filterBooks()">
+      </div>
+
+      <div class="chip-row" id="genre-chips">
+        <button class="chip active" data-genre="all" onclick="selectGenre('all')">All</button>
+        <button class="chip" data-genre="romance" onclick="selectGenre('romance')">Romance</button>
+        <button class="chip" data-genre="fantasy" onclick="selectGenre('fantasy')">Fantasy</button>
+        <button class="chip" data-genre="thriller" onclick="selectGenre('thriller')">Thriller</button>
+        <button class="chip" data-genre="horror" onclick="selectGenre('horror')">Horror</button>
+        <button class="chip" data-genre="scifi" onclick="selectGenre('scifi')">Sci-Fi</button>
+        <button class="chip" data-genre="drama" onclick="selectGenre('drama')">Drama</button>
+        <button class="chip" data-genre="comedy" onclick="selectGenre('comedy')">Comedy</button>
+      </div>
+
+      <div id="continue-reading-section" class="hidden">
+        <div class="section-title">
+          <h2>Continue reading</h2>
+        </div>
+        <div id="continue-reading-list" class="book-grid"></div>
+      </div>
+
+      <div class="section-title">
+        <h2>Featured</h2>
+      </div>
+
+      <div id="featured-book" class="card">
+        <div class="skeleton" style="height:180px;"></div>
+      </div>
+
+      <div class="section-title">
+        <h2>Trending</h2>
+      </div>
+
+      <div id="trending-books" class="book-grid">
+        <div class="skeleton" style="height:230px;"></div>
+        <div class="skeleton" style="height:230px;"></div>
+        <div class="skeleton" style="height:230px;"></div>
+      </div>
+
+      <div class="section-title">
+        <h2>New releases</h2>
+      </div>
+
+      <div id="new-books" class="book-grid">
+        <div class="skeleton" style="height:230px;"></div>
+        <div class="skeleton" style="height:230px;"></div>
+        <div class="skeleton" style="height:230px;"></div>
+      </div>
+
+      <div class="section-title">
+        <h2>Discover by mood</h2>
+      </div>
+
+      <div class="chip-row" id="mood-chips">
+        <button class="chip" data-mood="cosy" onclick="selectMood('cosy')">Cosy</button>
+        <button class="chip" data-mood="dark" onclick="selectMood('dark')">Dark</button>
+        <button class="chip" data-mood="romantic" onclick="selectMood('romantic')">Romantic</button>
+        <button class="chip" data-mood="thrilling" onclick="selectMood('thrilling')">Thrilling</button>
+        <button class="chip" data-mood="emotional" onclick="selectMood('emotional')">Emotional</button>
+        <button class="chip" data-mood="funny" onclick="selectMood('funny')">Funny</button>
+        <button class="chip" data-mood="mysterious" onclick="selectMood('mysterious')">Mysterious</button>
+      </div>
+
+      <div id="mood-results" class="book-grid" style="margin-top:14px;"></div>
+    </div>
+  </main>
+
+  <main id="page-library" class="page">
+    <div class="container">
+      <div class="section-title">
+        <h2>My Library</h2>
+      </div>
+
+      <div id="library-books" class="book-grid">
+        <p class="muted">Loading your library...</p>
+      </div>
+    </div>
+  </main>
+
+  <main id="page-contests" class="page">
+    <div class="container">
+      <div class="section-title">
+        <h2>Contests</h2>
+      </div>
+
+      <div class="card">
+        <h3 style="margin-bottom:8px;">Reading Sprint</h3>
+        <p class="muted" style="margin-bottom:14px;">
+          Read as many chapters as you can and climb the leaderboard.
+        </p>
+        <button class="btn" onclick="showToast('Reading Sprint will open in a later batch.')">
+          Join contest
+        </button>
+      </div>
+
+      <div class="card">
+        <h3 style="margin-bottom:8px;">Streak Challenge</h3>
+        <p class="muted" style="margin-bottom:14px;">
+          Read every day and earn badges, rewards and Codo Bills.
+        </p>
+        <button class="btn btn-ghost" onclick="showToast('Streak Challenge will open in a later batch.')">
+          View challenge
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <main id="page-profile" class="page">
+    <div class="container">
+      <div class="section-title">
+        <h2>Profile</h2>
+      </div>
+
+      <div id="profile-box" class="card">
+        <p class="muted">Loading profile...</p>
+      </div>
+
+      <button class="btn btn-danger" onclick="logoutUser()">
+        Log out
+      </button>
+    </div>
+  </main>
+</div>
+
+<nav class="bottom-nav">
+  <button class="nav-btn active" data-page="home" onclick="switchPage('home')">
+    <span style="font-size:18px;">🏠</span>
+    <span>Home</span>
+  </button>
+
+  <button class="nav-btn" data-page="library" onclick="switchPage('library')">
+    <span style="font-size:18px;">📚</span>
+    <span>Library</span>
+  </button>
+
+  <button class="nav-btn" data-page="contests" onclick="switchPage('contests')">
+    <span style="font-size:18px;">🏆</span>
+    <span>Contests</span>
+  </button>
+
+  <button class="nav-btn" data-page="profile" onclick="switchPage('profile')">
+    <span style="font-size:18px;">👤</span>
+    <span>Profile</span>
+  </button>
+    </nav>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyAYG03hjpqiFpJV1Rz5go40FPK5bx7NSOI",
+  authDomain: "doflownovels.firebaseapp.com",
+  projectId: "doflownovels",
+  storageBucket: "doflownovels.firebasestorage.app",
+  messagingSenderId: "113432065645",
+  appId: "1:113432065645:web:f5126915ec15ab41ab7164"
+};
+
+firebase.initializeApp(firebaseConfig);
+
+const auth = firebase.auth();
+const db = firebase.firestore();
+
+const BACKEND_URL = "https://doflownovels-backend.onrender.com";
+const LOGO_URL = "https://i.postimg.cc/FR8HwMSk/Messenger-creation-2478717422960483.jpg";
+
+let currentUser = null;
+let currentUserDoc = null;
+let allBooks = [];
+let selectedGenre = "all";
+let selectedMood = "";
+let searchQuery = "";
+
+function showToast(message, type) {
+  const toast = document.getElementById("toast");
+  if (!toast) return;
+
+  toast.textContent = message;
+  toast.classList.remove("hidden");
+
+  clearTimeout(window.toastTimer);
+
+  window.toastTimer = setTimeout(function () {
+    toast.classList.add("hidden");
+  }, 3200);
+}
+
+function switchPage(page) {
+  const pages = document.querySelectorAll(".page");
+
+  for (let i = 0; i < pages.length; i++) {
+    pages[i].classList.remove("active");
+  }
+
+  const targetPage = document.getElementById("page-" + page);
+
+  if (targetPage) {
+    targetPage.classList.add("active");
+  }
+
+  const navButtons = document.querySelectorAll(".nav-btn");
+
+  for (let i = 0; i < navButtons.length; i++) {
+    const button = navButtons[i];
+
+    if (button.dataset.page === page) {
+      button.classList.add("active");
+    } else {
+      button.classList.remove("active");
+    }
+  }
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+}
+
+function openMenu() {
+  showToast("Author Studio will open in Batch 4.");
+}
+
+function loginWithGoogle() {
+  const provider = new firebase.auth.GoogleAuthProvider();
+
+  provider.setCustomParameters({
+    prompt: "select_account"
+  });
+
+  auth.signInWithRedirect(provider).catch(function (error) {
+    console.error(error);
+    showToast("Google sign-in failed. Please try again.");
+  });
+}
+
+function logoutUser() {
+  auth.signOut().then(function () {
+    showToast("You have logged out.");
+  }).catch(function (error) {
+    console.error(error);
+    showToast("Could not log out. Please try again.");
+  });
+}
+
+function escapeHtml(value) {
+  return String(value || "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+function getBookAuthor(book) {
+  return book.authorName || book.penName || "Unknown author";
+}
+
+function getBookGenre(book) {
+  return String(book.genre || book.category || "all").toLowerCase();
+}
+
+function getBookMood(book) {
+  return String(book.mood || book.vibe || "").toLowerCase();
+}
+
+function renderBookGrid(containerId, books) {
+  const container = document.getElementById(containerId);
+
+  if (!container) return;
+
+  if (!books || books.length === 0) {
+    container.innerHTML = '<p class="muted">No books available yet.</p>';
+    return;
+  }
+
+  let html = "";
+
+  for (let i = 0; i < books.length; i++) {
+    const book = books[i];
+    const title = escapeHtml(book.title || "Untitled");
+    const author = escapeHtml(getBookAuthor(book));
+    const cover = escapeHtml(book.cover || LOGO_URL);
+
+    html += `
+      <div class="book-card" onclick="openBook('${escapeHtml(book.id)}')">
+        <img class="book-cover" src="${cover}" alt="${title}">
+        <div class="book-info">
+          <div class="book-title">${title}</div>
+          <div class="book-author">${author}</div>
+        </div>
+      </div>
+    `;
+  }
+
+  container.innerHTML = html;
+}
+
+function renderFeaturedBook(book) {
+  const container = document.getElementById("featured-book");
+
+  if (!container || !book) return;
+
+  const title = escapeHtml(book.title || "Untitled");
+  const author = escapeHtml(getBookAuthor(book));
+  const cover = escapeHtml(book.cover || LOGO_URL);
+
+  container.innerHTML = `
+    <div style="display:flex;gap:14px;align-items:flex-start;">
+      <img
+        src="${cover}"
+        alt="${title}"
+        style="width:100px;height:150px;object-fit:cover;border-radius:12px;">
+
+      <div style="flex:1;">
+        <span class="chip active" style="display:inline-block;margin-bottom:8px;">
+          Featured
+        </span>
+
+        <h3 style="font-size:19px;font-weight:800;margin-bottom:5px;">
+          ${title}
+        </h3>
+
+        <p class="muted" style="margin-bottom:10px;">
+          by ${author}
+        </p>
+
+        <button class="btn btn-sm" onclick="openBook('${escapeHtml(book.id)}')">
+          Read now
+        </button>
+      </div>
+    </div>
+  `;
+}
+
+function openBook(bookId) {
+  showToast("Book reader will open in Batch 2. Book ID: " + bookId);
+}
+
+function selectGenre(genre) {
+  selectedGenre = genre;
+
+  const chips = document.querySelectorAll("#genre-chips .chip");
+
+  for (let i = 0; i < chips.length; i++) {
+    const chip = chips[i];
+
+    if (chip.dataset.genre === genre) {
+      chip.classList.add("active");
+    } else {
+      chip.classList.remove("active");
+    }
+  }
+
+  filterBooks();
+}
+
+function selectMood(mood) {
+  if (selectedMood === mood) {
+    selectedMood = "";
+  } else {
+    selectedMood = mood;
+  }
+
+  const chips = document.querySelectorAll("#mood-chips .chip");
+
+  for (let i = 0; i < chips.length; i++) {
+    const chip = chips[i];
+
+    if (chip.dataset.mood === selectedMood) {
+      chip.classList.add("active");
+    } else {
+      chip.classList.remove("active");
+    }
+  }
+
+  filterBooks();
+}
+
+function filterBooks() {
+  const searchInput = document.getElementById("search-input");
+
+  if (searchInput) {
+    searchQuery = searchInput.value.toLowerCase().trim();
+  }
+
+  const filtered = allBooks.filter(function (book) {
+    const title = String(book.title || "").toLowerCase();
+    const author = String(getBookAuthor(book)).toLowerCase();
+    const genre = getBookGenre(book);
+    const mood = getBookMood(book);
+
+    const matchesSearch =
+      !searchQuery ||
+      title.includes(searchQuery) ||
+      author.includes(searchQuery) ||
+      genre.includes(searchQuery);
+
+    const matchesGenre =
+      selectedGenre === "all" ||
+      genre === selectedGenre ||
+      genre.includes(selectedGenre);
+
+    const matchesMood =
+      !selectedMood ||
+      mood.includes(selectedMood);
+
+    return matchesSearch && matchesGenre && matchesMood;
+  });
+
+  renderBookGrid("trending-books", filtered.slice(0, 12));
+  renderBookGrid("new-books", filtered.slice(0, 12));
+  renderBookGrid("mood-results", filtered.slice(0, 12));
+
+  if (filtered.length > 0) {
+    renderFeaturedBook(filtered[0]);
+  }
+}
+
+async function loadHomeBooks() {
+  try {
+    const snapshot = await db.collection("books")
+      .orderBy("createdAt", "desc")
+      .limit(50)
+      .get();
+
+    allBooks = [];
+
+    snapshot.forEach(function (doc) {
+      const book = doc.data();
+      book.id = doc.id;
+      allBooks.push(book);
+    });
+
+    renderBookGrid("trending-books", allBooks.slice(0, 12));
+    renderBookGrid("new-books", allBooks.slice(0, 12));
+
+    if (allBooks.length > 0) {
+      renderFeaturedBook(allBooks[0]);
+    } else {
+      document.getElementById("featured-book").innerHTML =
+        '<p class="muted">No books have been published yet.</p>';
+    }
+  } catch (error) {
+    console.error(error);
+
+    document.getElementById("trending-books").innerHTML =
+      '<p class="muted">Could not load books. Check your internet connection or Firestore rules.</p>';
+
+    document.getElementById("new-books").innerHTML =
+      '<p class="muted">Could not load books.</p>';
+  }
+}
+
+async function loadUserProfile() {
+  const box = document.getElementById("profile-box");
+
+  if (!box || !currentUser) return;
+
+  box.innerHTML = `
+    <div style="display:flex;align-items:center;gap:14px;margin-bottom:14px;">
+      <img
+        src="${escapeHtml(currentUser.photoURL || LOGO_URL)}"
+        alt="Profile photo"
+        style="width:62px;height:62px;border-radius:50%;object-fit:cover;">
+
+      <div>
+        <h3 style="font-size:18px;font-weight:800;">
+          ${escapeHtml(currentUser.displayName || "Reader")}
+        </h3>
+        <p class="muted">${escapeHtml(currentUser.email || "")}</p>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;">
+      <div class="card" style="margin:0;text-align:center;">
+        <div style="font-size:20px;font-weight:900;">0</div>
+        <div class="muted">Books read</div>
+      </div>
+
+      <div class="card" style="margin:0;text-align:center;">
+        <div style="font-size:20px;font-weight:900;">0</div>
+        <div class="muted">Day streak</div>
+      </div>
+
+      <div class="card" style="margin:0;text-align:center;">
+        <div style="font-size:20px;font-weight:900;">0</div>
+        <div class="muted">Codo Bills</div>
+      </div>
+    </div>
+  `;
+}
+
+auth.getRedirectResult().catch(function (error) {
+  console.error(error);
+});
+
+auth.onAuthStateChanged(async function (user) {
+  if (!user) {
+    currentUser = null;
+    currentUserDoc = null;
+
+    document.getElementById("login-screen").classList.remove("hidden");
+    document.getElementById("app").classList.add("hidden");
+    return;
+  }
+
+  currentUser = user;
+
+  document.getElementById("login-screen").classList.add("hidden");
+  document.getElementById("app").classList.remove("hidden");
+
+  document.getElementById("welcome-text").textContent =
+    "Welcome back, " + (user.displayName || "Reader");
+
+  await loadHomeBooks();
+  await loadUserProfile();
+});
+  </script>
+  <style>
+#toast {
+  position: fixed;
+  left: 50%;
+  bottom: 108px;
+  transform: translateX(-50%);
+  z-index: 10000;
+  max-width: 90%;
+  padding: 13px 18px;
+  border-radius: 14px;
+  background: rgba(20, 20, 28, 0.92);
+  border: 1px solid rgba(139, 92, 246, 0.45);
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+body.light-mode #toast,
+body.sepia-mode #toast {
+  background: rgba(255, 255, 255, 0.94);
+  color: #1e293b;
+}
+</style>
+    <!-- BATCH 2A START: READER STYLES AND ADMIN ERROR CONSOLE -->
+
+<style>
+#admin-error-console {
+  position: fixed;
+  inset: auto 12px 108px 12px;
+  z-index: 99999;
+  max-height: 48vh;
+  overflow: auto;
+  padding: 16px;
+  border-radius: 16px;
+  background: rgba(10, 10, 14, 0.97);
+  border: 1px solid rgba(239, 68, 68, 0.55);
+  color: #fecaca;
+  font-family: monospace;
+  font-size: 12px;
+  line-height: 1.55;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+#admin-error-console h3 {
+  color: #ef4444;
+  font-family: "Poppins", sans-serif;
+  font-size: 15px;
+  margin-bottom: 8px;
+}
+
+#admin-error-console pre {
+  white-space: pre-wrap;
+  word-break: break-word;
+  margin: 0 0 12px;
+}
+
+#admin-error-console button {
+  width: auto;
+  padding: 8px 12px;
+  font-size: 12px;
+  border-radius: 8px;
+}
+
+.reader-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  background: var(--bg);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.reader-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 12px 14px;
+  background: rgba(7, 7, 11, 0.78);
+  border-bottom: 1px solid var(--glass-border);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+body.light-mode .reader-topbar,
+body.sepia-mode .reader-topbar {
+  background: rgba(255, 255, 255, 0.80);
+}
+
+.reader-title {
+  font-size: 14px;
+  font-weight: 800;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.reader-body {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 22px 18px 150px;
+}
+
+.chapter-title {
+  font-size: 25px;
+  font-weight: 900;
+  margin-bottom: 8px;
+}
+
+.chapter-meta {
+  margin-bottom: 22px;
+}
+
+.reading-text {
+  font-family: "Merriweather", serif;
+  font-size: var(--reader-font-size, 18px);
+  line-height: var(--reader-line-height, 1.8);
+  word-break: break-word;
+}
+
+.reading-text p {
+  margin-bottom: 20px;
+}
+
+.reader-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  z-index: 600;
+}
+
+.reader-actions {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 88px;
+  z-index: 300;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  padding: 0 14px;
+  flex-wrap: wrap;
+}
+
+.reader-action-btn {
+  background: var(--card);
+  border: 1px solid var(--glass-border);
+  color: var(--text);
+  padding: 11px 16px;
+  border-radius: 999px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.reader-settings {
+  position: fixed;
+  inset: auto 12px 155px 12px;
+  z-index: 400;
+  padding: 18px;
+  border-radius: 18px;
+  background: var(--card);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
+}
+
+.reader-settings h3 {
+  font-size: 16px;
+  margin-bottom: 12px;
+}
+
+.setting-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.setting-row label {
+  margin: 0;
+}
+
+.setting-row select,
+.setting-row input {
+  width: auto;
+  margin: 0;
+  padding: 9px 12px;
+}
+
+.chapter-list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--glass-border);
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+body.light-mode .chapter-list-item,
+body.sepia-mode .chapter-list-item {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+.chapter-list-item h4 {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.chapter-list-item p {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.book-hero {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.book-hero img {
+  width: 118px;
+  height: 172px;
+  object-fit: cover;
+  border-radius: 14px;
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.45);
+}
+
+.book-hero-info {
+  flex: 1;
+}
+
+.book-hero-info h2 {
+  font-size: 23px;
+  font-weight: 900;
+  margin-bottom: 5px;
+}
+
+.badge {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 800;
+  background: rgba(139, 92, 246, 0.18);
+  color: var(--accent);
+  border: 1px solid rgba(139, 92, 246, 0.30);
+  margin-right: 6px;
+  margin-bottom: 8px;
+}
+
+.stat-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.stat-box {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--glass-border);
+  border-radius: 14px;
+  padding: 12px;
+  text-align: center;
+}
+
+body.light-mode .stat-box,
+body.sepia-mode .stat-box {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+.stat-box strong {
+  display: block;
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.stat-box span {
+  font-size: 10px;
+  color: var(--muted);
+}
+
+.action-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.action-row .btn {
+  margin: 0;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.82);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.modal-box {
+  width: 100%;
+  max-width: 420px;
+  padding: 22px;
+  border-radius: 20px;
+  background: var(--bg-soft);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.60);
+}
+
+.modal-box h3 {
+  font-size: 19px;
+  margin-bottom: 8px;
+}
+
+.modal-box p {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 16px;
+}
+</style>
+
+<!-- BATCH 2A END -->
+   <!-- BATCH 2B START: BOOK PAGE, READER, CHAPTER LIST, SETTINGS, ADMIN ERRORS -->
+
+<div id="book-page" class="page hidden">
+  <div class="container">
+    <button class="btn btn-ghost btn-sm" onclick="closeBookPage()">
+      ← Back
+    </button>
+
+    <div id="book-page-content" class="card" style="margin-top:14px;">
+      <div class="skeleton" style="height:220px;"></div>
+    </div>
+
+    <div class="section-title">
+      <h2>Chapters</h2>
+    </div>
+
+    <div id="chapter-list"></div>
+  </div>
+</div>
+
+<div id="reader-screen" class="reader-screen hidden">
+  <div class="reader-progress" id="reader-progress"></div>
+
+  <div class="reader-topbar">
+    <button class="icon-btn" onclick="closeReader()">←</button>
+
+    <div class="reader-title" id="reader-book-title">Loading...</div>
+
+    <button class="icon-btn" onclick="toggleReaderSettings()">⚙️</button>
+  </div>
+
+  <div class="reader-body">
+    <h1 class="chapter-title" id="reader-chapter-title">Loading chapter...</h1>
+
+    <div class="chapter-meta muted" id="reader-chapter-meta"></div>
+
+    <div class="reading-text" id="reader-chapter-content"></div>
+
+    <div style="display:flex;gap:10px;margin-top:30px;">
+      <button class="btn btn-ghost" onclick="previousChapter()">← Previous</button>
+      <button class="btn" onclick="nextChapter()">Next →</button>
+    </div>
+  </div>
+
+  <div class="reader-actions">
+    <button class="reader-action-btn" onclick="bookmarkCurrentChapter()">
+      🔖 Bookmark
+    </button>
+
+    <button class="reader-action-btn" onclick="toggleReaderSettings()">
+      Aa
+    </button>
+
+    <button class="reader-action-btn" onclick="openChapterList()">
+      ☰ Chapters
+    </button>
+  </div>
+
+  <div id="reader-settings-panel" class="reader-settings hidden">
+    <h3>Reading settings</h3>
+
+    <div class="setting-row">
+      <label>Theme</label>
+      <select id="reader-theme" onchange="changeReaderTheme(this.value)">
+        <option value="dark">Dark</option>
+        <option value="light">Light</option>
+        <option value="sepia">Sepia</option>
+      </select>
+    </div>
+
+    <div class="setting-row">
+      <label>Font size</label>
+      <select id="reader-font-size" onchange="changeReaderFontSize(this.value)">
+        <option value="16">Small</option>
+        <option value="18" selected>Normal</option>
+        <option value="20">Large</option>
+        <option value="22">Extra large</option>
+      </select>
+    </div>
+
+    <div class="setting-row">
+      <label>Line spacing</label>
+      <select id="reader-line-height" onchange="changeReaderLineHeight(this.value)">
+        <option value="1.6">Tight</option>
+        <option value="1.8" selected>Normal</option>
+        <option value="2.1">Relaxed</option>
+      </select>
+    </div>
+
+    <button class="btn btn-ghost btn-sm" onclick="toggleReaderSettings()">
+      Close
+    </button>
+  </div>
+</div>
+
+<div id="chapter-list-modal" class="modal-overlay hidden">
+  <div class="modal-box">
+    <h3>Chapters</h3>
+    <p id="chapter-list-book-title" class="muted"></p>
+
+    <div id="chapter-list-modal-items" style="max-height:55vh;overflow-y:auto;"></div>
+
+    <button class="btn btn-ghost" onclick="closeChapterList()">
+      Close
+    </button>
+  </div>
+</div>
+
+<div id="admin-error-console" class="hidden">
+  <h3>⚠️ Admin error console</h3>
+  <pre id="admin-error-details"></pre>
+  <button class="btn btn-danger btn-sm" onclick="closeAdminErrorConsole()">
+    Close
+  </button>
+</div>
+
+<!-- BATCH 2B END --> 
+    <!-- BATCH 2C START: READER JAVASCRIPT, CONTINUE READING, ADMIN ERRORS -->
+
+<script>
+const ADMIN_EMAIL = "whytewritingservice@gmail.com";
+
+let activeBook = null;
+let activeChapterIndex = 0;
+let readerSettings = {
+  theme: "dark",
+  fontSize: 18,
+  lineHeight: 1.8
+};
+
+function isAdminUser(user) {
+  if (!user || !user.email) return false;
+  return String(user.email).toLowerCase() === ADMIN_EMAIL;
+}
+
+function showAdminError(error, location) {
+  if (!isAdminUser(auth.currentUser)) return;
+
+  const consoleBox = document.getElementById("admin-error-console");
+  const details = document.getElementById("admin-error-details");
+
+  if (!consoleBox || !details) return;
+
+  let message = "Unknown error";
+  let stack = "";
+
+  if (error && error.message) {
+    message = error.message;
+  }
+
+  if (error && error.stack) {
+    stack = error.stack;
+  }
+
+  details.textContent =
+    "Location: " + (location || "Unknown") +
+    "\n\nMessage: " + message +
+    "\n\nDetails:\n" + stack;
+
+  consoleBox.classList.remove("hidden");
+}
+
+function closeAdminErrorConsole() {
+  const consoleBox = document.getElementById("admin-error-console");
+  if (consoleBox) {
+    consoleBox.classList.add("hidden");
+  }
+}
+
+window.addEventListener("error", function (event) {
+  showAdminError(event.error || event, "Global JavaScript error");
+});
+
+window.addEventListener("unhandledrejection", function (event) {
+  showAdminError(event.reason || event, "Unhandled promise error");
+});
+
+function getReadingProgress() {
+  try {
+    const saved = localStorage.getItem("doflow_reading_progress");
+    return saved ? JSON.parse(saved) : {};
+  } catch (error) {
+    return {};
+  }
+}
+
+function saveReadingProgress(bookId, chapterIndex, scrollPosition) {
+  try {
+    const progress = getReadingProgress();
+
+    progress[bookId] = {
+      chapterIndex: chapterIndex,
+      scrollPosition: scrollPosition,
+      updatedAt: Date.now()
+    };
+
+    localStorage.setItem(
+      "doflow_reading_progress",
+      JSON.stringify(progress)
+    );
+
+    renderContinueReading();
+  } catch (error) {
+    showAdminError(error, "saveReadingProgress");
+  }
+}
+
+function getBookmarks() {
+  try {
+    const saved = localStorage.getItem("doflow_bookmarks");
+    return saved ? JSON.parse(saved) : {};
+  } catch (error) {
+    return {};
+  }
+}
+
+function saveBookmarks(bookmarks) {
+  try {
+    localStorage.setItem("doflow_bookmarks", JSON.stringify(bookmarks));
+  } catch (error) {
+    showAdminError(error, "saveBookmarks");
+  }
+}
+
+function bookmarkCurrentChapter() {
+  if (!activeBook) return;
+
+  const bookmarks = getBookmarks();
+
+  if (!bookmarks[activeBook.id]) {
+    bookmarks[activeBook.id] = [];
+  }
+
+  const chapter = activeBook.chapters[activeChapterIndex];
+
+  const alreadySaved = bookmarks[activeBook.id].some(function (item) {
+    return item.chapterIndex === activeChapterIndex;
+  });
+
+  if (alreadySaved) {
+    showToast("Chapter already bookmarked.");
+    return;
+  }
+
+  bookmarks[activeBook.id].push({
+    chapterIndex: activeChapterIndex,
+    title: chapter ? chapter.title : "Chapter"
+  });
+
+  saveBookmarks(bookmarks);
+  showToast("Chapter bookmarked.");
+}
+
+function estimateReadingTime(content) {
+  const words = String(content || "")
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean).length;
+
+  const minutes = Math.max(1, Math.round(words / 200));
+  return minutes + " min read";
+}
+
+function formatChapterContent(content) {
+  const text = String(content || "").trim();
+
+  if (!text) {
+    return "<p>This chapter does not have any content yet.</p>";
+  }
+
+  return text
+    .split(/\n\s*\n/)
+    .map(function (paragraph) {
+      return "<p>" + escapeHtml(paragraph).replaceAll("\n", "<br>") + "</p>";
+    })
+    .join("");
+}
+
+function openBook(bookId) {
+  try {
+    const book = allBooks.find(function (item) {
+      return item.id === bookId;
+    });
+
+    if (!book) {
+      showToast("Book not found.");
+      return;
+    }
+
+    activeBook = book;
+    activeChapterIndex = 0;
+
+    renderBookPage(book);
+    switchPage("book");
+  } catch (error) {
+    showAdminError(error, "openBook");
+    showToast("Could not open this book.");
+  }
+}
+
+function closeBookPage() {
+  switchPage("home");
+}
+
+function renderBookPage(book) {
+  const container = document.getElementById("book-page-content");
+  const chapterList = document.getElementById("chapter-list");
+
+  if (!container || !chapterList) return;
+
+  const chapters = Array.isArray(book.chapters) ? book.chapters : [];
+  const totalMinutes = chapters.reduce(function (total, chapter) {
+    const words = String(chapter.content || "")
+      .trim()
+      .split(/\s+/)
+      .filter(Boolean).length;
+
+    return total + Math.max(1, Math.round(words / 200));
+  }, 0);
+
+  container.innerHTML = `
+    <div class="book-hero">
+      <img
+        src="${escapeHtml(book.cover || LOGO_URL)}"
+        alt="${escapeHtml(book.title || "Book cover")}">
+
+      <div class="book-hero-info">
+        <span class="badge">Book</span>
+        <h2>${escapeHtml(book.title || "Untitled")}</h2>
+        <p class="muted">by ${escapeHtml(getBookAuthor(book))}</p>
+
+        <div class="stat-row">
+          <div class="stat-box">
+            <strong>${chapters.length}</strong>
+            <span>Chapters</span>
+          </div>
+
+          <div class="stat-box">
+            <strong>${totalMinutes}</strong>
+            <span>Min read</span>
+          </div>
+
+          <div class="stat-box">
+            <strong>${Number(book.views || 0)}</strong>
+            <span>Reads</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p style="margin-top:18px;">
+      ${escapeHtml(book.synopsis || "No synopsis has been added for this book yet.")}
+    </p>
+
+    <div class="action-row">
+      ${
+        chapters.length > 0
+          ? `<button class="btn" onclick="startReading()">Start reading</button>`
+          : `<button class="btn btn-ghost" disabled>No chapters yet</button>`
+      }
+    </div>
+  `;
+
+  if (chapters.length === 0) {
+    chapterList.innerHTML =
+      '<p class="muted">This author has not published any chapters yet.</p>';
+    return;
+  }
+
+  let html = "";
+
+  for (let i = 0; i < chapters.length; i++) {
+    const chapter = chapters[i];
+
+    html += `
+      <div class="chapter-list-item" onclick="openChapter(${i})">
+        <div>
+          <h4>${escapeHtml(chapter.title || "Chapter " + (i + 1))}</h4>
+          <p>${estimateReadingTime(chapter.content)}</p>
+        </div>
+
+        <span>→</span>
+      </div>
+    `;
+  }
+
+  chapterList.innerHTML = html;
+}
+
+function startReading() {
+  const progress = getReadingProgress();
+  const saved = progress[activeBook.id];
+
+  if (saved && typeof saved.chapterIndex === "number") {
+    openChapter(saved.chapterIndex, saved.scrollPosition || 0);
+  } else {
+    openChapter(0, 0);
+  }
+}
+
+function openChapter(chapterIndex, scrollPosition) {
+  try {
+    if (!activeBook || !Array.isArray(activeBook.chapters)) {
+      showToast("No chapters available.");
+      return;
+    }
+
+    if (chapterIndex < 0 || chapterIndex >= activeBook.chapters.length) {
+      showToast("Chapter not found.");
+      return;
+    }
+
+    activeChapterIndex = chapterIndex;
+
+    const chapter = activeBook.chapters[chapterIndex];
+
+    document.getElementById("reader-book-title").textContent =
+      activeBook.title || "Untitled";
+
+    document.getElementById("reader-chapter-title").textContent =
+      chapter.title || "Chapter " + (chapterIndex + 1);
+
+    document.getElementById("reader-chapter-meta").textContent =
+      "Chapter " + (chapterIndex + 1) + " of " + activeBook.chapters.length +
+      " • " + estimateReadingTime(chapter.content);
+
+    document.getElementById("reader-chapter-content").innerHTML =
+      formatChapterContent(chapter.content);
+
+    document.getElementById("reader-screen").classList.remove("hidden");
+    document.body.style.overflow = "hidden";
+
+    window.scrollTo({
+      top: 0
+    });
+
+    const readerScreen = document.getElementById("reader-screen");
+    readerScreen.scrollTop = Number(scrollPosition || 0);
+
+    saveReadingProgress(
+      activeBook.id,
+      chapterIndex,
+      Number(scrollPosition || 0)
+    );
+
+    updateReaderProgress();
+  } catch (error) {
+    showAdminError(error, "openChapter");
+    showToast("Could not open this chapter.");
+  }
+}
+
+function closeReader() {
+  document.getElementById("reader-screen").classList.add("hidden");
+  document.body.style.overflow = "";
+}
+
+function nextChapter() {
+  if (!activeBook) return;
+
+  if (activeChapterIndex + 1 >= activeBook.chapters.length) {
+    showToast("You have reached the last chapter.");
+    return;
+  }
+
+  openChapter(activeChapterIndex + 1, 0);
+}
+
+function previousChapter() {
+  if (!activeBook) return;
+
+  if (activeChapterIndex - 1 < 0) {
+    showToast("You are at the first chapter.");
+    return;
+  }
+
+  openChapter(activeChapterIndex - 1, 0);
+}
+
+function updateReaderProgress() {
+  const progressBar = document.getElementById("reader-progress");
+  const readerScreen = document.getElementById("reader-screen");
+
+  if (!progressBar || !readerScreen || !activeBook) return;
+
+  const total = activeBook.chapters.length;
+  const percent = ((activeChapterIndex + 1) / total) * 100;
+
+  progressBar.style.width = percent + "%";
+}
+
+function toggleReaderSettings() {
+  const panel = document.getElementById("reader-settings-panel");
+
+  if (!panel) return;
+
+  panel.classList.toggle("hidden");
+}
+
+function changeReaderTheme(theme) {
+  readerSettings.theme = theme;
+
+  document.body.classList.remove("light-mode");
+  document.body.classList.remove("sepia-mode");
+
+  if (theme === "light") {
+    document.body.classList.add("light-mode");
+  }
+
+  if (theme === "sepia") {
+    document.body.classList.add("sepia-mode");
+  }
+
+  localStorage.setItem("doflow_reader_theme", theme);
+}
+
+function changeReaderFontSize(size) {
+  readerSettings.fontSize = Number(size);
+  document.documentElement.style.setProperty(
+    "--reader-font-size",
+    size + "px"
+  );
+
+  localStorage.setItem("doflow_reader_font_size", size);
+}
+
+function changeReaderLineHeight(height) {
+  readerSettings.lineHeight = Number(height);
+  document.documentElement.style.setProperty(
+    "--reader-line-height",
+    height
+  );
+
+  localStorage.setItem("doflow_reader_line_height", height);
+}
+
+function openChapterList() {
+  if (!activeBook) return;
+
+  const modal = document.getElementById("chapter-list-modal");
+  const title = document.getElementById("chapter-list-book-title");
+  const items = document.getElementById("chapter-list-modal-items");
+
+  if (!modal || !title || !items) return;
+
+  title.textContent = activeBook.title || "Untitled";
+
+  let html = "";
+
+  for (let i = 0; i < activeBook.chapters.length; i++) {
+    const chapter = activeBook.chapters[i];
+
+    html += `
+      <div class="chapter-list-item" onclick="closeChapterList(); openChapter(${i}, 0);">
+        <div>
+          <h4>${escapeHtml(chapter.title || "Chapter " + (i + 1))}</h4>
+          <p>${estimateReadingTime(chapter.content)}</p>
+        </div>
+        <span>→</span>
+      </div>
+    `;
+  }
+
+  items.innerHTML = html;
+  modal.classList.remove("hidden");
+}
+
+function closeChapterList() {
+  const modal = document.getElementById("chapter-list-modal");
+  if (modal) {
+    modal.classList.add("hidden");
+  }
+}
+
+function renderContinueReading() {
+  const section = document.getElementById("continue-reading-section");
+  const list = document.getElementById("continue-reading-list");
+
+  if (!section || !list) return;
+
+  const progress = getReadingProgress();
+  const readingBooks = [];
+
+  for (const bookId in progress) {
+    const book = allBooks.find(function (item) {
+      return item.id === bookId;
+    });
+
+    if (book) {
+      readingBooks.push(book);
+    }
+  }
+
+  if (readingBooks.length === 0) {
+    section.classList.add("hidden");
+    return;
+  }
+
+  section.classList.remove("hidden");
+
+  let html = "";
+
+  for (let i = 0; i < readingBooks.length; i++) {
+    const book = readingBooks[i];
+    const saved = progress[book.id];
+    const chapterIndex = saved.chapterIndex || 0;
+    const chapter = book.chapters && book.chapters[chapterIndex];
+
+    html += `
+      <div class="book-card" onclick="openBook('${escapeHtml(book.id)}')">
+        <img
+          class="book-cover"
+          src="${escapeHtml(book.cover || LOGO_URL)}"
+          alt="${escapeHtml(book.title || "Book cover")}">
+
+        <div class="book-info">
+          <div class="book-title">${escapeHtml(book.title || "Untitled")}</div>
+          <div class="book-author">
+            ${escapeHtml(chapter ? chapter.title : "Continue reading")}
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  list.innerHTML = html;
+}
+
+function loadReaderSettings() {
+  const theme = localStorage.getItem("doflow_reader_theme") || "dark";
+  const fontSize = localStorage.getItem("doflow_reader_font_size") || "18";
+  const lineHeight = localStorage.getItem("doflow_reader_line_height") || "1.8";
+
+  changeReaderTheme(theme);
+  changeReaderFontSize(fontSize);
+  changeReaderLineHeight(lineHeight);
+
+  const themeSelect = document.getElementById("reader-theme");
+  const fontSelect = document.getElementById("reader-font-size");
+  const heightSelect = document.getElementById("reader-line-height");
+
+  if (themeSelect) themeSelect.value = theme;
+  if (fontSelect) fontSelect.value = fontSize;
+  if (heightSelect) heightSelect.value = lineHeight;
+}
+
+document.addEventListener("scroll", function () {
+  const readerScreen = document.getElementById("reader-screen");
+
+  if (!readerScreen || readerScreen.classList.contains("hidden")) return;
+  if (!activeBook) return;
+
+  const scrollPosition = readerScreen.scrollTop;
+
+  saveReadingProgress(
+    activeBook.id,
+    activeChapterIndex,
+    scrollPosition
+  );
+});
+</script>
+
+<!-- BATCH 2C END -->
+    <!-- BATCH 2D START: CONNECT READER TO LOGIN, LIBRARY, AND SETTINGS -->
+
+<script>
+const originalOnAuthStateChanged = auth.onAuthStateChanged;
+
+auth.onAuthStateChanged(async function (user) {
+  try {
+    if (!user) {
+      currentUser = null;
+      currentUserDoc = null;
+
+      document.getElementById("login-screen").classList.remove("hidden");
+      document.getElementById("app").classList.add("hidden");
+      return;
+    }
+
+    currentUser = user;
+
+    document.getElementById("login-screen").classList.add("hidden");
+    document.getElementById("app").classList.remove("hidden");
+
+    document.getElementById("welcome-text").textContent =
+      "Welcome back, " + (user.displayName || "Reader");
+
+    await loadHomeBooks();
+    await loadUserProfile();
+    renderContinueReading();
+    loadReaderSettings();
+
+    if (isAdminUser(user)) {
+      showToast("Admin mode active. Error console enabled.");
+    }
+  } catch (error) {
+    showAdminError(error, "onAuthStateChanged");
+    showToast("Something went wrong while loading your account.");
+  }
+});
+
+async function loadLibraryBooks() {
+  const container = document.getElementById("library-books");
+
+  if (!container) return;
+
+  try {
+    const progress = getReadingProgress();
+    const bookmarks = getBookmarks();
+
+    const savedBookIds = new Set();
+
+    for (const bookId in progress) {
+      savedBookIds.add(bookId);
+    }
+
+    for (const bookId in bookmarks) {
+      savedBookIds.add(bookId);
+    }
+
+    const libraryBooks = allBooks.filter(function (book) {
+      return savedBookIds.has(book.id);
+    });
+
+    if (libraryBooks.length === 0) {
+      container.innerHTML =
+        '<p class="muted">Your library is empty. Open a book to start reading.</p>';
+      return;
+    }
+
+    renderBookGrid("library-books", libraryBooks);
+  } catch (error) {
+    showAdminError(error, "loadLibraryBooks");
+    container.innerHTML =
+      '<p class="muted">Could not load your library.</p>';
+  }
+}
+
+const originalSwitchPage = switchPage;
+
+switchPage = function (page) {
+  originalSwitchPage(page);
+
+  if (page === "library") {
+    loadLibraryBooks();
+  }
+
+  if (page === "home") {
+    renderContinueReading();
+  }
+};
+
+document.addEventListener("keydown", function (event) {
+  const readerScreen = document.getElementById("reader-screen");
+
+  if (!readerScreen || readerScreen.classList.contains("hidden")) return;
+
+  if (event.key === "ArrowRight") {
+    nextChapter();
+  }
+
+  if (event.key === "ArrowLeft") {
+    previousChapter();
+  }
+
+  if (event.key === "Escape") {
+    closeReader();
+    closeChapterList();
+  }
+});
+</script>
+
+<!-- BATCH 2D END -->
+    <!-- BATCH 3A START: ATMOSPHERE ENGINE -->
+
+<style>
+#atmosphere-toggle {
+  position: fixed;
+  right: 14px;
+  bottom: 158px;
+  z-index: 800;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px solid var(--glass-border);
+  background: var(--card);
+  color: var(--text);
+  font-size: 19px;
+  cursor: pointer;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+}
+
+.atmosphere-particle {
+  position: absolute;
+  top: -10%;
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+
+.vibe-rain .atmosphere-particle {
+  width: 2px;
+  height: 78px;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0.42)
+  );
+  animation: atmosphereRain linear infinite;
+}
+
+@keyframes atmosphereRain {
+  to {
+    transform: translateY(120vh);
+  }
+}
+
+.vibe-snow .atmosphere-particle {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #ffffff;
+  filter: blur(1px);
+  opacity: 0.82;
+  animation: atmosphereSnow linear infinite;
+}
+
+@keyframes atmosphereSnow {
+  0% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(18px, 55vh);
+  }
+  100% {
+    transform: translate(-12px, 115vh);
+  }
+}
+
+.vibe-autumn .atmosphere-particle {
+  width: 12px;
+  height: 12px;
+  border-radius: 0 100% 0 100%;
+  background: #d97706;
+  opacity: 0.82;
+  animation: atmosphereAutumn linear infinite;
+}
+
+@keyframes atmosphereAutumn {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate(28px, 55vh) rotate(180deg);
+  }
+  100% {
+    transform: translate(-18px, 115vh) rotate(360deg);
+  }
+}
+
+.vibe-spring .atmosphere-particle {
+  width: 10px;
+  height: 8px;
+  border-radius: 100% 0 100% 0;
+  background: #f9a8d4;
+  opacity: 0.72;
+  animation: atmosphereSpring linear infinite;
+}
+
+@keyframes atmosphereSpring {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate(34px, 55vh) rotate(90deg);
+  }
+  100% {
+    transform: translate(-20px, 115vh) rotate(180deg);
+  }
+}
+
+.vibe-sunny .atmosphere-particle {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #fde047;
+  filter: blur(3px);
+  opacity: 0.65;
+  animation: atmosphereSunny linear infinite;
+}
+
+@keyframes atmosphereSunny {
+  0% {
+    transform: translate(0, 105vh);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.85;
+  }
+  100% {
+    transform: translate(45px, -12vh);
+    opacity: 0;
+  }
+}
+
+.vibe-thunder {
+  animation: atmosphereThunder 9s infinite;
+}
+
+@keyframes atmosphereThunder {
+  0%,
+  93%,
+  97%,
+  100% {
+    background-color: transparent;
+  }
+  94%,
+  96% {
+    background-color: rgba(139, 92, 246, 0.14);
+  }
+  95% {
+    background-color: rgba(226, 232, 240, 0.16);
+  }
+}
+
+.atmosphere-paused .atmosphere-particle {
+  animation-play-state: paused !important;
+}
+
+.atmosphere-paused.vibe-thunder {
+  animation-play-state: paused !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .atmosphere-particle,
+  .vibe-thunder {
+    animation: none !important;
+  }
+}
+</style>
+
+<button
+  id="atmosphere-toggle"
+  onclick="toggleAtmosphere()"
+  title="Turn atmosphere on or off">
+  🌧️
+</button>
+
+<script>
+let atmosphereEnabled = true;
+let currentAtmosphere = "none";
+let atmosphereParticles = [];
+let atmosphereParticleLimit = 55;
+
+function isLowPowerDevice() {
+  const memory = navigator.deviceMemory || 4;
+  const cores = navigator.hardwareConcurrency || 4;
+
+  return memory <= 2 || cores <= 2;
+}
+
+function getAtmosphereParticleLimit() {
+  if (isLowPowerDevice()) {
+    return 25;
+  }
+
+  return 55;
+}
+
+function clearAtmosphere() {
+  const container = document.getElementById("weather-container");
+
+  if (!container) return;
+
+  container.innerHTML = "";
+  container.className = "";
+  atmosphereParticles = [];
+  currentAtmosphere = "none";
+
+  const toggleButton = document.getElementById("atmosphere-toggle");
+  if (toggleButton) {
+    toggleButton.textContent = "🌧️";
+  }
+}
+
+function createAtmosphereParticle(vibe) {
+  const container = document.getElementById("weather-container");
+  if (!container) return;
+
+  const particle = document.createElement("div");
+  particle.className = "atmosphere-particle";
+
+  particle.style.left = Math.random() * 100 + "%";
+  particle.style.animationDuration = (4 + Math.random() * 7) + "s";
+  particle.style.animationDelay = (Math.random() * 5) + "s";
+
+  if (vibe === "rain") {
+    particle.style.top = "-90px";
+  } else {
+    particle.style.top = "-20px";
+  }
+
+  container.appendChild(particle);
+  atmosphereParticles.push(particle);
+}
+
+function setAtmosphere(vibe) {
+  try {
+    if (!atmosphereEnabled || !vibe || vibe === "none") {
+      clearAtmosphere();
+      return;
+    }
+
+    clearAtmosphere();
+
+    const container = document.getElementById("weather-container");
+    if (!container) return;
+
+    const safeVibe = String(vibe).toLowerCase();
+    const allowedVibes = [
+      "rain",
+      "rainy",
+      "thunder",
+      "snow",
+      "autumn",
+      "spring",
+      "sunny"
+    ];
+
+    if (!allowedVibes.includes(safeVibe)) {
+      return;
+    }
+
+    let cssVibe = safeVibe;
+
+    if (safeVibe === "rainy") {
+      cssVibe = "rain";
+    }
+
+    currentAtmosphere = cssVibe;
+    container.classList.add("vibe-" + cssVibe);
+
+    atmosphereParticleLimit = getAtmosphereParticleLimit();
+
+    const count =
+      cssVibe === "thunder" ? 18 : atmosphereParticleLimit;
+
+    for (let i = 0; i < count; i++) {
+      createAtmosphereParticle(cssVibe);
+    }
+
+    const toggleButton = document.getElementById("atmosphere-toggle");
+
+    if (toggleButton) {
+      if (cssVibe === "rain") toggleButton.textContent = "🌧️";
+      if (cssVibe === "thunder") toggleButton.textContent = "⚡";
+      if (cssVibe === "snow") toggleButton.textContent = "❄️";
+      if (cssVibe === "autumn") toggleButton.textContent = "🍂";
+      if (cssVibe === "spring") toggleButton.textContent = "🌸";
+      if (cssVibe === "sunny") toggleButton.textContent = "☀️";
+    }
+  } catch (error) {
+    showAdminError(error, "setAtmosphere");
+  }
+}
+
+function toggleAtmosphere() {
+  atmosphereEnabled = !atmosphereEnabled;
+
+  if (!atmosphereEnabled) {
+    clearAtmosphere();
+    showToast("Atmosphere turned off.");
+    return;
+  }
+
+  if (activeBook && activeBook.vibe) {
+    setAtmosphere(activeBook.vibe);
+  } else {
+    setAtmosphere("rain");
+  }
+
+  showToast("Atmosphere turned on.");
+}
+
+function pauseAtmosphere() {
+  const container = document.getElementById("weather-container");
+  if (!container) return;
+
+  container.classList.add("atmosphere-paused");
+}
+
+function resumeAtmosphere() {
+  const container = document.getElementById("weather-container");
+  if (!container) return;
+
+  container.classList.remove("atmosphere-paused");
+}
+
+document.addEventListener("visibilitychange", function () {
+  if (document.hidden) {
+    pauseAtmosphere();
+  } else {
+    resumeAtmosphere();
+  }
+});
+</script>
+
+<!-- BATCH 3A END -->
+    <!-- BATCH 3B START: CONNECT ATMOSPHERE TO BOOKS -->
+
+<script>
+const originalOpenBookForAtmosphere = openBook;
+
+openBook = function (bookId) {
+  try {
+    const book = allBooks.find(function (item) {
+      return item.id === bookId;
+    });
+
+    if (!book) {
+      showToast("Book not found.");
+      return;
+    }
+
+    activeBook = book;
+    activeChapterIndex = 0;
+
+    if (book.vibeActive !== false) {
+      setAtmosphere(book.vibe || "none");
+    } else {
+      clearAtmosphere();
+    }
+
+    renderBookPage(book);
+    switchPage("book");
+  } catch (error) {
+    showAdminError(error, "openBook atmosphere connection");
+    showToast("Could not open this book.");
+  }
+};
+
+const originalOpenChapterForAtmosphere = openChapter;
+
+openChapter = function (chapterIndex, scrollPosition) {
+  try {
+    if (!activeBook || !Array.isArray(activeBook.chapters)) {
+      showToast("No chapters available.");
+      return;
+    }
+
+    if (chapterIndex < 0 || chapterIndex >= activeBook.chapters.length) {
+      showToast("Chapter not found.");
+      return;
+    }
+
+    activeChapterIndex = chapterIndex;
+
+    const chapter = activeBook.chapters[chapterIndex];
+
+    document.getElementById("reader-book-title").textContent =
+      activeBook.title || "Untitled";
+
+    document.getElementById("reader-chapter-title").textContent =
+      chapter.title || "Chapter " + (chapterIndex + 1);
+
+    document.getElementById("reader-chapter-meta").textContent =
+      "Chapter " + (chapterIndex + 1) + " of " + activeBook.chapters.length +
+      " • " + estimateReadingTime(chapter.content);
+
+    document.getElementById("reader-chapter-content").innerHTML =
+      formatChapterContent(chapter.content);
+
+    document.getElementById("reader-screen").classList.remove("hidden");
+    document.body.style.overflow = "hidden";
+
+    window.scrollTo({
+      top: 0
+    });
+
+    const readerScreen = document.getElementById("reader-screen");
+    readerScreen.scrollTop = Number(scrollPosition || 0);
+
+    saveReadingProgress(
+      activeBook.id,
+      chapterIndex,
+      Number(scrollPosition || 0)
+    );
+
+    updateReaderProgress();
+
+    if (activeBook.vibeActive !== false) {
+      setAtmosphere(activeBook.vibe || "none");
+    } else {
+      clearAtmosphere();
+    }
+  } catch (error) {
+    showAdminError(error, "openChapter atmosphere connection");
+    showToast("Could not open this chapter.");
+  }
+};
+
+const originalCloseReaderForAtmosphere = closeReader;
+
+closeReader = function () {
+  document.getElementById("reader-screen").classList.add("hidden");
+  document.body.style.overflow = "";
+};
+
+const originalLogoutForAtmosphere = logoutUser;
+
+logoutUser = function () {
+  clearAtmosphere();
+
+  auth.signOut().then(function () {
+    showToast("You have logged out.");
+  }).catch(function (error) {
+    showAdminError(error, "logoutUser");
+    showToast("Could not log out. Please try again.");
+  });
+};
+
+const originalLoadHomeBooksForAtmosphere = loadHomeBooks;
+
+loadHomeBooks = async function () {
+  try {
+    const snapshot = await db.collection("books")
+      .orderBy("createdAt", "desc")
+      .limit(50)
+      .get();
+
+    allBooks = [];
+
+    snapshot.forEach(function (doc) {
+      const book = doc.data();
+      book.id = doc.id;
+      allBooks.push(book);
+    });
+
+    renderBookGrid("trending-books", allBooks.slice(0, 12));
+    renderBookGrid("new-books", allBooks.slice(0, 12));
+    renderContinueReading();
+
+    if (allBooks.length > 0) {
+      renderFeaturedBook(allBooks[0]);
+    } else {
+      document.getElementById("featured-book").innerHTML =
+        '<p class="muted">No books have been published yet.</p>';
+    }
+  } catch (error) {
+    showAdminError(error, "loadHomeBooks atmosphere connection");
+
+    document.getElementById("trending-books").innerHTML =
+      '<p class="muted">Could not load books. Check your internet connection or Firestore rules.</p>';
+
+    document.getElementById("new-books").innerHTML =
+      '<p class="muted">Could not load books.</p>';
+  }
+};
+</script>
+
+<!-- BATCH 3B END -->
+    <!-- BATCH 4A START: AUTHOR STUDIO STYLES -->
+
+<style>
+#author-studio {
+  position: fixed;
+  inset: 0;
+  z-index: 700;
+  background: var(--bg);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.author-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 14px 16px;
+  background: rgba(7, 7, 11, 0.80);
+  border-bottom: 1px solid var(--glass-border);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+body.light-mode .author-topbar,
+body.sepia-mode .author-topbar {
+  background: rgba(255, 255, 255, 0.82);
+}
+
+.author-title {
+  font-size: 17px;
+  font-weight: 900;
+}
+
+.author-body {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 20px 16px 130px;
+}
+
+.author-tabs {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  margin-bottom: 18px;
+  padding-bottom: 4px;
+  scrollbar-width: none;
+}
+
+.author-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.author-tab {
+  flex: 0 0 auto;
+  padding: 10px 15px;
+  border-radius: 999px;
+  border: 1px solid var(--glass-border);
+  background: var(--card);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.author-tab.active {
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  border-color: transparent;
+  color: #ffffff;
+}
+
+.author-page {
+  display: none;
+}
+
+.author-page.active {
+  display: block;
+  animation: fadeIn 0.25s ease;
+}
+
+.author-book-item {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  padding: 14px;
+  border-radius: 16px;
+  background: var(--card);
+  border: 1px solid var(--glass-border);
+  margin-bottom: 12px;
+  cursor: pointer;
+}
+
+.author-book-item img {
+  width: 62px;
+  height: 92px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.author-book-info {
+  flex: 1;
+}
+
+.author-book-info h4 {
+  font-size: 15px;
+  font-weight: 800;
+  margin-bottom: 3px;
+}
+
+.author-book-info p {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.chapter-editor-item {
+  padding: 14px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--glass-border);
+  margin-bottom: 10px;
+}
+
+body.light-mode .chapter-editor-item,
+body.sepia-mode .chapter-editor-item {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+.chapter-editor-item h4 {
+  font-size: 14px;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+
+.chapter-editor-item p {
+  font-size: 11px;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+
+.chapter-editor-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.cover-preview {
+  width: 110px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 14px;
+  display: block;
+  background: #17171f;
+}
+
+.success-box {
+  border-color: rgba(16, 185, 129, 0.45);
+  background: rgba(16, 185, 129, 0.10);
+}
+
+.warning-box {
+  border-color: rgba(245, 158, 11, 0.45);
+  background: rgba(245, 158, 11, 0.10);
+}
+
+.danger-box {
+  border-color: rgba(239, 68, 68, 0.45);
+  background: rgba(239, 68, 68, 0.10);
+}
+</style>
+
+<!-- BATCH 4A END -->
+    <!-- BATCH 4B START: AUTHOR STUDIO HTML -->
+
+<div id="author-studio" class="hidden">
+  <div class="author-topbar">
+    <button class="icon-btn" onclick="closeAuthorStudio()">←</button>
+
+    <div class="author-title">Author Studio</div>
+
+    <button class="icon-btn" onclick="closeAuthorStudio()">✕</button>
+  </div>
+
+  <div class="author-body">
+    <div class="author-tabs">
+      <button class="author-tab active" data-author-tab="books" onclick="switchAuthorTab('books')">
+        📚 My Books
+      </button>
+
+      <button class="author-tab" data-author-tab="create" onclick="switchAuthorTab('create')">
+        ➕ New Book
+      </button>
+
+      <button class="author-tab" data-author-tab="profile" onclick="switchAuthorTab('profile')">
+        👤 Profile
+      </button>
+    </div>
+
+    <div id="author-page-books" class="author-page active">
+      <div class="card">
+        <h3 style="margin-bottom:10px;">My published books</h3>
+        <div id="author-books-list">
+          <p class="muted">Loading your books...</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="author-page-create" class="author-page">
+      <div class="card">
+        <h3 style="margin-bottom:14px;">Create a new book</h3>
+
+        <label>Book title</label>
+        <input id="author-book-title" type="text" placeholder="Enter your book title">
+
+        <label>Synopsis</label>
+        <textarea id="author-book-synopsis" rows="5" placeholder="Tell readers what your book is about..."></textarea>
+
+        <label>Genre</label>
+        <select id="author-book-genre">
+          <option value="romance">Romance</option>
+          <option value="fantasy">Fantasy</option>
+          <option value="thriller">Thriller</option>
+          <option value="horror">Horror</option>
+          <option value="scifi">Sci-Fi</option>
+          <option value="drama">Drama</option>
+          <option value="comedy">Comedy</option>
+          <option value="inspirational">Inspirational</option>
+        </select>
+
+        <label>Mood</label>
+        <select id="author-book-mood">
+          <option value="cosy">Cosy</option>
+          <option value="dark">Dark</option>
+          <option value="romantic">Romantic</option>
+          <option value="thrilling">Thrilling</option>
+          <option value="emotional">Emotional</option>
+          <option value="funny">Funny</option>
+          <option value="mysterious">Mysterious</option>
+        </select>
+
+        <label>Atmosphere vibe</label>
+        <select id="author-book-vibe">
+          <option value="none">None</option>
+          <option value="rain">🌧️ Rain</option>
+          <option value="thunder">⚡ Thunderstorm</option>
+          <option value="snow">❄️ Snow</option>
+          <option value="autumn">🍂 Autumn</option>
+          <option value="spring">🌸 Spring</option>
+          <option value="sunny">☀️ Sunny</option>
+        </select>
+
+        <label>Brand colour</label>
+        <input id="author-book-color" type="color" value="#8b5cf6">
+
+        <label>Tip link — optional</label>
+        <input id="author-book-tip-link" type="url" placeholder="https://flutterwave.com/pay/...">
+
+        <label>Cover image</label>
+        <input id="author-book-cover" type="file" accept="image/*">
+
+        <img id="author-cover-preview" class="cover-preview hidden" alt="Cover preview">
+
+        <button class="btn" onclick="createAuthorBook()">
+          Create book
+        </button>
+
+        <p class="muted" style="margin-top:12px;">
+          Your book is saved as a draft. Add chapters before publishing it.
+        </p>
+      </div>
+    </div>
+
+    <div id="author-page-profile" class="author-page">
+      <div class="card">
+        <h3 style="margin-bottom:14px;">Author profile</h3>
+
+        <label>Pen name</label>
+        <input id="author-pen-name" type="text" placeholder="Your pen name">
+
+        <label>Display name</label>
+        <input id="author-display-name" type="text" placeholder="Your display name">
+
+        <label>Author bio</label>
+        <textarea id="author-bio" rows="4" placeholder="Tell readers about yourself..."></textarea>
+
+        <label>Tip link</label>
+        <input id="author-profile-tip-link" type="url" placeholder="https://flutterwave.com/pay/...">
+
+        <button class="btn" onclick="saveAuthorProfile()">
+          Save profile
+        </button>
+      </div>
+    </div>
+
+    <div id="author-book-editor" class="hidden">
+      <button class="btn btn-ghost btn-sm" onclick="closeBookEditor()">
+        ← Back to my books
+      </button>
+
+      <div class="card" style="margin-top:14px;">
+        <h3 id="editor-book-title" style="margin-bottom:6px;">Book title</h3>
+        <p class="muted" id="editor-book-status">Draft</p>
+
+        <div class="action-row">
+          <button class="btn btn-success" onclick="publishAuthorBook()">
+            Publish book
+          </button>
+
+          <button class="btn btn-ghost" onclick="unpublishAuthorBook()">
+            Unpublish
+          </button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 style="margin-bottom:14px;">Add chapter</h3>
+
+        <label>Chapter title</label>
+        <input id="new-chapter-title" type="text" placeholder="Chapter title">
+
+        <label>Chapter content</label>
+        <textarea id="new-chapter-content" rows="10" placeholder="Write or paste your chapter here..."></textarea>
+
+        <button class="btn" onclick="addAuthorChapter()">
+          Save chapter
+        </button>
+      </div>
+
+      <div class="card">
+        <h3 style="margin-bottom:14px;">Chapters</h3>
+        <div id="editor-chapter-list">
+          <p class="muted">No chapters yet.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 style="margin-bottom:14px;">Monetisation</h3>
+
+        <label>Tip link</label>
+        <input id="editor-tip-link" type="url" placeholder="https://flutterwave.com/pay/...">
+
+        <label>Free chapters</label>
+        <select id="editor-free-chapters">
+          <option value="0">All chapters locked</option>
+          <option value="1">1 free chapter</option>
+          <option value="2">2 free chapters</option>
+          <option value="3">3 free chapters</option>
+          <option value="5">5 free chapters</option>
+          <option value="10">10 free chapters</option>
+          <option value="999">All chapters free</option>
+        </select>
+
+        <button class="btn" onclick="saveBookMonetisation()">
+          Save monetisation
+        </button>
+      </div>
+
+      <div class="card danger-box">
+        <h3 style="margin-bottom:8px;">Danger zone</h3>
+        <p class="muted" style="margin-bottom:14px;">
+          Deleting a book cannot be undone.
+        </p>
+
+        <button class="btn btn-danger" onclick="deleteAuthorBook()">
+          Delete book
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BATCH 4B END -->
+    <!-- BATCH 4C START: AUTHOR STUDIO JAVASCRIPT -->
+
+<script>
+let authorBooks = [];
+let activeAuthorBook = null;
+let selectedCoverFile = null;
+
+function openAuthorStudio() {
+  const studio = document.getElementById("author-studio");
+
+  if (!studio) return;
+
+  studio.classList.remove("hidden");
+  document.body.style.overflow = "hidden";
+
+  loadAuthorBooks();
+  loadAuthorProfileForm();
+}
+
+function closeAuthorStudio() {
+  const studio = document.getElementById("author-studio");
+
+  if (!studio) return;
+
+  studio.classList.add("hidden");
+  document.body.style.overflow = "";
+
+  closeBookEditor();
+}
+
+function switchAuthorTab(tab) {
+  const tabs = document.querySelectorAll(".author-tab");
+  const pages = document.querySelectorAll(".author-page");
+
+  for (let i = 0; i < tabs.length; i++) {
+    if (tabs[i].dataset.authorTab === tab) {
+      tabs[i].classList.add("active");
+    } else {
+      tabs[i].classList.remove("active");
+    }
+  }
+
+  for (let i = 0; i < pages.length; i++) {
+    pages[i].classList.remove("active");
+  }
+
+  const targetPage = document.getElementById("author-page-" + tab);
+
+  if (targetPage) {
+    targetPage.classList.add("active");
+  }
+}
+
+async function loadAuthorBooks() {
+  const container = document.getElementById("author-books-list");
+
+  if (!container || !currentUser) return;
+
+  try {
+    const snapshot = await db.collection("books")
+      .where("authorId", "==", currentUser.uid)
+      .orderBy("createdAt", "desc")
+      .get();
+
+    authorBooks = [];
+
+    snapshot.forEach(function (doc) {
+      const book = doc.data();
+      book.id = doc.id;
+      authorBooks.push(book);
+    });
+
+    if (authorBooks.length === 0) {
+      container.innerHTML =
+        '<p class="muted">You have not created any books yet.</p>';
+      return;
+    }
+
+    let html = "";
+
+    for (let i = 0; i < authorBooks.length; i++) {
+      const book = authorBooks[i];
+      const status = book.published ? "Published" : "Draft";
+
+      html += `
+        <div class="author-book-item" onclick="openBookEditor('${escapeHtml(book.id)}')">
+          <img src="${escapeHtml(book.cover || LOGO_URL)}" alt="">
+
+          <div class="author-book-info">
+            <h4>${escapeHtml(book.title || "Untitled")}</h4>
+            <p>${status} • ${Array.isArray(book.chapters) ? book.chapters.length : 0} chapters</p>
+          </div>
+
+          <span>→</span>
+        </div>
+      `;
+    }
+
+    container.innerHTML = html;
+  } catch (error) {
+    showAdminError(error, "loadAuthorBooks");
+    container.innerHTML =
+      '<p class="muted">Could not load your books. Check Firestore rules or internet connection.</p>';
+  }
+}
+
+document.addEventListener("change", function (event) {
+  if (event.target && event.target.id === "author-book-cover") {
+    const file = event.target.files[0];
+
+    if (!file) return;
+
+    selectedCoverFile = file;
+
+    const preview = document.getElementById("author-cover-preview");
+
+    if (preview) {
+      preview.src = URL.createObjectURL(file);
+      preview.classList.remove("hidden");
+    }
+  }
+});
+
+async function uploadCoverToCloudinary(file) {
+  const cloudName = "your-cloud-name";
+  const uploadPreset = "your-upload-preset";
+
+  if (!cloudName || cloudName === "your-cloud-name") {
+    throw new Error("Cloudinary upload is not configured yet.");
+  }
+
+  const formData = new FormData();
+  formData.append("file", file);
+  formData.append("upload_preset", uploadPreset);
+
+  const response = await fetch(
+    "https://api.cloudinary.com/v1_1/" + cloudName + "/image/upload",
+    {
+      method: "POST",
+      body: formData
+    }
+  );
+
+  const data = await response.json();
+
+  if (!response.ok || !data.secure_url) {
+    throw new Error(data.error ? data.error.message : "Cover upload failed.");
+  }
+
+  return data.secure_url;
+}
+
+async function createAuthorBook() {
+  if (!currentUser) {
+    showToast("Please sign in first.");
+    return;
+  }
+
+  const titleInput = document.getElementById("author-book-title");
+  const synopsisInput = document.getElementById("author-book-synopsis");
+  const genreInput = document.getElementById("author-book-genre");
+  const moodInput = document.getElementById("author-book-mood");
+  const vibeInput = document.getElementById("author-book-vibe");
+  const colorInput = document.getElementById("author-book-color");
+  const tipInput = document.getElementById("author-book-tip-link");
+
+  const title = titleInput.value.trim();
+  const synopsis = synopsisInput.value.trim();
+
+  if (!title) {
+    showToast("Enter a book title.");
+    return;
+  }
+
+  try {
+    showToast("Creating your book...");
+
+    let coverUrl = LOGO_URL;
+
+    if (selectedCoverFile) {
+      coverUrl = await uploadCoverToCloudinary(selectedCoverFile);
+    }
+
+    const bookData = {
+      authorId: currentUser.uid,
+      authorName: currentUser.displayName || "Unknown author",
+      penName: currentUser.displayName || "Unknown author",
+      title: title,
+      synopsis: synopsis,
+      genre: genreInput.value,
+      mood: moodInput.value,
+      cover: coverUrl,
+      color: colorInput.value,
+      vibe: vibeInput.value,
+      vibeActive: vibeInput.value !== "none",
+      tipLink: tipInput.value.trim(),
+      chapters: [],
+      views: 0,
+      clicks: 0,
+      published: false,
+      freeChapters: 999,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    };
+
+    const docRef = await db.collection("books").add(bookData);
+
+    titleInput.value = "";
+    synopsisInput.value = "";
+    tipInput.value = "";
+    selectedCoverFile = null;
+
+    const preview = document.getElementById("author-cover-preview");
+    if (preview) {
+      preview.classList.add("hidden");
+      preview.src = "";
+    }
+
+    showToast("Book created as a draft.");
+    await loadAuthorBooks();
+    openBookEditor(docRef.id);
+  } catch (error) {
+    showAdminError(error, "createAuthorBook");
+    showToast(error.message || "Could not create your book.");
+  }
+}
+
+async function loadAuthorProfileForm() {
+  if (!currentUser) return;
+
+  const penNameInput = document.getElementById("author-pen-name");
+  const displayNameInput = document.getElementById("author-display-name");
+  const bioInput = document.getElementById("author-bio");
+  const tipInput = document.getElementById("author-profile-tip-link");
+
+  try {
+    const doc = await db.collection("authors").doc(currentUser.uid).get();
+
+    let data = {};
+
+    if (doc.exists) {
+      data = doc.data();
+    }
+
+    if (penNameInput) {
+      penNameInput.value = data.penName || "";
+    }
+
+    if (displayNameInput) {
+      displayNameInput.value = data.displayName || currentUser.displayName || "";
+    }
+
+    if (bioInput) {
+      bioInput.value = data.bio || "";
+    }
+
+    if (tipInput) {
+      tipInput.value = data.tipLink || "";
+    }
+  } catch (error) {
+    showAdminError(error, "loadAuthorProfileForm");
+  }
+}
+
+async function saveAuthorProfile() {
+  if (!currentUser) return;
+
+  const penNameInput = document.getElementById("author-pen-name");
+  const displayNameInput = document.getElementById("author-display-name");
+  const bioInput = document.getElementById("author-bio");
+  const tipInput = document.getElementById("author-profile-tip-link");
+
+  try {
+    await db.collection("authors").doc(currentUser.uid).set({
+      email: currentUser.email,
+      displayName: displayNameInput.value.trim(),
+      penName: penNameInput.value.trim(),
+      bio: bioInput.value.trim(),
+      tipLink: tipInput.value.trim(),
+      updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+    }, { merge: true });
+
+    showToast("Author profile saved.");
+  } catch (error) {
+    showAdminError(error, "saveAuthorProfile");
+    showToast("Could not save your profile.");
+  }
+}
+
+function openBookEditor(bookId) {
+  const book = authorBooks.find(function (item) {
+    return item.id === bookId;
+  });
+
+  if (!book) {
+    showToast("Book not found.");
+    return;
+  }
+
+  activeAuthorBook = book;
+
+  document.getElementById("editor-book-title").textContent =
+    book.title || "Untitled";
+
+  document.getElementById("editor-book-status").textContent =
+    book.published ? "Published" : "Draft";
+
+  document.getElementById("editor-tip-link").value = book.tipLink || "";
+  document.getElementById("editor-free-chapters").value = String(
+    book.freeChapters === 0 ? 0 : book.freeChapters || 999
+  );
+
+  renderEditorChapters();
+
+  document.getElementById("author-page-books").classList.remove("active");
+  document.getElementById("author-page-create").classList.remove("active");
+  document.getElementById("author-page-profile").classList.remove("active");
+
+  document.getElementById("author-book-editor").classList.remove("hidden");
+}
+
+function closeBookEditor() {
+  activeAuthorBook = null;
+
+  const editor = document.getElementById("author-book-editor");
+
+  if (editor) {
+    editor.classList.add("hidden");
+  }
+
+  switchAuthorTab("books");
+}
+
+function renderEditorChapters() {
+  const container = document.getElementById("editor-chapter-list");
+
+  if (!container || !activeAuthorBook) return;
+
+  const chapters = Array.isArray(activeAuthorBook.chapters)
+    ? activeAuthorBook.chapters
+    : [];
+
+  if (chapters.length === 0) {
+    container.innerHTML = '<p class="muted">No chapters yet.</p>';
+    return;
+  }
+
+  let html = "";
+
+  for (let i = 0; i < chapters.length; i++) {
+    const chapter = chapters[i];
+
+    html += `
+      <div class="chapter-editor-item">
+        <h4>${escapeHtml(chapter.title || "Chapter " + (i + 1))}</h4>
+        <p>${estimateReadingTime(chapter.content)}</p>
+
+        <div class="chapter-editor-actions">
+          <button class="btn btn-ghost btn-sm" onclick="editAuthorChapter(${i})">
+            Edit
+          </button>
+
+          <button class="btn btn-danger btn-sm" onclick="deleteAuthorChapter(${i})">
+            Delete
+          </button>
+        </div>
+      </div>
+    `;
+  }
+
+  container.innerHTML = html;
+}
+
+async function addAuthorChapter() {
+  if (!activeAuthorBook) return;
+
+  const titleInput = document.getElementById("new-chapter-title");
+  const contentInput = document.getElementById("new-chapter-content");
+
+  const title = titleInput.value.trim();
+  const content = contentInput.value.trim();
+
+  if (!title) {
+    showToast("Enter a chapter title.");
+    return;
+  }
+
+  if (!content) {
+    showToast("Write your chapter content.");
+    return;
+  }
+
+  try {
+    const chapters = Array.isArray(activeAuthorBook.chapters)
+      ? activeAuthorBook.chapters
+      : [];
+
+    chapters.push({
+      title: title,
+      content: content,
+      createdAt: Date.now()
+    });
+
+    await db.collection("books").doc(activeAuthorBook.id).update({
+      chapters: chapters
+    });
+
+    activeAuthorBook.chapters = chapters;
+
+    titleInput.value = "";
+    contentInput.value = "";
+
+    renderEditorChapters();
+    showToast("Chapter saved.");
+  } catch (error) {
+    showAdminError(error, "addAuthorChapter");
+    showToast("Could not save this chapter.");
+  }
+}
+
+function editAuthorChapter(index) {
+  const chapters = Array.isArray(activeAuthorBook.chapters)
+    ? activeAuthorBook.chapters
+    : [];
+
+  const chapter = chapters[index];
+
+  if (!chapter) return;
+
+  document.getElementById("new-chapter-title").value = chapter.title || "";
+  document.getElementById("new-chapter-content").value = chapter.content || "";
+
+  showToast("Chapter loaded. Save it as a new chapter after editing.");
+}
+
+async function deleteAuthorChapter(index) {
+  if (!activeAuthorBook) return;
+
+  const confirmed = confirm("Delete this chapter? This cannot be undone.");
+
+  if (!confirmed) return;
+
+  try {
+    const chapters = Array.isArray(activeAuthorBook.chapters)
+      ? activeAuthorBook.chapters
+      : [];
+
+    chapters.splice(index, 1);
+
+    await db.collection("books").doc(activeAuthorBook.id).update({
+      chapters: chapters
+    });
+
+    activeAuthorBook.chapters = chapters;
+
+    renderEditorChapters();
+    showToast("Chapter deleted.");
+  } catch (error) {
+    showAdminError(error, "deleteAuthorChapter");
+    showToast("Could not delete this chapter.");
+  }
+}
+
+async function publishAuthorBook() {
+  if (!activeAuthorBook) return;
+
+  const chapters = Array.isArray(activeAuthorBook.chapters)
+    ? activeAuthorBook.chapters
+    : [];
+
+  if (chapters.length === 0) {
+    showToast("Add at least one chapter before publishing.");
+    return;
+  }
+
+  try {
+    await db.collection("books").doc(activeAuthorBook.id).update({
+      published: true,
+      publishedAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+
+    activeAuthorBook.published = true;
+    document.getElementById("editor-book-status").textContent = "Published";
+
+    showToast("Book published.");
+    await loadAuthorBooks();
+  } catch (error) {
+    showAdminError(error, "publishAuthorBook");
+    showToast("Could not publish this book.");
+  }
+}
+
+async function unpublishAuthorBook() {
+  if (!activeAuthorBook) return;
+
+  try {
+    await db.collection("books").doc(activeAuthorBook.id).update({
+      published: false
+    });
+
+    activeAuthorBook.published = false;
+    document.getElementById("editor-book-status").textContent = "Draft";
+
+    showToast("Book unpublished.");
+    await loadAuthorBooks();
+  } catch (error) {
+    showAdminError(error, "unpublishAuthorBook");
+    showToast("Could not unpublish this book.");
+  }
+}
+
+async function saveBookMonetisation() {
+  if (!activeAuthorBook) return;
+
+  const tipInput = document.getElementById("editor-tip-link");
+  const freeChaptersInput = document.getElementById("editor-free-chapters");
+
+  try {
+    await db.collection("books").doc(activeAuthorBook.id).update({
+      tipLink: tipInput.value.trim(),
+      freeChapters: Number(freeChaptersInput.value)
+    });
+
+    activeAuthorBook.tipLink = tipInput.value.trim();
+    activeAuthorBook.freeChapters = Number(freeChaptersInput.value);
+
+    showToast("Monetisation settings saved.");
+  } catch (error) {
+    showAdminError(error, "saveBookMonetisation");
+    showToast("Could not save monetisation settings.");
+  }
+}
+
+async function deleteAuthorBook() {
+  if (!activeAuthorBook) return;
+
+  const confirmed = confirm(
+    "Delete this book and all its chapters? This cannot be undone."
+  );
+
+  if (!confirmed) return;
+
+  try {
+    await db.collection("books").doc(activeAuthorBook.id).delete();
+
+    showToast("Book deleted.");
+    closeBookEditor();
+    await loadAuthorBooks();
+  } catch (error) {
+    showAdminError(error, "deleteAuthorBook");
+    showToast("Could not delete this book.");
+  }
+}
+</script>
+
+<!-- BATCH 4C END -->
+    <!-- BATCH 4D START: CONNECT AUTHOR STUDIO TO APP -->
+
+<style>
+#author-studio-button {
+  position: fixed;
+  right: 14px;
+  bottom: 216px;
+  z-index: 800;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px solid var(--glass-border);
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: #ffffff;
+  font-size: 19px;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+}
+</style>
+
+<button
+  id="author-studio-button"
+  onclick="openAuthorStudio()"
+  title="Open Author Studio">
+  ✍️
+</button>
+
+<script>
+const originalOpenMenuForAuthorStudio = openMenu;
+
+openMenu = function () {
+  openAuthorStudio();
+};
+
+const originalLoadHomeBooksForAuthorStudio = loadHomeBooks;
+
+loadHomeBooks = async function () {
+  try {
+    const snapshot = await db.collection("books")
+      .orderBy("createdAt", "desc")
+      .limit(50)
+      .get();
+
+    allBooks = [];
+
+    snapshot.forEach(function (doc) {
+      const book = doc.data();
+      book.id = doc.id;
+
+      if (book.published !== false) {
+        allBooks.push(book);
+      }
+    });
+
+    renderBookGrid("trending-books", allBooks.slice(0, 12));
+    renderBookGrid("new-books", allBooks.slice(0, 12));
+    renderContinueReading();
+
+    if (allBooks.length > 0) {
+      renderFeaturedBook(allBooks[0]);
+    } else {
+      document.getElementById("featured-book").innerHTML =
+        '<p class="muted">No books have been published yet.</p>';
+    }
+  } catch (error) {
+    showAdminError(error, "loadHomeBooks author studio connection");
+
+    document.getElementById("trending-books").innerHTML =
+      '<p class="muted">Could not load books. Check your internet connection or Firestore rules.</p>';
+
+    document.getElementById("new-books").innerHTML =
+      '<p class="muted">Could not load books.</p>';
+  }
+};
+
+const originalLoadAuthorBooksForRefresh = loadAuthorBooks;
+
+loadAuthorBooks = async function () {
+  await originalLoadAuthorBooksForRefresh();
+
+  if (activeAuthorBook) {
+    const refreshedBook = authorBooks.find(function (book) {
+      return book.id === activeAuthorBook.id;
+    });
+
+    if (refreshedBook) {
+      activeAuthorBook = refreshedBook;
+      renderEditorChapters();
+    }
+  }
+};
+
+const originalCreateAuthorBookForRefresh = createAuthorBook;
+
+createAuthorBook = async function () {
+  await originalCreateAuthorBookForRefresh();
+  await loadHomeBooks();
+};
+
+const originalPublishAuthorBookForRefresh = publishAuthorBook;
+
+publishAuthorBook = async function () {
+  await originalPublishAuthorBookForRefresh();
+  await loadHomeBooks();
+};
+
+const originalUnpublishAuthorBookForRefresh = unpublishAuthorBook;
+
+unpublishAuthorBook = async function () {
+  await originalUnpublishAuthorBookForRefresh();
+  await loadHomeBooks();
+};
+
+const originalDeleteAuthorBookForRefresh = deleteAuthorBook;
+
+deleteAuthorBook = async function () {
+  await originalDeleteAuthorBookForRefresh();
+  await loadHomeBooks();
+};
+</script>
+
+<!-- BATCH 4D END -->
+    <!-- BATCH 5A START: CODO BILLS WALLET AND LOCKED CHAPTERS -->
+
+<style>
+#codo-wallet-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 750;
+  background: var(--bg);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.codo-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 14px 16px;
+  background: rgba(7, 7, 11, 0.80);
+  border-bottom: 1px solid var(--glass-border);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+body.light-mode .codo-topbar,
+body.sepia-mode .codo-topbar {
+  background: rgba(255, 255, 255, 0.82);
+}
+
+.codo-body {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 20px 16px 130px;
+}
+
+.codo-bill-card {
+  position: relative;
+  overflow: hidden;
+  padding: 24px;
+  border-radius: 22px;
+  background:
+    linear-gradient(135deg, rgba(139, 92, 246, 0.28), rgba(99, 102, 241, 0.20)),
+    rgba(18, 18, 26, 0.72);
+  border: 1px solid rgba(196, 181, 253, 0.35);
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+  margin-bottom: 20px;
+}
+
+.codo-bill-card::before {
+  content: "";
+  position: absolute;
+  inset: -50%;
+  background: linear-gradient(
+    115deg,
+    transparent 35%,
+    rgba(255, 255, 255, 0.18) 50%,
+    transparent 65%
+  );
+  transform: translateX(-70%);
+  animation: codoShine 5s infinite;
+}
+
+@keyframes codoShine {
+  0% {
+    transform: translateX(-70%);
+  }
+  60%,
+  100% {
+    transform: translateX(70%);
+  }
+}
+
+.codo-bill-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 22px;
+}
+
+.codo-brand {
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  color: #e9d5ff;
+}
+
+.codo-bill-value {
+  font-size: 42px;
+  font-weight: 900;
+  line-height: 1;
+  background: linear-gradient(135deg, #ffffff, #c4b5fd);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.codo-bill-label {
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: #ddd6fe;
+  margin-top: 6px;
+}
+
+.codo-bill-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 26px;
+}
+
+.codo-serial {
+  font-family: monospace;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.codo-balance-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.codo-balance-box {
+  background: var(--card);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  padding: 14px;
+  text-align: center;
+}
+
+.codo-balance-box strong {
+  display: block;
+  font-size: 21px;
+  font-weight: 900;
+}
+
+.codo-balance-box span {
+  font-size: 10px;
+  color: var(--muted);
+}
+
+.bundle-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.bundle-card {
+  padding: 18px;
+  border-radius: 18px;
+  background: var(--card);
+  border: 1px solid var(--glass-border);
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.18s ease;
+}
+
+.bundle-card:active {
+  transform: scale(0.97);
+}
+
+.bundle-card.selected {
+  border-color: var(--accent);
+  background: rgba(139, 92, 246, 0.16);
+}
+
+.bundle-card strong {
+  display: block;
+  font-size: 24px;
+  font-weight: 900;
+  margin-bottom: 4px;
+}
+
+.bundle-card span {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.transaction-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 13px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--glass-border);
+  margin-bottom: 10px;
+}
+
+body.light-mode .transaction-item,
+body.sepia-mode .transaction-item {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+.transaction-item strong {
+  font-size: 13px;
+}
+
+.transaction-item p {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.locked-chapter-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.locked-chapter-box {
+  width: 100%;
+  max-width: 420px;
+  padding: 24px;
+  border-radius: 22px;
+  background: var(--bg-soft);
+  border: 1px solid rgba(196, 181, 253, 0.30);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.65);
+  text-align: center;
+}
+
+.locked-chapter-box h3 {
+  font-size: 21px;
+  font-weight: 900;
+  margin-bottom: 8px;
+}
+
+.locked-chapter-box p {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 18px;
+}
+
+.codo-mini-bill {
+  width: 120px;
+  margin: 0 auto 18px;
+  padding: 16px 12px;
+  border-radius: 16px;
+  background:
+    linear-gradient(135deg, rgba(139, 92, 246, 0.30), rgba(99, 102, 241, 0.22)),
+    rgba(18, 18, 26, 0.80);
+  border: 1px solid rgba(196, 181, 253, 0.35);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+}
+
+.codo-mini-bill strong {
+  display: block;
+  font-size: 22px;
+  font-weight: 900;
+}
+
+.codo-mini-bill span {
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: #ddd6fe;
+}
+
+.tip-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(245, 158, 11, 0.45);
+  background: rgba(245, 158, 11, 0.14);
+  color: #fbbf24;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+}
+</style>
+
+<!-- BATCH 5A END -->
+    <!-- BATCH 5B START: CODO WALLET HTML AND LOCKED CHAPTER UI -->
+
+<div id="codo-wallet-screen" class="hidden">
+  <div class="codo-topbar">
+    <button class="icon-btn" onclick="closeCodoWallet()">←</button>
+
+    <div class="author-title">Codo Wallet</div>
+
+    <button class="icon-btn" onclick="closeCodoWallet()">✕</button>
+  </div>
+
+  <div class="codo-body">
+    <div class="codo-bill-card">
+      <div class="codo-bill-top">
+        <div class="codo-brand">DOFLOWNOVELS</div>
+        <div style="font-size:22px;">💠</div>
+      </div>
+
+      <div class="codo-bill-value" id="codo-total-balance">0</div>
+      <div class="codo-bill-label">CODO BILLS</div>
+
+      <div class="codo-bill-bottom">
+        <div class="codo-serial" id="codo-wallet-id">Wallet</div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.65);">
+          Premium reading currency
+        </div>
+      </div>
+    </div>
+
+    <div class="codo-balance-row">
+      <div class="codo-balance-box">
+        <strong id="codo-purchased-balance">0</strong>
+        <span>Purchased</span>
+      </div>
+
+      <div class="codo-balance-box">
+        <strong id="codo-awarded-balance">0</strong>
+        <span>Awarded</span>
+      </div>
+
+      <div class="codo-balance-box">
+        <strong id="codo-available-balance">0</strong>
+        <span>Available</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-bottom:14px;">Buy Codo Bills</h3>
+
+      <div class="bundle-grid" id="codo-bundle-grid">
+        <div class="bundle-card selected" data-bundle="1" onclick="selectCodoBundle(1)">
+          <strong>1</strong>
+          <span>Codo Bill</span>
+        </div>
+
+        <div class="bundle-card" data-bundle="3" onclick="selectCodoBundle(3)">
+          <strong>3</strong>
+          <span>Codo Bills</span>
+        </div>
+
+        <div class="bundle-card" data-bundle="5" onclick="selectCodoBundle(5)">
+          <strong>5</strong>
+          <span>Codo Bills</span>
+        </div>
+
+        <div class="bundle-card" data-bundle="10" onclick="selectCodoBundle(10)">
+          <strong>10</strong>
+          <span>Codo Bills</span>
+        </div>
+      </div>
+
+      <label style="margin-top:18px;">Currency</label>
+      <select id="codo-currency" onchange="updateCodoPrice()">
+        <option value="GBP">GBP £</option>
+        <option value="USD">USD $</option>
+        <option value="NGN">NGN ₦</option>
+        <option value="GHS">GHS ₵</option>
+        <option value="KES">KES KSh</option>
+      </select>
+
+      <div id="codo-price-display" class="card" style="margin:0 0 14px;">
+        <p class="muted">Loading price...</p>
+      </div>
+
+      <button class="btn" onclick="startCodoCheckout()">
+        Pay with Flutterwave
+      </button>
+
+      <p class="muted" style="margin-top:12px;">
+        Payments are processed securely. Your Codo Bills will be added after payment is confirmed.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-bottom:14px;">Transaction history</h3>
+      <div id="codo-transactions">
+        <p class="muted">No transactions yet.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="locked-chapter-overlay" class="locked-chapter-overlay hidden">
+  <div class="locked-chapter-box">
+    <div class="codo-mini-bill">
+      <strong>🔒</strong>
+      <span>CODO BILL</span>
+    </div>
+
+    <h3 id="locked-chapter-title">Chapter locked</h3>
+
+    <p id="locked-chapter-message">
+      Unlock this chapter with Codo Bills, or support the author with a tip.
+    </p>
+
+    <button class="btn" onclick="unlockCurrentChapter()">
+      Unlock with Codo Bills
+    </button>
+
+    <div id="locked-tip-area" style="margin-top:12px;"></div>
+
+    <button class="btn btn-ghost" onclick="closeLockedChapterModal()">
+      Maybe later
+    </button>
+  </div>
+</div>
+
+<!-- BATCH 5B END -->
+    <!-- BATCH 5C START: CODO WALLET, LOCKED CHAPTERS, ADMIN ACCESS, TIPS -->
+
+<script>
+let codoWallet = {
+  purchasedBills: 0,
+  awardedBills: 0
+};
+
+let codoSettings = {
+  enabled: true,
+  prices: {
+    GBP: 1,
+    USD: 1.29,
+    NGN: 500,
+    GHS: 4,
+    KES: 50
+  }
+};
+
+let selectedCodoBundle = 1;
+
+function getCodoBalance() {
+  return Number(codoWallet.purchasedBills || 0) +
+    Number(codoWallet.awardedBills || 0);
+}
+
+function openCodoWallet() {
+  const screen = document.getElementById("codo-wallet-screen");
+
+  if (!screen) return;
+
+  screen.classList.remove("hidden");
+  document.body.style.overflow = "hidden";
+
+  loadCodoWallet();
+  loadCodoSettings();
+}
+
+function closeCodoWallet() {
+  const screen = document.getElementById("codo-wallet-screen");
+
+  if (!screen) return;
+
+  screen.classList.add("hidden");
+  document.body.style.overflow = "";
+}
+
+async function loadCodoWallet() {
+  if (!currentUser) return;
+
+  try {
+    const walletDoc = await db.collection("codoWallets")
+      .doc(currentUser.uid)
+      .get();
+
+    if (walletDoc.exists) {
+      codoWallet = walletDoc.data();
+    } else {
+      codoWallet = {
+        purchasedBills: 0,
+        awardedBills: 0
+      };
+    }
+
+    updateCodoWalletDisplay();
+    await loadCodoTransactions();
+  } catch (error) {
+    showAdminError(error, "loadCodoWallet");
+    showToast("Could not load your Codo wallet.");
+  }
+}
+
+function updateCodoWalletDisplay() {
+  const total = getCodoBalance();
+
+  document.getElementById("codo-total-balance").textContent = total;
+  document.getElementById("codo-purchased-balance").textContent =
+    Number(codoWallet.purchasedBills || 0);
+
+  document.getElementById("codo-awarded-balance").textContent =
+    Number(codoWallet.awardedBills || 0);
+
+  document.getElementById("codo-available-balance").textContent = total;
+
+  document.getElementById("codo-wallet-id").textContent = currentUser
+    ? "Wallet • " + currentUser.uid.slice(0, 8).toUpperCase()
+    : "Wallet";
+}
+
+async function loadCodoTransactions() {
+  const container = document.getElementById("codo-transactions");
+
+  if (!container || !currentUser) return;
+
+  try {
+    const snapshot = await db.collection("codoTransactions")
+      .where("uid", "==", currentUser.uid)
+      .orderBy("createdAt", "desc")
+      .limit(30)
+      .get();
+
+    if (snapshot.empty) {
+      container.innerHTML =
+        '<p class="muted">No transactions yet.</p>';
+      return;
+    }
+
+    let html = "";
+
+    snapshot.forEach(function (doc) {
+      const transaction = doc.data();
+      const status = String(transaction.status || "pending");
+      const amount = transaction.amount || 0;
+      const currency = transaction.currency || "";
+      const bundle = transaction.bundle || 0;
+
+      html += `
+        <div class="transaction-item">
+          <div>
+            <strong>${bundle} Codo Bill${bundle === 1 ? "" : "s"}</strong>
+            <p>${currency} ${amount} • ${status}</p>
+          </div>
+
+          <span>${status === "successful" ? "✅" : "⏳"}</span>
+        </div>
+      `;
+    });
+
+    container.innerHTML = html;
+  } catch (error) {
+    showAdminError(error, "loadCodoTransactions");
+    container.innerHTML =
+      '<p class="muted">Could not load transactions.</p>';
+  }
+}
+
+async function loadCodoSettings() {
+  try {
+    const response = await fetch(
+      BACKEND_URL + "/api/codo-bills/public-settings"
+    );
+
+    const data = await response.json();
+
+    if (data && data.success && data.settings) {
+      codoSettings = data.settings;
+    }
+
+    updateCodoPrice();
+  } catch (error) {
+    showAdminError(error, "loadCodoSettings");
+    updateCodoPrice();
+  }
+}
+
+function selectCodoBundle(bundle) {
+  selectedCodoBundle = Number(bundle);
+
+  const cards = document.querySelectorAll(".bundle-card");
+
+  for (let i = 0; i < cards.length; i++) {
+    const card = cards[i];
+
+    if (Number(card.dataset.bundle) === selectedCodoBundle) {
+      card.classList.add("selected");
+    } else {
+      card.classList.remove("selected");
+    }
+  }
+
+  updateCodoPrice();
+}
+
+function updateCodoPrice() {
+  const currencySelect = document.getElementById("codo-currency");
+  const display = document.getElementById("codo-price-display");
+
+  if (!currencySelect || !display) return;
+
+  const currency = currencySelect.value;
+  const price = Number(
+    codoSettings.prices && codoSettings.prices[currency]
+  );
+
+  if (!price || price <= 0) {
+    display.innerHTML =
+      '<p class="muted">Checkout is not available in ' + currency + ".</p>";
+    return;
+  }
+
+  const total = price * selectedCodoBundle;
+
+  display.innerHTML = `
+    <div style="display:flex;align-items:center;justify-content:space-between;">
+      <div>
+        <strong style="font-size:17px;">
+          ${selectedCodoBundle} Codo Bill${selectedCodoBundle === 1 ? "" : "s"}
+        </strong>
+
+        <p class="muted" style="margin-top:3px;">
+          ${currency} ${total.toFixed(2)}
+        </p>
+      </div>
+
+      <div style="font-size:26px;">💠</div>
+    </div>
+  `;
+}
+
+async function startCodoCheckout() {
+  if (!currentUser) {
+    showToast("Please sign in first.");
+    return;
+  }
+
+  const currencySelect = document.getElementById("codo-currency");
+  const currency = currencySelect ? currencySelect.value : "GBP";
+
+  try {
+    showToast("Starting secure checkout...");
+
+    const idToken = await currentUser.getIdToken(true);
+
+    const response = await fetch(
+      BACKEND_URL + "/api/codo-bills/checkout",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer " + idToken
+        },
+        body: JSON.stringify({
+          bundle: selectedCodoBundle,
+          currency: currency
+        })
+      }
+    );
+
+    const data = await response.json();
+
+    if (!response.ok || !data.success || !data.checkoutUrl) {
+      throw new Error(data.error || "Checkout could not be started.");
+    }
+
+    window.location.href = data.checkoutUrl;
+  } catch (error) {
+    showAdminError(error, "startCodoCheckout");
+    showToast(error.message || "Could not start checkout.");
+  }
+}
+
+function isChapterLocked(book, chapterIndex) {
+  if (!book) return false;
+
+  if (isAdminUser(currentUser)) {
+    return false;
+  }
+
+  const freeChapters = Number(book.freeChapters === 0 ? 0 : book.freeChapters || 999);
+
+  if (chapterIndex < freeChapters) {
+    return false;
+  }
+
+  return true;
+}
+
+function showLockedChapterModal() {
+  const overlay = document.getElementById("locked-chapter-overlay");
+  const title = document.getElementById("locked-chapter-title");
+  const message = document.getElementById("locked-chapter-message");
+  const tipArea = document.getElementById("locked-tip-area");
+
+  if (!overlay || !activeBook) return;
+
+  const chapter = activeBook.chapters[activeChapterIndex];
+
+  title.textContent = chapter
+    ? chapter.title || "Chapter locked"
+    : "Chapter locked";
+
+  message.textContent =
+    "Unlock this chapter with Codo Bills, or support " +
+    getBookAuthor(activeBook) +
+    " with a tip.";
+
+  tipArea.innerHTML = activeBook.tipLink
+    ? `<button class="tip-button" onclick="openAuthorTipLink()">💛 Tip the author</button>`
+    : "";
+
+  overlay.classList.remove("hidden");
+}
+
+function closeLockedChapterModal() {
+  const overlay = document.getElementById("locked-chapter-overlay");
+
+  if (overlay) {
+    overlay.classList.add("hidden");
+  }
+}
+
+function unlockCurrentChapter() {
+  if (!activeBook) return;
+
+  closeLockedChapterModal();
+  openCodoWallet();
+
+  showToast("Buy Codo Bills to unlock this chapter.");
+}
+
+function openAuthorTipLink() {
+  if (!activeBook || !activeBook.tipLink) {
+    showToast("This author has not added a tip link.");
+    return;
+  }
+
+  increaseTipClicks(activeBook.id);
+  window.open(activeBook.tipLink, "_blank");
+}
+
+async function increaseTipClicks(bookId) {
+  try {
+    const bookRef = db.collection("books").doc(bookId);
+    const bookDoc = await bookRef.get();
+
+    if (!bookDoc.exists) return;
+
+    const currentClicks = Number(bookDoc.data().clicks || 0);
+
+    await bookRef.update({
+      clicks: currentClicks + 1
+    });
+  } catch (error) {
+    showAdminError(error, "increaseTipClicks");
+  }
+}
+
+const originalOpenChapterForCodo = openChapter;
+
+openChapter = function (chapterIndex, scrollPosition) {
+  try {
+    if (!activeBook || !Array.isArray(activeBook.chapters)) {
+      showToast("No chapters available.");
+      return;
+    }
+
+    if (chapterIndex < 0 || chapterIndex >= activeBook.chapters.length) {
+      showToast("Chapter not found.");
+      return;
+    }
+
+    if (isChapterLocked(activeBook, chapterIndex)) {
+      activeChapterIndex = chapterIndex;
+      showLockedChapterModal();
+      return;
+    }
+
+    originalOpenChapterForCodo(chapterIndex, scrollPosition);
+  } catch (error) {
+    showAdminError(error, "openChapter Codo connection");
+    showToast("Could not open this chapter.");
+  }
+};
+
+const originalRenderBookPageForCodo = renderBookPage;
+
+renderBookPage = function (book) {
+  originalRenderBookPageForCodo(book);
+
+  const container = document.getElementById("book-page-content");
+
+  if (!container || !book) return;
+
+  const chapters = Array.isArray(book.chapters) ? book.chapters : [];
+  const freeChapters = Number(
+    book.freeChapters === 0 ? 0 : book.freeChapters || 999
+  );
+
+  let badge = "Free";
+
+  if (freeChapters === 0) {
+    badge = "Premium";
+  } else if (freeChapters < chapters.length) {
+    badge = "Freemium";
+  }
+
+  const badgeHtml = `
+    <span class="badge">${badge}</span>
+  `;
+
+  container.innerHTML = container.innerHTML.replace(
+    '<span class="badge">Book</span>',
+    badgeHtml
+  );
+};
+</script>
+
+<!-- BATCH 5C END -->
+    <!-- BATCH 5D START: CONNECT CODO WALLET, TIPS, AND LOCKED CHAPTERS -->
+
+<style>
+#codo-wallet-button {
+  position: fixed;
+  right: 14px;
+  bottom: 274px;
+  z-index: 800;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px solid rgba(196, 181, 253, 0.40);
+  background:
+    linear-gradient(135deg, rgba(139, 92, 246, 0.35), rgba(99, 102, 241, 0.25)),
+    rgba(18, 18, 26, 0.80);
+  color: #ffffff;
+  font-size: 19px;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+</style>
+
+<button
+  id="codo-wallet-button"
+  onclick="openCodoWallet()"
+  title="Open Codo Wallet">
+  💠
+</button>
+
+<script>
+const originalLoadUserProfileForCodo = loadUserProfile;
+
+loadUserProfile = async function () {
+  await originalLoadUserProfileForCodo();
+
+  if (currentUser) {
+    await loadCodoWallet();
+  }
+};
+
+const originalRenderBookPageForTip = renderBookPage;
+
+renderBookPage = function (book) {
+  originalRenderBookPageForTip(book);
+
+  const container = document.getElementById("book-page-content");
+
+  if (!container || !book) return;
+
+  const tipButton = book.tipLink
+    ? `<button class="tip-button" onclick="openAuthorTipLink()">💛 Tip the author</button>`
+    : "";
+
+  const walletButton = `
+    <button class="btn btn-ghost btn-sm" onclick="openCodoWallet()">
+      💠 Codo Wallet
+    </button>
+  `;
+
+  container.innerHTML = container.innerHTML.replace(
+    '<div class="action-row">',
+    `<div class="action-row">${tipButton}${walletButton}`
+  );
+};
+
+const originalRenderChapterListForLocks = renderBookPage;
+
+renderBookPage = function (book) {
+  originalRenderChapterListForLocks(book);
+
+  const chapterList = document.getElementById("chapter-list");
+
+  if (!chapterList || !book) return;
+
+  const chapters = Array.isArray(book.chapters) ? book.chapters : [];
+  const freeChapters = Number(
+    book.freeChapters === 0 ? 0 : book.freeChapters || 999
+  );
+
+  let html = "";
+
+  for (let i = 0; i < chapters.length; i++) {
+    const chapter = chapters[i];
+    const locked = isChapterLocked(book, i);
+
+    html += `
+      <div class="chapter-list-item" onclick="openChapter(${i})">
+        <div>
+          <h4>${escapeHtml(chapter.title || "Chapter " + (i + 1))}</h4>
+          <p>${estimateReadingTime(chapter.content)}</p>
+        </div>
+
+        <span>${locked ? "🔒" : "→"}</span>
+      </div>
+    `;
+  }
+
+  chapterList.innerHTML = html;
+};
+
+const originalCloseReaderForCodo = closeReader;
+
+closeReader = function () {
+  originalCloseReaderForCodo();
+  closeLockedChapterModal();
+};
+
+const originalSwitchPageForCodo = switchPage;
+
+switchPage = function (page) {
+  originalSwitchPageForCodo(page);
+
+  if (page === "home") {
+    renderContinueReading();
+  }
+};
+
+async function refreshCodoWalletAfterPayment() {
+  if (!currentUser) return;
+
+  await loadCodoWallet();
+  showToast("Codo wallet refreshed.");
+}
+
+function checkPaymentReturn() {
+  const params = new URLSearchParams(window.location.search);
+  const status = params.get("status");
+  const txRef = params.get("tx_ref");
+
+  if (status === "successful" && txRef) {
+    showToast("Payment successful. Refreshing your Codo Bills...");
+    refreshCodoWalletAfterPayment();
+  }
+
+  if (status === "cancelled") {
+    showToast("Payment was cancelled.");
+  }
+
+  if (status === "failed") {
+    showToast("Payment failed. Please try again.");
+  }
+}
+
+window.addEventListener("load", function () {
+  checkPaymentReturn();
+});
+</script>
+
+<!-- BATCH 5D END -->
+    <!-- BATCH 6A START: COMMUNITY AND SHARING STYLES -->
+
+<style>
+#community-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 760;
+  background: var(--bg);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.community-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 14px 16px;
+  background: rgba(7, 7, 11, 0.80);
+  border-bottom: 1px solid var(--glass-border);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+body.light-mode .community-topbar,
+body.sepia-mode .community-topbar {
+  background: rgba(255, 255, 255, 0.82);
+}
+
+.community-body {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 20px 16px 130px;
+}
+
+.comment-item {
+  padding: 14px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--glass-border);
+  margin-bottom: 12px;
+}
+
+body.light-mode .comment-item,
+body.sepia-mode .comment-item {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+.comment-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.comment-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #26262f;
+}
+
+.comment-name {
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.comment-time {
+  font-size: 10px;
+  color: var(--muted);
+}
+
+.comment-text {
+  font-size: 14px;
+  line-height: 1.55;
+  word-break: break-word;
+}
+
+.comment-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.comment-action {
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.rating-stars {
+  display: flex;
+  gap: 5px;
+  font-size: 22px;
+  margin-bottom: 12px;
+}
+
+.star {
+  cursor: pointer;
+  color: #4b5563;
+}
+
+.star.active {
+  color: #fbbf24;
+}
+
+.review-item {
+  padding: 14px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--glass-border);
+  margin-bottom: 12px;
+}
+
+body.light-mode .review-item,
+body.sepia-mode .review-item {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+.review-stars {
+  color: #fbbf24;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.notification-item {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 14px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--glass-border);
+  margin-bottom: 10px;
+}
+
+body.light-mode .notification-item,
+body.sepia-mode .notification-item {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+.notification-icon {
+  font-size: 20px;
+}
+
+.share-card-preview {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 20px;
+  background:
+    linear-gradient(135deg, rgba(139, 92, 246, 0.35), rgba(99, 102, 241, 0.25)),
+    rgba(10, 10, 16, 0.90);
+  border: 1px solid rgba(196, 181, 253, 0.30);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 24px;
+  margin-bottom: 16px;
+}
+
+.share-quote {
+  font-family: "Merriweather", serif;
+  font-size: 17px;
+  line-height: 1.55;
+  margin-bottom: 18px;
+}
+
+.share-book-title {
+  font-size: 15px;
+  font-weight: 900;
+}
+
+.share-author {
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 14px;
+}
+
+.share-brand {
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  color: #c4b5fd;
+}
+
+.follow-button {
+  padding: 9px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--glass-border);
+  background: var(--card);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.follow-button.following {
+  background: rgba(139, 92, 246, 0.18);
+  border-color: rgba(139, 92, 246, 0.45);
+  color: var(--accent);
+}
+</style>
+
+<!-- BATCH 6A END -->
+    <!-- BATCH 6B START: COMMUNITY, REVIEWS, NOTIFICATIONS, SHARE CARDS -->
+
+<div id="community-screen" class="hidden">
+  <div class="community-topbar">
+    <button class="icon-btn" onclick="closeCommunityScreen()">←</button>
+
+    <div class="author-title">Community</div>
+
+    <button class="icon-btn" onclick="closeCommunityScreen()">✕</button>
+  </div>
+
+  <div class="community-body">
+    <div class="card">
+      <h3 style="margin-bottom:12px;">Share this book</h3>
+
+      <div class="share-card-preview">
+        <div class="share-quote" id="share-card-quote">
+          “A great story deserves to be shared.”
+        </div>
+
+        <div class="share-book-title" id="share-card-title">Book title</div>
+        <div class="share-author" id="share-card-author">by Author</div>
+        <div class="share-brand">DOFLOWNOVELS</div>
+      </div>
+
+      <label>Write a quote to share</label>
+      <textarea id="share-quote-input" rows="3" placeholder="Write your favourite line..."></textarea>
+
+      <button class="btn" onclick="shareBookCard()">
+        Share book
+      </button>
+
+      <button class="btn btn-ghost" style="margin-top:10px;" onclick="copyBookLink()">
+        Copy book link
+      </button>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-bottom:12px;">Rate this book</h3>
+
+      <div class="rating-stars" id="rating-stars">
+        <span class="star" onclick="selectRating(1)">★</span>
+        <span class="star" onclick="selectRating(2)">★</span>
+        <span class="star" onclick="selectRating(3)">★</span>
+        <span class="star" onclick="selectRating(4)">★</span>
+        <span class="star" onclick="selectRating(5)">★</span>
+      </div>
+
+      <label>Write a review</label>
+      <textarea id="review-text" rows="4" placeholder="What did you think about this book?"></textarea>
+
+      <button class="btn" onclick="submitBookReview()">
+        Submit review
+      </button>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-bottom:12px;">Reviews</h3>
+      <div id="book-reviews">
+        <p class="muted">No reviews yet.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-bottom:12px;">Comments</h3>
+
+      <label>Write a comment</label>
+      <textarea id="comment-text" rows="3" placeholder="Share your thoughts..."></textarea>
+
+      <button class="btn" onclick="submitChapterComment()">
+        Post comment
+      </button>
+
+      <div id="chapter-comments" style="margin-top:18px;">
+        <p class="muted">No comments yet.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-bottom:12px;">Notifications</h3>
+      <div id="notification-list">
+        <p class="muted">No notifications yet.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BATCH 6B END -->
+<!-- BATCH 6C START: COMMUNITY JAVASCRIPT -->
+
+<script>
+let selectedRating = 0;
+
+function openCommunityScreen() {
+  const screen = document.getElementById("community-screen");
+
+  if (!screen) return;
+
+  screen.classList.remove("hidden");
+  document.body.style.overflow = "hidden";
+
+  updateShareCard();
+  loadBookReviews();
+  loadChapterComments();
+  loadNotifications();
+}
+
+function closeCommunityScreen() {
+  const screen = document.getElementById("community-screen");
+
+  if (!screen) return;
+
+  screen.classList.add("hidden");
+  document.body.style.overflow = "";
+}
+
+function updateShareCard() {
+  if (!activeBook) return;
+
+  const quoteInput = document.getElementById("share-quote-input");
+  const title = document.getElementById("share-card-title");
+  const author = document.getElementById("share-card-author");
+
+  if (quoteInput && quoteInput.value.trim()) {
+    document.getElementById("share-card-quote").textContent =
+      "“" + quoteInput.value.trim() + "”";
+  }
+
+  if (title) {
+    title.textContent = activeBook.title || "Untitled";
+  }
+
+  if (author) {
+    author.textContent = "by " + getBookAuthor(activeBook);
+  }
+}
+
+function copyBookLink() {
+  if (!activeBook) return;
+
+  const link =
+    window.location.origin + window.location.pathname +
+    "?book=" + activeBook.id;
+
+  navigator.clipboard.writeText(link).then(function () {
+    showToast("Book link copied.");
+  }).catch(function () {
+    showToast("Could not copy link.");
+  });
+}
+
+function shareBookCard() {
+  if (!activeBook) return;
+
+  updateShareCard();
+
+  const quoteInput = document.getElementById("share-quote-input");
+  const quote = quoteInput.value.trim() ||
+    "A great story deserves to be shared.";
+
+  const text =
+    quote +
+    "\n\n" +
+    activeBook.title +
+    " by " +
+    getBookAuthor(activeBook) +
+    "\n\nRead on Doflownovels:";
+
+  const link =
+    window.location.origin + window.location.pathname +
+    "?book=" + activeBook.id;
+
+  if (navigator.share) {
+    navigator.share({
+      title: activeBook.title || "Doflownovels",
+      text: text,
+      url: link
+    }).catch(function () {
+      showToast("Sharing was cancelled.");
+    });
+  } else {
+    navigator.clipboard.writeText(text + "\n" + link).then(function () {
+      showToast("Share text copied.");
+    }).catch(function () {
+      showToast("Could not share this book.");
+    });
+  }
+}
+
+function selectRating(rating) {
+  selectedRating = Number(rating);
+
+  const stars = document.querySelectorAll("#rating-stars .star");
+
+  for (let i = 0; i < stars.length; i++) {
+    if (i < selectedRating) {
+      stars[i].classList.add("active");
+    } else {
+      stars[i].classList.remove("active");
+    }
+  }
+}
+
+async function submitBookReview() {
+  if (!currentUser) {
+    showToast("Please sign in to review this book.");
+    return;
+  }
+
+  if (!activeBook) return;
+
+  const reviewInput = document.getElementById("review-text");
+  const reviewText = reviewInput.value.trim();
+
+  if (!selectedRating) {
+    showToast("Choose a star rating.");
+    return;
+  }
+
+  if (!reviewText) {
+    showToast("Write a short review.");
+    return;
+  }
+
+  try {
+    await db.collection("bookReviews").add({
+      bookId: activeBook.id,
+      uid: currentUser.uid,
+      displayName: currentUser.displayName || "Reader",
+      photoURL: currentUser.photoURL || "",
+      rating: selectedRating,
+      review: reviewText,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+
+    await createNotification(
+      activeBook.authorId,
+      "New review",
+      currentUser.displayName + " left a " + selectedRating + "-star review on " +
+      (activeBook.title || "your book") + "."
+    );
+
+    reviewInput.value = "";
+    selectedRating = 0;
+    selectRating(0);
+
+    showToast("Review submitted.");
+    loadBookReviews();
+  } catch (error) {
+    showAdminError(error, "submitBookReview");
+    showToast("Could not submit your review.");
+  }
+}
+
+async function loadBookReviews() {
+  const container = document.getElementById("book-reviews");
+
+  if (!container || !activeBook) return;
+
+  try {
+    const snapshot = await db.collection("bookReviews")
+      .where("bookId", "==", activeBook.id)
+      .orderBy("createdAt", "desc")
+      .limit(30)
+      .get();
+
+    if (snapshot.empty) {
+      container.innerHTML = '<p class="muted">No reviews yet.</p>';
+      return;
+    }
+
+    let html = "";
+
+    snapshot.forEach(function (doc) {
+      const review = doc.data();
+      const stars = "★".repeat(Number(review.rating || 0));
+
+      html += `
+        <div class="review-item">
+          <div class="review-stars">${stars}</div>
+          <div class="comment-header">
+            <img class="comment-avatar" src="${escapeHtml(review.photoURL || LOGO_URL)}" alt="">
+            <div>
+              <div class="comment-name">${escapeHtml(review.displayName || "Reader")}</div>
+              <div class="comment-time">Recent</div>
+            </div>
+          </div>
+
+          <div class="comment-text">${escapeHtml(review.review)}</div>
+        </div>
+      `;
+    });
+
+    container.innerHTML = html;
+  } catch (error) {
+    showAdminError(error, "loadBookReviews");
+    container.innerHTML =
+      '<p class="muted">Could not load reviews.</p>';
+  }
+}
+
+async function submitChapterComment() {
+  if (!currentUser) {
+    showToast("Please sign in to comment.");
+    return;
+  }
+
+  if (!activeBook) return;
+
+  const commentInput = document.getElementById("comment-text");
+  const commentText = commentInput.value.trim();
+
+  if (!commentText) {
+    showToast("Write a comment first.");
+    return;
+  }
+
+  try {
+    await db.collection("chapterComments").add({
+      bookId: activeBook.id,
+      chapterIndex: activeChapterIndex,
+      uid: currentUser.uid,
+      displayName: currentUser.displayName || "Reader",
+      photoURL: currentUser.photoURL || "",
+      comment: commentText,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+
+    await createNotification(
+      activeBook.authorId,
+      "New comment",
+      currentUser.displayName + " commented on " +
+      (activeBook.title || "your book") + "."
+    );
+
+    commentInput.value = "";
+    showToast("Comment posted.");
+    loadChapterComments();
+  } catch (error) {
+    showAdminError(error, "submitChapterComment");
+    showToast("Could not post your comment.");
+  }
+}
+
+async function loadChapterComments() {
+  const container = document.getElementById("chapter-comments");
+
+  if (!container || !activeBook) return;
+
+  try {
+    const snapshot = await db.collection("chapterComments")
+      .where("bookId", "==", activeBook.id)
+      .where("chapterIndex", "==", activeChapterIndex)
+      .orderBy("createdAt", "desc")
+      .limit(30)
+      .get();
+
+    if (snapshot.empty) {
+      container.innerHTML = '<p class="muted">No comments yet.</p>';
+      return;
+    }
+
+    let html = "";
+
+    snapshot.forEach(function (doc) {
+      const comment = doc.data();
+
+      html += `
+        <div class="comment-item">
+          <div class="comment-header">
+            <img class="comment-avatar" src="${escapeHtml(comment.photoURL || LOGO_URL)}" alt="">
+            <div>
+              <div class="comment-name">${escapeHtml(comment.displayName || "Reader")}</div>
+              <div class="comment-time">Recent</div>
+            </div>
+          </div>
+
+          <div class="comment-text">${escapeHtml(comment.comment)}</div>
+        </div>
+      `;
+    });
+
+    container.innerHTML = html;
+  } catch (error) {
+    showAdminError(error, "loadChapterComments");
+    container.innerHTML =
+      '<p class="muted">Could not load comments.</p>';
+  }
+}
+
+async function createNotification(userId, title, message) {
+  if (!userId) return;
+
+  try {
+    await db.collection("notifications").add({
+      userId: userId,
+      title: title,
+      message: message,
+      read: false,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+  } catch (error) {
+    showAdminError(error, "createNotification");
+  }
+}
+
+async function loadNotifications() {
+  const container = document.getElementById("notification-list");
+
+  if (!container || !currentUser) return;
+
+  try {
+    const snapshot = await db.collection("notifications")
+      .where("userId", "==", currentUser.uid)
+      .orderBy("createdAt", "desc")
+      .limit(30)
+      .get();
+
+    if (snapshot.empty) {
+      container.innerHTML = '<p class="muted">No notifications yet.</p>';
+      return;
+    }
+
+    let html = "";
+
+    snapshot.forEach(function (doc) {
+      const notification = doc.data();
+
+      html += `
+        <div class="notification-item">
+          <div class="notification-icon">🔔</div>
+
+          <div>
+            <strong style="font-size:13px;">${escapeHtml(notification.title || "Notification")}</strong>
+            <p class="muted">${escapeHtml(notification.message || "")}</p>
+          </div>
+        </div>
+      `;
+    });
+
+    container.innerHTML = html;
+  } catch (error) {
+    showAdminError(error, "loadNotifications");
+    container.innerHTML =
+      '<p class="muted">Could not load notifications.</p>';
+  }
+}
+
+async function toggleFollowAuthor(authorId) {
+  if (!currentUser) {
+    showToast("Please sign in to follow authors.");
+    return;
+  }
+
+  if (!authorId) return;
+
+  try {
+    const followRef = db.collection("authorFollows")
+      .doc(currentUser.uid + "_" + authorId);
+
+    const followDoc = await followRef.get();
+
+    if (followDoc.exists) {
+      await followRef.delete();
+      showToast("Unfollowed author.");
+    } else {
+      await followRef.set({
+        followerId: currentUser.uid,
+        authorId: authorId,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      });
+
+      await createNotification(
+        authorId,
+        "New follower",
+        currentUser.displayName + " started following you."
+      );
+
+      showToast("Following author.");
+    }
+  } catch (error) {
+    showAdminError(error, "toggleFollowAuthor");
+    showToast("Could not update follow.");
+  }
+}
+
+const originalRenderBookPageForCommunity = renderBookPage;
+
+renderBookPage = function (book) {
+  originalRenderBookPageForCommunity(book);
+
+  const container = document.getElementById("book-page-content");
+
+  if (!container || !book) return;
+
+  const communityButtons = `
+    <button class="btn btn-ghost btn-sm" onclick="openCommunityScreen()">
+      💬 Community
+    </button>
+
+    <button class="follow-button" onclick="toggleFollowAuthor('${escapeHtml(book.authorId)}')">
+      ➕ Follow
+    </button>
+  `;
+
+  container.innerHTML = container.innerHTML.replace(
+    '<div class="action-row">',
+    `<div class="action-row">${communityButtons}`
+  );
+};
+</script>
+
+<!-- BATCH 6C END -->
+    <!-- BATCH 6D START: CONNECT COMMUNITY TO BOOKS -->
+
+<style>
+#community-button {
+  position: fixed;
+  right: 14px;
+  bottom: 332px;
+  z-index: 800;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px solid var(--glass-border);
+  background: var(--card);
+  color: var(--text);
+  font-size: 19px;
+  cursor: pointer;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+}
+</style>
+
+<button
+  id="community-button"
+  onclick="openCommunityScreen()"
+  title="Open community">
+  💬
+</button>
+
+<script>
+const originalOpenBookForCommunity = openBook;
+
+openBook = function (bookId) {
+  originalOpenBookForCommunity(bookId);
+
+  if (activeBook) {
+    updateShareCard();
+    loadBookReviews();
+    loadChapterComments();
+  }
+};
+
+const originalOpenChapterForCommunity = openChapter;
+
+openChapter = function (chapterIndex, scrollPosition) {
+  originalOpenChapterForCommunity(chapterIndex, scrollPosition);
+
+  if (activeBook) {
+    loadChapterComments();
+  }
+};
+
+const originalSubmitReviewForRefresh = submitBookReview;
+
+submitBookReview = async function () {
+  await originalSubmitReviewForRefresh();
+  await loadHomeBooks();
+};
+
+const originalLoadHomeBooksForCommunity = loadHomeBooks;
+
+loadHomeBooks = async function () {
+  await originalLoadHomeBooksForCommunity();
+
+  if (activeBook) {
+    updateShareCard();
+    loadBookReviews();
+    loadChapterComments();
+  }
+};
+
+const originalLoadUserProfileForCommunity = loadUserProfile;
+
+loadUserProfile = async function () {
+  await originalLoadUserProfileForCommunity();
+
+  if (currentUser) {
+    await loadNotifications();
+  }
+};
+
+const originalCloseReaderForCommunity = closeReader;
+
+closeReader = function () {
+  originalCloseReaderForCommunity();
+  closeCommunityScreen();
+};
+</script>
+
+<!-- BATCH 6D END -->
+    <!-- BATCH 7A START: CONTESTS, BADGES, AND REWARDS STYLES -->
+
+<style>
+#contest-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 770;
+  background: var(--bg);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.contest-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 14px 16px;
+  background: rgba(7, 7, 11, 0.80);
+  border-bottom: 1px solid var(--glass-border);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+body.light-mode .contest-topbar,
+body.sepia-mode .contest-topbar {
+  background: rgba(255, 255, 255, 0.82);
+}
+
+.contest-body {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 20px 16px 130px;
+}
+
+.contest-card {
+  position: relative;
+  overflow: hidden;
+  padding: 20px;
+  border-radius: 20px;
+  background:
+    linear-gradient(135deg, rgba(139, 92, 246, 0.25), rgba(99, 102, 241, 0.18)),
+    var(--card);
+  border: 1px solid rgba(196, 181, 253, 0.28);
+  margin-bottom: 18px;
+}
+
+.contest-card h3 {
+  font-size: 18px;
+  font-weight: 900;
+  margin-bottom: 6px;
+}
+
+.contest-card p {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 14px;
+}
+
+.contest-badge {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 900;
+  background: rgba(139, 92, 246, 0.20);
+  color: #c4b5fd;
+  border: 1px solid rgba(139, 92, 246, 0.35);
+  margin-bottom: 10px;
+}
+
+.leaderboard-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 13px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--glass-border);
+  margin-bottom: 10px;
+}
+
+body.light-mode .leaderboard-item,
+body.sepia-mode .leaderboard-item {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+.leaderboard-rank {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  background: rgba(139, 92, 246, 0.18);
+  color: var(--accent);
+}
+
+.leaderboard-name {
+  flex: 1;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.leaderboard-points {
+  font-size: 13px;
+  font-weight: 900;
+  color: var(--accent);
+}
+
+.badge-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(105px, 1fr));
+  gap: 12px;
+}
+
+.badge-card {
+  padding: 14px 10px;
+  border-radius: 16px;
+  background: var(--card);
+  border: 1px solid var(--glass-border);
+  text-align: center;
+}
+
+.badge-card.locked {
+  opacity: 0.45;
+}
+
+.badge-icon {
+  font-size: 24px;
+  margin-bottom: 6px;
+}
+
+.badge-name {
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.badge-card.unlocked {
+  border-color: rgba(245, 158, 11, 0.45);
+  background: rgba(245, 158, 11, 0.10);
+}
+
+.theory-item {
+  padding: 14px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--glass-border);
+  margin-bottom: 12px;
+}
+
+body.light-mode .theory-item,
+body.sepia-mode .theory-item {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+.theory-item h4 {
+  font-size: 14px;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+
+.theory-item p {
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+
+.vote-button {
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--glass-border);
+  background: var(--card);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.vote-button.voted {
+  background: rgba(139, 92, 246, 0.18);
+  border-color: rgba(139, 92, 246, 0.45);
+  color: var(--accent);
+}
+</style>
+
+<!-- BATCH 7A END -->
+   <!-- BATCH 7B START: CONTESTS, LEADERBOARD, BADGES, FAN THEORIES -->
+
+<div id="contest-screen" class="hidden">
+  <div class="contest-topbar">
+    <button class="icon-btn" onclick="closeContestScreen()">←</button>
+
+    <div class="author-title">Contests</div>
+
+    <button class="icon-btn" onclick="closeContestScreen()">✕</button>
+  </div>
+
+  <div class="contest-body">
+    <div class="contest-card">
+      <span class="contest-badge">Reading Sprint</span>
+      <h3>Read as many chapters as you can</h3>
+      <p>
+        Earn 10 points for every chapter you finish. The top readers win Codo Bills,
+        badges, and a homepage spotlight.
+      </p>
+
+      <div class="stat-row">
+        <div class="stat-box">
+          <strong id="sprint-chapters">0</strong>
+          <span>Chapters read</span>
+        </div>
+
+        <div class="stat-box">
+          <strong id="sprint-points">0</strong>
+          <span>Points</span>
+        </div>
+
+        <div class="stat-box">
+          <strong id="sprint-rank">--</strong>
+          <span>Rank</span>
+        </div>
+      </div>
+
+      <button class="btn" onclick="joinReadingSprint()">
+        Join Reading Sprint
+      </button>
+    </div>
+
+    <div class="contest-card">
+      <span class="contest-badge">Streak Challenge</span>
+      <h3>Read every day</h3>
+      <p>
+        Keep your reading streak alive. Reach 3, 7, 14, or 30 days to unlock badges
+        and rewards.
+      </p>
+
+      <div class="stat-row">
+        <div class="stat-box">
+          <strong id="streak-days">0</strong>
+          <span>Day streak</span>
+        </div>
+
+        <div class="stat-box">
+          <strong id="streak-best">0</strong>
+          <span>Best streak</span>
+        </div>
+
+        <div class="stat-box">
+          <strong id="streak-next">3</strong>
+          <span>Next badge</span>
+        </div>
+      </div>
+
+      <button class="btn btn-ghost" onclick="updateReadingStreak()">
+        Update today’s streak
+      </button>
+    </div>
+
+    <div class="contest-card">
+      <span class="contest-badge">Best Fan Theory</span>
+      <h3>Share your best theory</h3>
+      <p>
+        Write a theory about any book. Readers can vote for the most interesting theory.
+      </p>
+
+      <label>Theory title</label>
+      <input id="theory-title" type="text" placeholder="Give your theory a title">
+
+      <label>Your theory</label>
+      <textarea id="theory-text" rows="5" placeholder="Write your best fan theory..."></textarea>
+
+      <button class="btn" onclick="submitFanTheory()">
+        Submit theory
+      </button>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-bottom:14px;">Fan theories</h3>
+      <div id="theory-list">
+        <p class="muted">No theories yet.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-bottom:14px;">Reading Sprint leaderboard</h3>
+      <div id="sprint-leaderboard">
+        <p class="muted">No readers have joined yet.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-bottom:14px;">Your badges</h3>
+      <div class="badge-grid" id="badge-grid"></div>
+    </div>
+  </div>
+</div>
+
+<!-- BATCH 7B END --> 
+    <!-- BATCH 7C START: CONTESTS, STREAKS, BADGES, FAN THEORY JAVASCRIPT -->
+
+<script>
+let contestProfile = {
+  sprintChapters: 0,
+  sprintPoints: 0,
+  streakDays: 0,
+  bestStreak: 0,
+  lastReadDate: "",
+  badges: []
+};
+
+function openContestScreen() {
+  const screen = document.getElementById("contest-screen");
+
+  if (!screen) return;
+
+  screen.classList.add("active");
+  screen.classList.remove("hidden");
+  document.body.style.overflow = "hidden";
+
+  loadContestProfile();
+  loadSprintLeaderboard();
+  loadFanTheories();
+  renderBadges();
+}
+
+function closeContestScreen() {
+  const screen = document.getElementById("contest-screen");
+
+  if (!screen) return;
+
+  screen.classList.add("hidden");
+  screen.classList.remove("active");
+  document.body.style.overflow = "";
+}
+
+async function loadContestProfile() {
+  if (!currentUser) return;
+
+  try {
+    const doc = await db.collection("contestProfiles")
+      .doc(currentUser.uid)
+      .get();
+
+    if (doc.exists) {
+      contestProfile = doc.data();
+    }
+
+    updateContestDisplay();
+  } catch (error) {
+    showAdminError(error, "loadContestProfile");
+  }
+}
+
+function updateContestDisplay() {
+  document.getElementById("sprint-chapters").textContent =
+    Number(contestProfile.sprintChapters || 0);
+
+  document.getElementById("sprint-points").textContent =
+    Number(contestProfile.sprintPoints || 0);
+
+  document.getElementById("streak-days").textContent =
+    Number(contestProfile.streakDays || 0);
+
+  document.getElementById("streak-best").textContent =
+    Number(contestProfile.bestStreak || 0);
+
+  const streak = Number(contestProfile.streakDays || 0);
+
+  let nextBadge = 3;
+
+  if (streak >= 3) nextBadge = 7;
+  if (streak >= 7) nextBadge = 14;
+  if (streak >= 14) nextBadge = 30;
+  if (streak >= 30) nextBadge = "All badges earned";
+
+  document.getElementById("streak-next").textContent = nextBadge;
+}
+
+async function joinReadingSprint() {
+  if (!currentUser) {
+    showToast("Please sign in to join the Reading Sprint.");
+    return;
+  }
+
+  try {
+    await db.collection("contestProfiles").doc(currentUser.uid).set({
+      displayName: currentUser.displayName || "Reader",
+      photoURL: currentUser.photoURL || "",
+      sprintJoined: true,
+      sprintChapters: Number(contestProfile.sprintChapters || 0),
+      sprintPoints: Number(contestProfile.sprintPoints || 0),
+      updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+    }, { merge: true });
+
+    contestProfile.sprintJoined = true;
+
+    showToast("You joined the Reading Sprint.");
+    loadSprintLeaderboard();
+  } catch (error) {
+    showAdminError(error, "joinReadingSprint");
+    showToast("Could not join the Reading Sprint.");
+  }
+}
+
+async function addSprintChapter() {
+  if (!currentUser) return;
+
+  try {
+    const chapters = Number(contestProfile.sprintChapters || 0) + 1;
+    const points = Number(contestProfile.sprintPoints || 0) + 10;
+
+    contestProfile.sprintChapters = chapters;
+    contestProfile.sprintPoints = points;
+
+    await db.collection("contestProfiles").doc(currentUser.uid).set({
+      displayName: currentUser.displayName || "Reader",
+      photoURL: currentUser.photoURL || "",
+      sprintJoined: true,
+      sprintChapters: chapters,
+      sprintPoints: points,
+      updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+    }, { merge: true });
+
+    updateContestDisplay();
+  } catch (error) {
+    showAdminError(error, "addSprintChapter");
+  }
+}
+
+async function updateReadingStreak() {
+  if (!currentUser) {
+    showToast("Please sign in to track your streak.");
+    return;
+  }
+
+  try {
+    const today = new Date().toISOString().slice(0, 10);
+
+    if (contestProfile.lastReadDate === today) {
+      showToast("Today’s streak is already updated.");
+      return;
+    }
+
+    const yesterday = new Date();
+    yesterday.setDate(yesterday.getDate() - 1);
+
+    const yesterdayString = yesterday.toISOString().slice(0, 10);
+
+    let streak = Number(contestProfile.streakDays || 0);
+
+    if (contestProfile.lastReadDate === yesterdayString) {
+      streak = streak + 1;
+    } else {
+      streak = 1;
+    }
+
+    const bestStreak = Math.max(streak, Number(contestProfile.bestStreak || 0));
+
+    contestProfile.streakDays = streak;
+    contestProfile.bestStreak = bestStreak;
+    contestProfile.lastReadDate = today;
+
+    await db.collection("contestProfiles").doc(currentUser.uid).set({
+      displayName: currentUser.displayName || "Reader",
+      photoURL: currentUser.photoURL || "",
+      streakDays: streak,
+      bestStreak: bestStreak,
+      lastReadDate: today,
+      updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+    }, { merge: true });
+
+    await checkStreakBadges(streak);
+
+    showToast("Streak updated: " + streak + " day" + (streak === 1 ? "" : "s") + ".");
+    updateContestDisplay();
+    renderBadges();
+  } catch (error) {
+    showAdminError(error, "updateReadingStreak");
+    showToast("Could not update your streak.");
+  }
+}
+
+async function checkStreakBadges(streak) {
+  const badges = Array.isArray(contestProfile.badges)
+    ? contestProfile.badges
+    : [];
+
+  const newBadges = [];
+
+  if (streak >= 3 && !badges.includes("3-day-streak")) {
+    newBadges.push("3-day-streak");
+  }
+
+  if (streak >= 7 && !badges.includes("7-day-streak")) {
+    newBadges.push("7-day-streak");
+  }
+
+  if (streak >= 14 && !badges.includes("14-day-streak")) {
+    newBadges.push("14-day-streak");
+  }
+
+  if (streak >= 30 && !badges.includes("30-day-streak")) {
+    newBadges.push("30-day-streak");
+  }
+
+  if (newBadges.length === 0) return;
+
+  const updatedBadges = badges.concat(newBadges);
+
+  contestProfile.badges = updatedBadges;
+
+  await db.collection("contestProfiles").doc(currentUser.uid).update({
+    badges: updatedBadges
+  });
+
+  showToast("New badge unlocked!");
+}
+
+function renderBadges() {
+  const container = document.getElementById("badge-grid");
+
+  if (!container) return;
+
+  const badges = Array.isArray(contestProfile.badges)
+    ? contestProfile.badges
+    : [];
+
+  const allBadges = [
+    {
+      id: "3-day-streak",
+      icon: "🔥",
+      name: "3-Day Streak"
+    },
+    {
+      id: "7-day-streak",
+      icon: "⚡",
+      name: "7-Day Streak"
+    },
+    {
+      id: "14-day-streak",
+      icon: "🌟",
+      name: "14-Day Streak"
+    },
+    {
+      id: "30-day-streak",
+      icon: "👑",
+      name: "30-Day Streak"
+    },
+    {
+      id: "contest-champion",
+      icon: "🏆",
+      name: "Contest Champion"
+    },
+    {
+      id: "top-reviewer",
+      icon: "⭐",
+      name: "Top Reviewer"
+    }
+  ];
+
+  let html = "";
+
+  for (let i = 0; i < allBadges.length; i++) {
+    const badge = allBadges[i];
+    const unlocked = badges.includes(badge.id);
+
+    html += `
+      <div class="badge-card ${unlocked ? "unlocked" : "locked"}">
+        <div class="badge-icon">${badge.icon}</div>
+        <div class="badge-name">${badge.name}</div>
+      </div>
+    `;
+  }
+
+  container.innerHTML = html;
+}
+
+async function submitFanTheory() {
+  if (!currentUser) {
+    showToast("Please sign in to submit a theory.");
+    return;
+  }
+
+  const titleInput = document.getElementById("theory-title");
+  const textInput = document.getElementById("theory-text");
+
+  const title = titleInput.value.trim();
+  const text = textInput.value.trim();
+
+  if (!title || !text) {
+    showToast("Enter a theory title and content.");
+    return;
+  }
+
+  try {
+    await db.collection("fanTheories").add({
+      uid: currentUser.uid,
+      displayName: currentUser.displayName || "Reader",
+      photoURL: currentUser.photoURL || "",
+      title: title,
+      theory: text,
+      votes: 0,
+      voters: [],
+      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+
+    titleInput.value = "";
+    textInput.value = "";
+
+    showToast("Theory submitted.");
+    loadFanTheories();
+  } catch (error) {
+    showAdminError(error, "submitFanTheory");
+    showToast("Could not submit your theory.");
+  }
+}
+
+async function loadFanTheories() {
+  const container = document.getElementById("theory-list");
+
+  if (!container) return;
+
+  try {
+    const snapshot = await db.collection("fanTheories")
+      .orderBy("votes", "desc")
+      .orderBy("createdAt", "desc")
+      .limit(30)
+      .get();
+
+    if (snapshot.empty) {
+      container.innerHTML = '<p class="muted">No theories yet.</p>';
+      return;
+    }
+
+    let html = "";
+
+    snapshot.forEach(function (doc) {
+      const theory = doc.data();
+      const theoryId = doc.id;
+      const voters = Array.isArray(theory.voters) ? theory.voters : [];
+      const hasVoted = currentUser && voters.includes(currentUser.uid);
+
+      html += `
+        <div class="theory-item">
+          <h4>${escapeHtml(theory.title || "Untitled theory")}</h4>
+          <p>${escapeHtml(theory.theory || "")}</p>
+
+          <div style="display:flex;align-items:center;gap:10px;">
+            <button
+              class="vote-button ${hasVoted ? "voted" : ""}"
+              onclick="voteFanTheory('${escapeHtml(theoryId)}')">
+              ${hasVoted ? "Voted" : "Vote"} • ${Number(theory.votes || 0)}
+            </button>
+
+            <span class="muted">by ${escapeHtml(theory.displayName || "Reader")}</span>
+          </div>
+        </div>
+      `;
+    });
+
+    container.innerHTML = html;
+  } catch (error) {
+    showAdminError(error, "loadFanTheories");
+    container.innerHTML =
+      '<p class="muted">Could not load fan theories.</p>';
+  }
+}
+
+async function voteFanTheory(theoryId) {
+  if (!currentUser) {
+    showToast("Please sign in to vote.");
+    return;
+  }
+
+  try {
+    const theoryRef = db.collection("fanTheories").doc(theoryId);
+    const theoryDoc = await theoryRef.get();
+
+    if (!theoryDoc.exists) return;
+
+    const theory = theoryDoc.data();
+    const voters = Array.isArray(theory.voters) ? theory.voters : [];
+
+    if (voters.includes(currentUser.uid)) {
+      showToast("You already voted for this theory.");
+      return;
+    }
+
+    voters.push(currentUser.uid);
+
+    await theoryRef.update({
+      votes: Number(theory.votes || 0) + 1,
+      voters: voters
+    });
+
+    showToast("Vote submitted.");
+    loadFanTheories();
+  } catch (error) {
+    showAdminError(error, "voteFanTheory");
+    showToast("Could not vote.");
+  }
+}
+
+async function loadSprintLeaderboard() {
+  const container = document.getElementById("sprint-leaderboard");
+
+  if (!container) return;
+
+  try {
+    const snapshot = await db.collection("contestProfiles")
+      .where("sprintJoined", "==", true)
+      .orderBy("sprintPoints", "desc")
+      .limit(20)
+      .get();
+
+    if (snapshot.empty) {
+      container.innerHTML =
+        '<p class="muted">No readers have joined yet.</p>';
+      return;
+    }
+
+    let html = "";
+    let rank = 1;
+
+    snapshot.forEach(function (doc) {
+      const reader = doc.data();
+      const isCurrentUser = currentUser && doc.id === currentUser.uid;
+
+      html += `
+        <div class="leaderboard-item">
+          <div class="leaderboard-rank">${rank}</div>
+
+          <div class="leaderboard-name">
+            ${escapeHtml(reader.displayName || "Reader")}
+            ${isCurrentUser ? " (You)" : ""}
+          </div>
+
+          <div class="leaderboard-points">
+            ${Number(reader.sprintPoints || 0)} pts
+          </div>
+        </div>
+      `;
+
+      rank = rank + 1;
+    });
+
+    container.innerHTML = html;
+  } catch (error) {
+    showAdminError(error, "loadSprintLeaderboard");
+    container.innerHTML =
+      '<p class="muted">Could not load the leaderboard.</p>';
+  }
+}
+
+const originalOpenChapterForContest = openChapter;
+
+openChapter = function (chapterIndex, scrollPosition) {
+  originalOpenChapterForContest(chapterIndex, scrollPosition);
+
+  if (currentUser) {
+    addSprintChapter();
+    updateReadingStreak();
+  }
+};
+</script>
+
+<!-- BATCH 7C END -->
+    <!-- BATCH 7D START: CONNECT CONTESTS TO APP -->
+
+<style>
+#contest-floating-button {
+  position: fixed;
+  right: 14px;
+  bottom: 390px;
+  z-index: 800;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px solid rgba(245, 158, 11, 0.45);
+  background: rgba(245, 158, 11, 0.16);
+  color: #fbbf24;
+  font-size: 19px;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+</style>
+
+<button
+  id="contest-floating-button"
+  onclick="openContestScreen()"
+  title="Open contests">
+  🏆
+</button>
+
+<script>
+const originalSwitchPageForContests = switchPage;
+
+switchPage = function (page) {
+  originalSwitchPageForContests(page);
+
+  if (page === "contests") {
+    openContestScreen();
+  }
+};
+
+const originalOpenContestScreenForRefresh = openContestScreen;
+
+openContestScreen = function () {
+  originalOpenContestScreenForRefresh();
+
+  if (currentUser) {
+    loadSprintLeaderboard();
+    loadFanTheories();
+    renderBadges();
+  }
+};
+
+const originalSubmitFanTheoryForRefresh = submitFanTheory;
+
+submitFanTheory = async function () {
+  await originalSubmitFanTheoryForRefresh();
+  await loadFanTheories();
+};
+
+const originalVoteFanTheoryForRefresh = voteFanTheory;
+
+voteFanTheory = async function (theoryId) {
+  await originalVoteFanTheoryForRefresh(theoryId);
+  await loadFanTheories();
+};
+
+const originalJoinReadingSprintForRefresh = joinReadingSprint;
+
+joinReadingSprint = async function () {
+  await originalJoinReadingSprintForRefresh();
+  await loadSprintLeaderboard();
+};
+
+const originalUpdateReadingStreakForRefresh = updateReadingStreak;
+
+updateReadingStreak = async function () {
+  await originalUpdateReadingStreakForRefresh();
+  await loadContestProfile();
+};
+
+const originalLoadUserProfileForContests = loadUserProfile;
+
+loadUserProfile = async function () {
+  await originalLoadUserProfileForContests();
+
+  if (currentUser) {
+    await loadContestProfile();
+  }
+};
+
+const originalCloseReaderForContests = closeReader;
+
+closeReader = function () {
+  originalCloseReaderForContests();
+  closeContestScreen();
+};
+</script>
+
+<!-- BATCH 7D END -->
+    <!-- BATCH 8A START: ADMIN GOD MODE STYLES -->
+
+<style>
+#admin-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 780;
+  background: var(--bg);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.admin-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 14px 16px;
+  background: rgba(7, 7, 11, 0.82);
+  border-bottom: 1px solid rgba(239, 68, 68, 0.35);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+body.light-mode .admin-topbar,
+body.sepia-mode .admin-topbar {
+  background: rgba(255, 255, 255, 0.85);
+}
+
+.admin-title {
+  font-size: 17px;
+  font-weight: 900;
+  color: #fca5a5;
+}
+
+.admin-body {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 20px 16px 130px;
+}
+
+.admin-tabs {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  margin-bottom: 18px;
+  padding-bottom: 4px;
+  scrollbar-width: none;
+}
+
+.admin-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.admin-tab {
+  flex: 0 0 auto;
+  padding: 10px 15px;
+  border-radius: 999px;
+  border: 1px solid var(--glass-border);
+  background: var(--card);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.admin-tab.active {
+  background: linear-gradient(135deg, #ef4444, #b91c1c);
+  border-color: transparent;
+  color: #ffffff;
+}
+
+.admin-page {
+  display: none;
+}
+
+.admin-page.active {
+  display: block;
+  animation: fadeIn 0.25s ease;
+}
+
+.admin-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.admin-stat-box {
+  background: var(--card);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  padding: 16px;
+  text-align: center;
+}
+
+.admin-stat-box strong {
+  display: block;
+  font-size: 24px;
+  font-weight: 900;
+}
+
+.admin-stat-box span {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.admin-item {
+  padding: 14px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--glass-border);
+  margin-bottom: 12px;
+}
+
+body.light-mode .admin-item,
+body.sepia-mode .admin-item {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+.admin-item h4 {
+  font-size: 14px;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+
+.admin-item p {
+  font-size: 11px;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+
+.admin-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.admin-action {
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--glass-border);
+  background: var(--card);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.admin-action.featured {
+  background: rgba(139, 92, 246, 0.18);
+  border-color: rgba(139, 92, 246, 0.45);
+  color: var(--accent);
+}
+
+.admin-action.danger {
+  background: rgba(239, 68, 68, 0.15);
+  border-color: rgba(239, 68, 68, 0.45);
+  color: #fca5a5;
+}
+
+.admin-action.success {
+  background: rgba(16, 185, 129, 0.15);
+  border-color: rgba(16, 185, 129, 0.45);
+  color: #6ee7b7;
+}
+
+.admin-free-access {
+  border-color: rgba(139, 92, 246, 0.45);
+  background: rgba(139, 92, 246, 0.12);
+}
+
+.admin-log {
+  font-family: monospace;
+  font-size: 11px;
+  line-height: 1.5;
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid var(--glass-border);
+  border-radius: 14px;
+  padding: 14px;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+</style>
+
+<!-- BATCH 8A END -->
+    <!-- BATCH 8B START: ADMIN GOD MODE HTML -->
+
+<div id="admin-screen" class="hidden">
+  <div class="admin-topbar">
+    <button class="icon-btn" onclick="closeAdminScreen()">←</button>
+
+    <div class="admin-title">👑 Admin God Mode</div>
+
+    <button class="icon-btn" onclick="closeAdminScreen()">✕</button>
+  </div>
+
+  <div class="admin-body">
+    <div class="admin-tabs">
+      <button class="admin-tab active" data-admin-tab="overview" onclick="switchAdminTab('overview')">
+        📊 Overview
+      </button>
+
+      <button class="admin-tab" data-admin-tab="books" onclick="switchAdminTab('books')">
+        📚 Books
+      </button>
+
+      <button class="admin-tab" data-admin-tab="authors" onclick="switchAdminTab('authors')">
+        ✍️ Authors
+      </button>
+
+      <button class="admin-tab" data-admin-tab="reports" onclick="switchAdminTab('reports')">
+        🚩 Reports
+      </button>
+
+      <button class="admin-tab" data-admin-tab="codo" onclick="switchAdminTab('codo')">
+        💠 Codo
+      </button>
+
+      <button class="admin-tab" data-admin-tab="diagnostics" onclick="switchAdminTab('diagnostics')">
+        🛠️ Diagnostics
+      </button>
+    </div>
+
+    <div id="admin-page-overview" class="admin-page active">
+      <div class="card">
+        <h3 style="margin-bottom:14px;">Platform analytics</h3>
+
+        <div class="admin-stat-grid">
+          <div class="admin-stat-box">
+            <strong id="admin-total-books">0</strong>
+            <span>Total books</span>
+          </div>
+
+          <div class="admin-stat-box">
+            <strong id="admin-total-authors">0</strong>
+            <span>Total authors</span>
+          </div>
+
+          <div class="admin-stat-box">
+            <strong id="admin-total-reads">0</strong>
+            <span>Total reads</span>
+          </div>
+
+          <div class="admin-stat-box">
+            <strong id="admin-total-clicks">0</strong>
+            <span>Tip clicks</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card admin-free-access">
+        <h3 style="margin-bottom:8px;">Admin free reading</h3>
+        <p class="muted" style="margin-bottom:14px;">
+          You can read every book and chapter without spending Codo Bills.
+        </p>
+
+        <div style="display:flex;align-items:center;gap:10px;">
+          <span style="font-size:22px;">👑</span>
+          <strong style="font-size:14px;">Admin access active</strong>
+        </div>
+      </div>
+    </div>
+
+    <div id="admin-page-books" class="admin-page">
+      <div class="card">
+        <h3 style="margin-bottom:14px;">Manage books</h3>
+        <div id="admin-books-list">
+          <p class="muted">Loading books...</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="admin-page-authors" class="admin-page">
+      <div class="card">
+        <h3 style="margin-bottom:14px;">Manage authors</h3>
+        <div id="admin-authors-list">
+          <p class="muted">Loading authors...</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="admin-page-reports" class="admin-page">
+      <div class="card">
+        <h3 style="margin-bottom:14px;">Reports and moderation</h3>
+        <div id="admin-reports-list">
+          <p class="muted">No reports yet.</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="admin-page-codo" class="admin-page">
+      <div class="card">
+        <h3 style="margin-bottom:14px;">Codo Bill settings</h3>
+
+        <label>Codo purchases</label>
+        <select id="admin-codo-enabled">
+          <option value="true">Enabled</option>
+          <option value="false">Disabled</option>
+        </select>
+
+        <label>Author revenue share (%)</label>
+        <input id="admin-author-share" type="number" min="1" max="99" value="70">
+
+        <label>GBP price per Codo Bill</label>
+        <input id="admin-gbp-price" type="number" step="0.01" min="0.01" value="1">
+
+        <label>USD price per Codo Bill</label>
+        <input id="admin-usd-price" type="number" step="0.01" min="0.01" value="1.29">
+
+        <label>NGN price per Codo Bill</label>
+        <input id="admin-ngn-price" type="number" step="1" min="1" value="500">
+
+        <button class="btn" onclick="saveAdminCodoSettings()">
+          Save Codo settings
+        </button>
+      </div>
+    </div>
+
+    <div id="admin-page-diagnostics" class="admin-page">
+      <div class="card">
+        <h3 style="margin-bottom:14px;">System diagnostics</h3>
+
+        <div class="admin-log" id="admin-diagnostics-log">
+          Waiting for diagnostics...
+        </div>
+
+        <button class="btn btn-ghost" style="margin-top:14px;" onclick="runAdminDiagnostics()">
+          Run diagnostics
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BATCH 8B END -->
+    <!-- BATCH 8C START: ADMIN GOD MODE JAVASCRIPT -->
+
+<script>
+let adminBooks = [];
+let adminAuthors = [];
+
+function openAdminScreen() {
+  if (!isAdminUser(currentUser)) {
+    showToast("Administrator access only.");
+    return;
+  }
+
+  const screen = document.getElementById("admin-screen");
+
+  if (!screen) return;
+
+  screen.classList.remove("hidden");
+  document.body.style.overflow = "hidden";
+
+  loadAdminAnalytics();
+  loadAdminBooks();
+  loadAdminAuthors();
+  loadAdminReports();
+  loadAdminCodoSettings();
+}
+
+function closeAdminScreen() {
+  const screen = document.getElementById("admin-screen");
+
+  if (!screen) return;
+
+  screen.classList.add("hidden");
+  document.body.style.overflow = "";
+}
+
+function switchAdminTab(tab) {
+  const tabs = document.querySelectorAll(".admin-tab");
+  const pages = document.querySelectorAll(".admin-page");
+
+  for (let i = 0; i < tabs.length; i++) {
+    if (tabs[i].dataset.adminTab === tab) {
+      tabs[i].classList.add("active");
+    } else {
+      tabs[i].classList.remove("active");
+    }
+  }
+
+  for (let i = 0; i < pages.length; i++) {
+    pages[i].classList.remove("active");
+  }
+
+  const targetPage = document.getElementById("admin-page-" + tab);
+
+  if (targetPage) {
+    targetPage.classList.add("active");
+  }
+}
+
+async function loadAdminAnalytics() {
+  if (!isAdminUser(currentUser)) return;
+
+  try {
+    const booksSnapshot = await db.collection("books").get();
+    const authorsSnapshot = await db.collection("authors").get();
+
+    let totalReads = 0;
+    let totalClicks = 0;
+
+    booksSnapshot.forEach(function (doc) {
+      const book = doc.data();
+      totalReads = totalReads + Number(book.views || 0);
+      totalClicks = totalClicks + Number(book.clicks || 0);
+    });
+
+    document.getElementById("admin-total-books").textContent =
+      booksSnapshot.size;
+
+    document.getElementById("admin-total-authors").textContent =
+      authorsSnapshot.size;
+
+    document.getElementById("admin-total-reads").textContent = totalReads;
+    document.getElementById("admin-total-clicks").textContent = totalClicks;
+  } catch (error) {
+    showAdminError(error, "loadAdminAnalytics");
+  }
+}
+
+async function loadAdminBooks() {
+  const container = document.getElementById("admin-books-list");
+
+  if (!container || !isAdminUser(currentUser)) return;
+
+  try {
+    const snapshot = await db.collection("books")
+      .orderBy("createdAt", "desc")
+      .limit(100)
+      .get();
+
+    adminBooks = [];
+
+    snapshot.forEach(function (doc) {
+      const book = doc.data();
+      book.id = doc.id;
+      adminBooks.push(book);
+    });
+
+    if (adminBooks.length === 0) {
+      container.innerHTML = '<p class="muted">No books yet.</p>';
+      return;
+    }
+
+    let html = "";
+
+    for (let i = 0; i < adminBooks.length; i++) {
+      const book = adminBooks[i];
+      const featured = book.featured === true;
+
+      html += `
+        <div class="admin-item">
+          <h4>${escapeHtml(book.title || "Untitled")}</h4>
+          <p>
+            by ${escapeHtml(getBookAuthor(book))} •
+            ${book.published === false ? "Draft" : "Published"} •
+            ${Array.isArray(book.chapters) ? book.chapters.length : 0} chapters
+          </p>
+
+          <div class="admin-actions">
+            <button class="admin-action ${featured ? "featured" : ""}"
+              onclick="toggleAdminFeaturedBook('${escapeHtml(book.id)}')">
+              ${featured ? "★ Featured" : "☆ Feature"}
+            </button>
+
+            <button class="admin-action" onclick="adminReadBook('${escapeHtml(book.id)}')">
+              👑 Read free
+            </button>
+
+            <button class="admin-action danger"
+              onclick="adminDeleteBook('${escapeHtml(book.id)}')">
+              Delete
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    container.innerHTML = html;
+  } catch (error) {
+    showAdminError(error, "loadAdminBooks");
+    container.innerHTML =
+      '<p class="muted">Could not load books.</p>';
+  }
+}
+
+async function toggleAdminFeaturedBook(bookId) {
+  if (!isAdminUser(currentUser)) return;
+
+  try {
+    const book = adminBooks.find(function (item) {
+      return item.id === bookId;
+    });
+
+    if (!book) return;
+
+    const featured = !(book.featured === true);
+
+    await db.collection("books").doc(bookId).update({
+      featured: featured
+    });
+
+    book.featured = featured;
+
+    showToast(featured ? "Book featured." : "Book unfeatured.");
+    loadAdminBooks();
+    loadHomeBooks();
+  } catch (error) {
+    showAdminError(error, "toggleAdminFeaturedBook");
+    showToast("Could not update featured status.");
+  }
+}
+
+function adminReadBook(bookId) {
+  const book = adminBooks.find(function (item) {
+    return item.id === bookId;
+  });
+
+  if (!book) return;
+
+  activeBook = book;
+  activeChapterIndex = 0;
+
+  renderBookPage(book);
+  switchPage("book");
+
+  showToast("Admin free reading enabled.");
+}
+
+async function adminDeleteBook(bookId) {
+  if (!isAdminUser(currentUser)) return;
+
+  const confirmed = confirm(
+    "Delete this book permanently? This cannot be undone."
+  );
+
+  if (!confirmed) return;
+
+  try {
+    await db.collection("books").doc(bookId).delete();
+
+    showToast("Book deleted.");
+    loadAdminBooks();
+    loadHomeBooks();
+  } catch (error) {
+    showAdminError(error, "adminDeleteBook");
+    showToast("Could not delete this book.");
+  }
+}
+
+async function loadAdminAuthors() {
+  const container = document.getElementById("admin-authors-list");
+
+  if (!container || !isAdminUser(currentUser)) return;
+
+  try {
+    const snapshot = await db.collection("authors")
+      .orderBy("createdAt", "desc")
+      .limit(100)
+      .get();
+
+    adminAuthors = [];
+
+    snapshot.forEach(function (doc) {
+      const author = doc.data();
+      author.id = doc.id;
+      adminAuthors.push(author);
+    });
+
+    if (adminAuthors.length === 0) {
+      container.innerHTML = '<p class="muted">No authors yet.</p>';
+      return;
+    }
+
+    let html = "";
+
+    for (let i = 0; i < adminAuthors.length; i++) {
+      const author = adminAuthors[i];
+      const verified = author.verified === true;
+
+      html += `
+        <div class="admin-item">
+          <h4>${escapeHtml(author.displayName || author.penName || "Author")}</h4>
+          <p>${escapeHtml(author.email || "")}</p>
+
+          <div class="admin-actions">
+            <button class="admin-action ${verified ? "success" : ""}"
+              onclick="toggleAdminVerifiedAuthor('${escapeHtml(author.id)}')">
+              ${verified ? "✅ Verified" : "Verify author"}
+            </button>
+
+            <button class="admin-action danger"
+              onclick="adminBanAuthor('${escapeHtml(author.id)}')">
+              Ban
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    container.innerHTML = html;
+  } catch (error) {
+    showAdminError(error, "loadAdminAuthors");
+    container.innerHTML =
+      '<p class="muted">Could not load authors.</p>';
+  }
+}
+
+async function toggleAdminVerifiedAuthor(authorId) {
+  if (!isAdminUser(currentUser)) return;
+
+  try {
+    const author = adminAuthors.find(function (item) {
+      return item.id === authorId;
+    });
+
+    if (!author) return;
+
+    const verified = !(author.verified === true);
+
+    await db.collection("authors").doc(authorId).update({
+      verified: verified
+    });
+
+    author.verified = verified;
+
+    showToast(verified ? "Author verified." : "Verification removed.");
+    loadAdminAuthors();
+  } catch (error) {
+    showAdminError(error, "toggleAdminVerifiedAuthor");
+    showToast("Could not update author verification.");
+  }
+}
+
+async function adminBanAuthor(authorId) {
+  if (!isAdminUser(currentUser)) return;
+
+  const confirmed = confirm("Ban this author?");
+
+  if (!confirmed) return;
+
+  try {
+    await db.collection("authors").doc(authorId).update({
+      banned: true
+    });
+
+    showToast("Author banned.");
+    loadAdminAuthors();
+  } catch (error) {
+    showAdminError(error, "adminBanAuthor");
+    showToast("Could not ban this author.");
+  }
+}
+
+async function loadAdminReports() {
+  const container = document.getElementById("admin-reports-list");
+
+  if (!container || !isAdminUser(currentUser)) return;
+
+  try {
+    const snapshot = await db.collection("reports")
+      .orderBy("createdAt", "desc")
+      .limit(50)
+      .get();
+
+    if (snapshot.empty) {
+      container.innerHTML = '<p class="muted">No reports yet.</p>';
+      return;
+    }
+
+    let html = "";
+
+    snapshot.forEach(function (doc) {
+      const report = doc.data();
+      const reportId = doc.id;
+
+      html += `
+        <div class="admin-item">
+          <h4>${escapeHtml(report.title || "Report")}</h4>
+          <p>${escapeHtml(report.message || "")}</p>
+
+          <div class="admin-actions">
+            <button class="admin-action success"
+              onclick="resolveAdminReport('${escapeHtml(reportId)}')">
+              Resolve
+            </button>
+
+            <button class="admin-action danger"
+              onclick="deleteAdminReport('${escapeHtml(reportId)}')">
+              Delete
+            </button>
+          </div>
+        </div>
+      `;
+    });
+
+    container.innerHTML = html;
+  } catch (error) {
+    showAdminError(error, "loadAdminReports");
+    container.innerHTML =
+      '<p class="muted">Could not load reports.</p>';
+  }
+}
+
+async function resolveAdminReport(reportId) {
+  if (!isAdminUser(currentUser)) return;
+
+  try {
+    await db.collection("reports").doc(reportId).update({
+      resolved: true,
+      resolvedAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+
+    showToast("Report resolved.");
+    loadAdminReports();
+  } catch (error) {
+    showAdminError(error, "resolveAdminReport");
+    showToast("Could not resolve this report.");
+  }
+}
+
+async function deleteAdminReport(reportId) {
+  if (!isAdminUser(currentUser)) return;
+
+  try {
+    await db.collection("reports").doc(reportId).delete();
+
+    showToast("Report deleted.");
+    loadAdminReports();
+  } catch (error) {
+    showAdminError(error, "deleteAdminReport");
+    showToast("Could not delete this report.");
+  }
+}
+
+async function loadAdminCodoSettings() {
+  if (!isAdminUser(currentUser)) return;
+
+  try {
+    const response = await fetch(
+      BACKEND_URL + "/api/codo-bills/public-settings"
+    );
+
+    const data = await response.json();
+
+    if (!data.success || !data.settings) return;
+
+    const settings = data.settings;
+
+    document.getElementById("admin-codo-enabled").value =
+      settings.enabled ? "true" : "false";
+
+    document.getElementById("admin-author-share").value =
+      settings.authorSharePercent || 70;
+
+    document.getElementById("admin-gbp-price").value =
+      settings.prices.GBP || 1;
+
+    document.getElementById("admin-usd-price").value =
+      settings.prices.USD || 1.29;
+
+    document.getElementById("admin-ngn-price").value =
+      settings.prices.NGN || 500;
+  } catch (error) {
+    showAdminError(error, "loadAdminCodoSettings");
+  }
+}
+
+async function saveAdminCodoSettings() {
+  if (!isAdminUser(currentUser)) return;
+
+  try {
+    const idToken = await currentUser.getIdToken(true);
+
+    const enabledValue = document.getElementById("admin-codo-enabled").value;
+    const authorShare = Number(
+      document.getElementById("admin-author-share").value
+    );
+
+    const gbpPrice = Number(
+      document.getElementById("admin-gbp-price").value
+    );
+
+    const usdPrice = Number(
+      document.getElementById("admin-usd-price").value
+    );
+
+    const ngnPrice = Number(
+      document.getElementById("admin-ngn-price").value
+    );
+
+    const response = await fetch(
+      BACKEND_URL + "/api/admin/codo-bills/settings",
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer " + idToken
+        },
+        body: JSON.stringify({
+          enabled: enabledValue === "true",
+          authorSharePercent: authorShare,
+          regionalPrices: {
+            GBP: gbpPrice,
+            USD: usdPrice,
+            NGN: ngnPrice
+          }
+        })
+      }
+    );
+
+    const data = await response.json();
+
+    if (!response.ok || !data.success) {
+      throw new Error(data.error || "Could not save Codo settings.");
+    }
+
+    showToast("Codo settings saved.");
+    loadCodoSettings();
+  } catch (error) {
+    showAdminError(error, "saveAdminCodoSettings");
+    showToast(error.message || "Could not save Codo settings.");
+  }
+}
+
+function runAdminDiagnostics() {
+  if (!isAdminUser(currentUser)) return;
+
+  const log = document.getElementById("admin-diagnostics-log");
+
+  if (!log) return;
+
+  const lines = [];
+
+  lines.push("DOFLOWNOVELS ADMIN DIAGNOSTICS");
+  lines.push("Time: " + new Date().toLocaleString());
+  lines.push("");
+  lines.push("Firebase loaded: " + (typeof firebase !== "undefined"));
+  lines.push("Firestore loaded: " + (typeof db !== "undefined"));
+  lines.push("Current user: " + (currentUser ? currentUser.email : "Not signed in"));
+  lines.push("Admin access: " + (isAdminUser(currentUser) ? "Yes" : "No"));
+  lines.push("Books loaded: " + allBooks.length);
+  lines.push("Author books loaded: " + authorBooks.length);
+  lines.push("Codo balance: " + getCodoBalance());
+  lines.push("Atmosphere: " + (atmosphereEnabled ? "On" : "Off"));
+  lines.push("Active book: " + (activeBook ? activeBook.title || activeBook.id : "None"));
+  lines.push("Backend URL: " + BACKEND_URL);
+
+  log.textContent = lines.join("\n");
+}
+</script>
+
+<!-- BATCH 8C END -->
+    <!-- BATCH 8D START: CONNECT ADMIN GOD MODE TO APP -->
+
+<style>
+#admin-floating-button {
+  position: fixed;
+  right: 14px;
+  bottom: 448px;
+  z-index: 800;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px solid rgba(239, 68, 68, 0.45);
+  background: rgba(239, 68, 68, 0.16);
+  color: #fca5a5;
+  font-size: 19px;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+</style>
+
+<button
+  id="admin-floating-button"
+  class="hidden"
+  onclick="openAdminScreen()"
+  title="Admin God Mode">
+  👑
+</button>
+
+<script>
+const originalOnAuthStateChangedForAdmin = auth.onAuthStateChanged;
+
+auth.onAuthStateChanged(async function (user) {
+  try {
+    const adminButton = document.getElementById("admin-floating-button");
+
+    if (!user) {
+      if (adminButton) {
+        adminButton.classList.add("hidden");
+      }
+
+      return;
+    }
+
+    if (isAdminUser(user)) {
+      if (adminButton) {
+        adminButton.classList.remove("hidden");
+      }
+
+      showToast("Admin God Mode available.");
+    } else {
+      if (adminButton) {
+        adminButton.classList.add("hidden");
+      }
+    }
+  } catch (error) {
+    showAdminError(error, "onAuthStateChanged admin connection");
+  }
+});
+
+const originalOpenBookForAdmin = openBook;
+
+openBook = function (bookId) {
+  originalOpenBookForAdmin(bookId);
+
+  if (activeBook && isAdminUser(currentUser)) {
+    showToast("Admin free reading enabled for this book.");
+  }
+};
+
+const originalIsChapterLockedForAdmin = isChapterLocked;
+
+isChapterLocked = function (book, chapterIndex) {
+  if (isAdminUser(currentUser)) {
+    return false;
+  }
+
+  return originalIsChapterLockedForAdmin(book, chapterIndex);
+};
+
+const originalLoadHomeBooksForAdmin = loadHomeBooks;
+
+loadHomeBooks = async function () {
+  await originalLoadHomeBooksForAdmin();
+
+  if (isAdminUser(currentUser)) {
+    await loadAdminAnalytics();
+  }
+};
+
+const originalOpenAdminScreenForRefresh = openAdminScreen;
+
+openAdminScreen = function () {
+  originalOpenAdminScreenForRefresh();
+
+  if (isAdminUser(currentUser)) {
+    loadAdminAnalytics();
+    loadAdminBooks();
+    loadAdminAuthors();
+    loadAdminReports();
+    loadAdminCodoSettings();
+    runAdminDiagnostics();
+  }
+};
+
+const originalCloseReaderForAdmin = closeReader;
+
+closeReader = function () {
+  originalCloseReaderForAdmin();
+  closeAdminScreen();
+};
+</script>
+
+<!-- BATCH 8D END -->
+    <!-- BATCH 9A START: PWA, OFFLINE READING, RECAP, POLISH -->
+
+<style>
+#install-app-banner {
+  position: fixed;
+  left: 12px;
+  right: 12px;
+  bottom: 96px;
+  z-index: 900;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px;
+  border-radius: 18px;
+  background: var(--card);
+  border: 1px solid rgba(139, 92, 246, 0.40);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+}
+
+#install-app-banner p {
+  font-size: 12px;
+  font-weight: 700;
+}
+
+#install-app-banner button {
+  width: auto;
+  padding: 9px 14px;
+  font-size: 12px;
+  border-radius: 10px;
+}
+
+#offline-badge {
+  position: fixed;
+  top: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 950;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(245, 158, 11, 0.16);
+  border: 1px solid rgba(245, 158, 11, 0.45);
+  color: #fbbf24;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+#recap-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 790;
+  background: var(--bg);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.recap-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 14px 16px;
+  background: rgba(7, 7, 11, 0.80);
+  border-bottom: 1px solid var(--glass-border);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+body.light-mode .recap-topbar,
+body.sepia-mode .recap-topbar {
+  background: rgba(255, 255, 255, 0.82);
+}
+
+.recap-body {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 24px 16px 130px;
+  text-align: center;
+}
+
+.recap-hero {
+  padding: 30px 20px;
+  border-radius: 24px;
+  background:
+    linear-gradient(135deg, rgba(139, 92, 246, 0.30), rgba(99, 102, 241, 0.22)),
+    var(--card);
+  border: 1px solid rgba(196, 181, 253, 0.30);
+  margin-bottom: 20px;
+}
+
+.recap-hero h2 {
+  font-size: 27px;
+  font-weight: 900;
+  margin-bottom: 8px;
+}
+
+.recap-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.recap-stat {
+  padding: 18px;
+  border-radius: 18px;
+  background: var(--card);
+  border: 1px solid var(--glass-border);
+}
+
+.recap-stat strong {
+  display: block;
+  font-size: 27px;
+  font-weight: 900;
+}
+
+.recap-stat span {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.pwa-hidden {
+  display: none !important;
+}
+</style>
+
+<div id="offline-badge" class="hidden">
+  Offline mode • Reading saved chapters
+</div>
+
+<div id="install-app-banner" class="pwa-hidden">
+  <p>📲 Install Doflownovels</p>
+  <button class="btn btn-sm" onclick="installDoflowApp()">
+    Install
+  </button>
+</div>
+
+<div id="recap-screen" class="hidden">
+  <div class="recap-topbar">
+    <button class="icon-btn" onclick="closeRecapScreen()">←</button>
+
+    <div class="author-title">Reading Recap</div>
+
+    <button class="icon-btn" onclick="closeRecapScreen()">✕</button>
+  </div>
+
+  <div class="recap-body">
+    <div class="recap-hero">
+      <h2>Your reading journey</h2>
+      <p class="muted">
+        See your progress, streak, favourite books, and achievements.
+      </p>
+    </div>
+
+    <div class="recap-stat-grid">
+      <div class="recap-stat">
+        <strong id="recap-books">0</strong>
+        <span>Books opened</span>
+      </div>
+
+      <div class="recap-stat">
+        <strong id="recap-chapters">0</strong>
+        <span>Chapters read</span>
+      </div>
+
+      <div class="recap-stat">
+        <strong id="recap-streak">0</strong>
+        <span>Day streak</span>
+      </div>
+
+      <div class="recap-stat">
+        <strong id="recap-badges">0</strong>
+        <span>Badges earned</span>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:20px;">
+      <h3 style="margin-bottom:10px;">Keep reading</h3>
+      <p class="muted">
+        Your reading progress is saved automatically. Come back anytime and continue
+        exactly where you stopped.
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- BATCH 9A END -->
+   <!-- BATCH 9B START: PWA, OFFLINE, RECAP, POLISH JAVASCRIPT -->
+
+<script>
+let deferredInstallPrompt = null;
+
+window.addEventListener("beforeinstallprompt", function (event) {
+  event.preventDefault();
+  deferredInstallPrompt = event;
+
+  const banner = document.getElementById("install-app-banner");
+
+  if (banner) {
+    banner.classList.remove("pwa-hidden");
+  }
+});
+
+function installDoflowApp() {
+  if (!deferredInstallPrompt) {
+    showToast("Use your browser menu and choose “Add to Home screen”.");
+    return;
+  }
+
+  deferredInstallPrompt.prompt();
+
+  deferredInstallPrompt.userChoice.then(function (choice) {
+    if (choice.outcome === "accepted") {
+      showToast("Doflownovels installed.");
+    }
+
+    deferredInstallPrompt = null;
+
+    const banner = document.getElementById("install-app-banner");
+
+    if (banner) {
+      banner.classList.add("pwa-hidden");
+    }
+  });
+}
+
+function getOfflineChapters() {
+  try {
+    const saved = localStorage.getItem("doflow_offline_chapters");
+    return saved ? JSON.parse(saved) : {};
+  } catch (error) {
+    return {};
+  }
+}
+
+function saveOfflineChapters(chapters) {
+  try {
+    localStorage.setItem(
+      "doflow_offline_chapters",
+      JSON.stringify(chapters)
+    );
+  } catch (error) {
+    showAdminError(error, "saveOfflineChapters");
+  }
+}
+
+function saveChapterOffline(bookId, chapterIndex, chapter) {
+  try {
+    const offlineChapters = getOfflineChapters();
+
+    if (!offlineChapters[bookId]) {
+      offlineChapters[bookId] = {};
+    }
+
+    offlineChapters[bookId][chapterIndex] = {
+      title: chapter.title || "Chapter",
+      content: chapter.content || "",
+      savedAt: Date.now()
+    };
+
+    saveOfflineChapters(offlineChapters);
+  } catch (error) {
+    showAdminError(error, "saveChapterOffline");
+  }
+}
+
+function getOfflineChapter(bookId, chapterIndex) {
+  const offlineChapters = getOfflineChapters();
+
+  if (!offlineChapters[bookId]) return null;
+
+  return offlineChapters[bookId][chapterIndex] || null;
+}
+
+function updateOfflineBadge() {
+  const badge = document.getElementById("offline-badge");
+
+  if (!badge) return;
+
+  if (navigator.onLine) {
+    badge.classList.add("hidden");
+  } else {
+    badge.classList.remove("hidden");
+  }
+}
+
+window.addEventListener("online", function () {
+  updateOfflineBadge();
+  showToast("You are back online.");
+});
+
+window.addEventListener("offline", function () {
+  updateOfflineBadge();
+  showToast("You are offline. Saved chapters are still available.");
+});
+
+function openRecapScreen() {
+  const screen = document.getElementById("recap-screen");
+
+  if (!screen) return;
+
+  screen.classList.remove("hidden");
+  document.body.style.overflow = "hidden";
+
+  updateRecapStats();
+}
+
+function closeRecapScreen() {
+  const screen = document.getElementById("recap-screen");
+
+  if (!screen) return;
+
+  screen.classList.add("hidden");
+  document.body.style.overflow = "";
+}
+
+function updateRecapStats() {
+  const progress = getReadingProgress();
+  const offlineChapters = getOfflineChapters();
+
+  let booksOpened = 0;
+  let chaptersRead = 0;
+
+  for (const bookId in progress) {
+    booksOpened = booksOpened + 1;
+  }
+
+  for (const bookId in offlineChapters) {
+    const bookChapters = offlineChapters[bookId];
+
+    for (const chapterIndex in bookChapters) {
+      chaptersRead = chaptersRead + 1;
+    }
+  }
+
+  document.getElementById("recap-books").textContent = booksOpened;
+  document.getElementById("recap-chapters").textContent = chaptersRead;
+  document.getElementById("recap-streak").textContent =
+    Number(contestProfile.streakDays || 0);
+
+  document.getElementById("recap-badges").textContent =
+    Array.isArray(contestProfile.badges)
+      ? contestProfile.badges.length
+      : 0;
+}
+
+const originalOpenChapterForOffline = openChapter;
+
+openChapter = function (chapterIndex, scrollPosition) {
+  try {
+    if (!activeBook || !Array.isArray(activeBook.chapters)) {
+      showToast("No chapters available.");
+      return;
+    }
+
+    if (chapterIndex < 0 || chapterIndex >= activeBook.chapters.length) {
+      showToast("Chapter not found.");
+      return;
+    }
+
+    const chapter = activeBook.chapters[chapterIndex];
+
+    saveChapterOffline(activeBook.id, chapterIndex, chapter);
+
+    originalOpenChapterForOffline(chapterIndex, scrollPosition);
+  } catch (error) {
+    showAdminError(error, "openChapter offline connection");
+    showToast("Could not open this chapter.");
+  }
+};
+
+const originalLoadHomeBooksForPolish = loadHomeBooks;
+
+loadHomeBooks = async function () {
+  await originalLoadHomeBooksForPolish();
+
+  updateOfflineBadge();
+};
+
+const originalLoadUserProfileForPolish = loadUserProfile;
+
+loadUserProfile = async function () {
+  await originalLoadUserProfileForPolish();
+
+  updateOfflineBadge();
+  updateRecapStats();
+};
+
+const originalCloseReaderForPolish = closeReader;
+
+closeReader = function () {
+  originalCloseReaderForPolish();
+  closeRecapScreen();
+};
+
+window.addEventListener("load", function () {
+  updateOfflineBadge();
+});
+</script>
+
+<!-- BATCH 9B END --> 
+</body>
+    </html>
