@@ -7700,5 +7700,101 @@ window.addEventListener("load", function () {
 </script>
 
 <!-- BATCH 9B END --> 
+<style>
+  /* Hide app navigation on the landing page */
+  body:not(.doflow-logged-in) .bottom-nav {
+    display: none !important;
+  }
+
+  /* Premium bottom navigation */
+  .bottom-nav {
+    padding: 10px 14px calc(10px + env(safe-area-inset-bottom)) !important;
+    background: rgba(10, 10, 16, 0.92) !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+    backdrop-filter: blur(24px) !important;
+    -webkit-backdrop-filter: blur(24px) !important;
+  }
+
+  .nav-btn {
+    gap: 5px !important;
+    padding: 8px 0 !important;
+    border-radius: 14px !important;
+  }
+
+  .nav-btn span:first-child {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+  }
+
+  .nav-btn svg {
+    width: 22px;
+    height: 22px;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .nav-btn span:last-child {
+    font-size: 10px !important;
+    letter-spacing: 0.2px;
+  }
+
+  .nav-btn.active {
+    color: #a78bfa !important;
+    background: rgba(139, 92, 246, 0.14) !important;
+  }
+</style>
+
+<script>
+(function () {
+  function premiumNavigation() {
+    const nav = document.querySelector(".bottom-nav");
+
+    if (!nav || nav.dataset.premium === "true") return;
+
+    const icons = {
+      home: '<svg viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5"></path><path d="M5 9.8V20h14V9.8"></path><path d="M9.5 20v-5.5h5V20"></path></svg>',
+      library: '<svg viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v18H6.5A2.5 2.5 0 0 1 4 18.5z"></path><path d="M8 7h8"></path><path d="M8 11h8"></path></svg>',
+      contests: '<svg viewBox="0 0 24 24"><path d="M8 4h8v4a4 4 0 0 1-8 0z"></path><path d="M8 5H5a3 3 0 0 0 3 5"></path><path d="M16 5h3a3 3 0 0 1-3 5"></path><path d="M12 12v4"></path><path d="M9 20h6"></path><path d="M10 16h4l1 4H9z"></path></svg>',
+      profile: '<svg viewBox="0 0 24 24"><circle cx="12" cy="8.5" r="3.5"></circle><path d="M5 20c1.5-3.5 4-5 7-5s5.5 1.5 7 5"></path></svg>'
+    };
+
+    const buttons = nav.querySelectorAll(".nav-btn");
+
+    buttons.forEach(function (button) {
+      const page = button.dataset.page;
+      const label = button.querySelector("span:last-child");
+
+      if (!page || !icons[page] || !label) return;
+
+      button.innerHTML =
+        '<span>' + icons[page] + '</span>' +
+        '<span>' + label.textContent + '</span>';
+    });
+
+    nav.dataset.premium = "true";
+  }
+
+  function updateLoginState(user) {
+    document.body.classList.toggle(
+      "doflow-logged-in",
+      Boolean(user)
+    );
+
+    premiumNavigation();
+  }
+
+  if (window.firebase && firebase.auth) {
+    firebase.auth().onAuthStateChanged(updateLoginState);
+  }
+
+  document.addEventListener("DOMContentLoaded", premiumNavigation);
+})();
+</script>
 </body>
     </html>
