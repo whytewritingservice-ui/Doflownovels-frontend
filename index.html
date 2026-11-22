@@ -8000,5 +8000,4002 @@ window.addEventListener("load", function () {
   }, 1500);
 })();
 </script>
+<style>
+  body:not(.doflow-logged-in) #app,
+  body:not(.doflow-logged-in) .bottom-nav,
+  body:not(.doflow-logged-in) .floating-actions,
+  body:not(.doflow-logged-in) .floating-button,
+  body:not(.doflow-logged-in) .fab,
+  body:not(.doflow-logged-in) .quick-actions,
+  body:not(.doflow-logged-in) .side-actions {
+    display: none !important;
+  }
+
+  #doflow-landing {
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 32px 22px 48px;
+    position: relative;
+    z-index: 2;
+  }
+
+  #doflow-landing .landing-logo {
+    width: 168px;
+    border-radius: 26px;
+    margin-bottom: 26px;
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.08),
+      0 24px 70px rgba(139, 92, 246, 0.32);
+  }
+
+  #doflow-landing h1 {
+    font-size: 38px;
+    font-weight: 900;
+    letter-spacing: -1px;
+    margin-bottom: 10px;
+    background: linear-gradient(135deg, #ffffff, #c4b5fd);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  #doflow-landing .landing-tagline {
+    max-width: 330px;
+    color: #a1a1aa;
+    font-size: 15px;
+    line-height: 1.55;
+    margin-bottom: 32px;
+  }
+
+  #doflow-landing .google-button {
+    width: 100%;
+    max-width: 330px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 16px 20px;
+    border: none;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #8b5cf6, #6366f1);
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: 0 18px 40px rgba(99, 102, 241, 0.28);
+    transition: transform 0.18s ease;
+  }
+
+  #doflow-landing .google-button:active {
+    transform: scale(0.97);
+  }
+
+  #doflow-landing .google-button svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  #doflow-landing .landing-note {
+    max-width: 330px;
+    margin-top: 18px;
+    color: #71717a;
+    font-size: 12.5px;
+    line-height: 1.5;
+  }
+
+  #doflow-landing .landing-badges {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 30px;
+  }
+
+  #doflow-landing .landing-badge {
+    padding: 8px 13px;
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 999px;
+    background: rgba(18, 18, 26, 0.55);
+    color: #d4d4d8;
+    font-size: 11.5px;
+    font-weight: 600;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+</style>
+<div id="doflow-landing">
+  <img
+    class="landing-logo"
+    src="https://i.postimg.cc/FR8HwMSk/Messenger-creation-2478717422960483.jpg"
+    alt="Doflownovels">
+
+  <h1>Doflownovels</h1>
+
+  <p class="landing-tagline">
+    Discover stories. Support authors. Unlock worlds.
+  </p>
+
+  <button class="google-button" onclick="loginWithGoogle()">
+    <svg viewBox="0 0 24 24">
+      <path fill="#ffffff" d="M21.35 11.1H12v3.8h5.35c-.25 1.35-1.7 3.95-5.35 3.95A5.85 5.85 0 0 1 12 7.2c1.65 0 2.75.7 3.4 1.3l2.6-2.5A9.4 9.4 0 0 0 12 3.4a9.6 9.6 0 0 0 0 19.2c5.55 0 9.25-3.9 9.25-9.4 0-.65-.05-1.15-.15-2.1z"></path>
+    </svg>
+    Continue with Google
+  </button>
+
+  <p class="landing-note">
+    Free to join. Readers discover stories. Approved authors publish and receive support.
+  </p>
+
+  <div class="landing-badges">
+    <span class="landing-badge">Read free stories</span>
+    <span class="landing-badge">Support authors</span>
+    <span class="landing-badge">Join contests</span>
+  </div>
+</div>
+<script>
+(function () {
+  function updateLoginState(user) {
+    document.body.classList.toggle(
+      "doflow-logged-in",
+      Boolean(user)
+    );
+  }
+
+  if (window.firebase && firebase.auth) {
+    firebase.auth().onAuthStateChanged(updateLoginState);
+  }
+})();
+</script>
+<style>
+  /* Premium Reader Home */
+  #page-home .container {
+    padding-top: 8px;
+  }
+
+  #page-home .search-wrap input {
+    background: rgba(18, 18, 26, 0.65) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    color: #f4f4f5 !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.22);
+  }
+
+  #page-home .chip {
+    background: rgba(18, 18, 26, 0.65) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    color: #d4d4d8 !important;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+
+  #page-home .chip.active {
+    background: linear-gradient(135deg, #8b5cf6, #6366f1) !important;
+    border-color: transparent !important;
+    color: #ffffff !important;
+  }
+
+  #page-home .section-title h2 {
+    font-size: 20px !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.3px;
+  }
+
+  #page-home .book-card {
+    background: rgba(18, 18, 26, 0.72) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 18px !important;
+    overflow: hidden;
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.28);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+  }
+
+  #page-home .book-cover {
+    border-radius: 0;
+  }
+
+  #page-home .book-info {
+    padding: 11px 12px 13px !important;
+  }
+
+  #page-home .book-title {
+    font-size: 13.5px !important;
+    font-weight: 700 !important;
+  }
+
+  #page-home .book-author {
+    font-size: 11px !important;
+  }
+
+  #page-home .featured-card {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    background: rgba(18, 18, 26, 0.72) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 20px !important;
+    padding: 16px !important;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.30);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+  }
+
+  #page-home .featured-cover {
+    width: 104px;
+    height: 156px;
+    object-fit: cover;
+    border-radius: 14px;
+    flex: 0 0 auto;
+  }
+
+  #page-home .featured-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 11px;
+    border-radius: 999px;
+    background: rgba(139, 92, 246, 0.16);
+    color: #c4b5fd;
+    font-size: 11px;
+    font-weight: 800;
+    margin-bottom: 9px;
+  }
+
+  #page-home .featured-title {
+    font-size: 19px;
+    font-weight: 800;
+    line-height: 1.25;
+    margin-bottom: 5px;
+  }
+
+  #page-home .featured-author {
+    color: #a1a1aa;
+    font-size: 12.5px;
+    margin-bottom: 14px;
+  }
+
+  #page-home .featured-button {
+    width: auto !important;
+    padding: 10px 16px !important;
+    border-radius: 12px !important;
+    font-size: 13px !important;
+  }
+</style>
+<script>
+(function () {
+  const LOGO_URL =
+    "https://i.postimg.cc/FR8HwMSk/Messenger-creation-2478717422960483.jpg";
+
+  function escapeValue(value) {
+    return String(value || "")
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#039;");
+  }
+
+  function getBookAuthor(book) {
+    return book.authorName || book.penName || "Unknown author";
+  }
+
+  function createBookCard(book) {
+    const title = escapeValue(book.title || "Untitled");
+    const author = escapeValue(getBookAuthor(book));
+    const cover = escapeValue(book.cover || LOGO_URL);
+    const bookId = escapeValue(book.id);
+
+    return `
+      <div class="book-card" onclick="openBook('${bookId}')">
+        <img class="book-cover" src="${cover}" alt="${title}">
+        <div class="book-info">
+          <div class="book-title">${title}</div>
+          <div class="book-author">${author}</div>
+        </div>
+      </div>
+    `;
+  }
+
+  function renderBooks(containerId, books) {
+    const container = document.getElementById(containerId);
+
+    if (!container) return;
+
+    if (!books || books.length === 0) {
+      container.innerHTML =
+        '<p class="muted">No books available yet.</p>';
+      return;
+    }
+
+    container.innerHTML = books
+      .map(createBookCard)
+      .join("");
+  }
+
+  function renderFeaturedBook(book) {
+    const container = document.getElementById("featured-book");
+
+    if (!container || !book) return;
+
+    const title = escapeValue(book.title || "Untitled");
+    const author = escapeValue(getBookAuthor(book));
+    const cover = escapeValue(book.cover || LOGO_URL);
+    const bookId = escapeValue(book.id);
+
+    container.innerHTML = `
+      <div class="featured-card">
+        <img class="featured-cover" src="${cover}" alt="${title}">
+
+        <div>
+          <span class="featured-badge">Featured</span>
+
+          <div class="featured-title">${title}</div>
+          <div class="featured-author">by ${author}</div>
+
+          <button
+            class="btn featured-button"
+            onclick="openBook('${bookId}')">
+            Read now
+          </button>
+        </div>
+      </div>
+    `;
+  }
+
+  async function loadReaderHomeBooks() {
+    if (!window.firebase || !firebase.firestore) return;
+
+    const db = firebase.firestore();
+    const currentUser = firebase.auth().currentUser;
+
+    if (!currentUser) return;
+
+    try {
+      const snapshot = await db
+        .collection("books")
+        .where("published", "==", true)
+        .limit(30)
+        .get();
+
+      const books = snapshot.docs.map(function (document) {
+        return {
+          id: document.id,
+          ...document.data()
+        };
+      });
+
+      const featured = books.find(function (book) {
+        return book.featured === true;
+      }) || books[0];
+
+      const trending = [...books]
+        .sort(function (first, second) {
+          return Number(second.views || 0) - Number(first.views || 0);
+        })
+        .slice(0, 10);
+
+      const newReleases = [...books]
+        .sort(function (first, second) {
+          const firstDate = first.createdAt?.toMillis?.() || 0;
+          const secondDate = second.createdAt?.toMillis?.() || 0;
+          return secondDate - firstDate;
+        })
+        .slice(0, 10);
+
+      renderFeaturedBook(featured);
+      renderBooks("trending-books", trending);
+      renderBooks("new-books", newReleases);
+      renderBooks("mood-results", books.slice(0, 10));
+    } catch (error) {
+      console.error("Reader Home books error:", error);
+    }
+  }
+
+  if (window.firebase && firebase.auth) {
+    firebase.auth().onAuthStateChanged(function (user) {
+      if (user) {
+        loadReaderHomeBooks();
+      }
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    setTimeout(loadReaderHomeBooks, 800);
+  });
+})();
+</script>
+<style>
+  /* Premium Book Page */
+  #doflow-book-page {
+    display: none;
+  }
+
+  #doflow-book-page.active {
+    display: block;
+  }
+
+  #doflow-book-page .book-hero {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    background: rgba(18, 18, 26, 0.72);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 22px;
+    padding: 18px;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.30);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    margin-bottom: 18px;
+  }
+
+  #doflow-book-page .book-hero-cover {
+    width: 112px;
+    height: 168px;
+    object-fit: cover;
+    border-radius: 15px;
+    flex: 0 0 auto;
+  }
+
+  #doflow-book-page .book-hero-info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  #doflow-book-page .book-hero-title {
+    font-size: 22px;
+    font-weight: 800;
+    line-height: 1.25;
+    margin-bottom: 6px;
+  }
+
+  #doflow-book-page .book-hero-author {
+    color: #a1a1aa;
+    font-size: 13px;
+    margin-bottom: 12px;
+  }
+
+  #doflow-book-page .book-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-bottom: 14px;
+  }
+
+  #doflow-book-page .book-tag {
+    padding: 6px 11px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    background: rgba(255, 255, 255, 0.04);
+    color: #d4d4d8;
+    font-size: 11px;
+    font-weight: 600;
+  }
+
+  #doflow-book-page .book-description {
+    color: #a1a1aa;
+    font-size: 13.5px;
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+
+  #doflow-book-page .book-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+  }
+
+  #doflow-book-page .book-action {
+    width: auto !important;
+    padding: 10px 15px !important;
+    border-radius: 12px !important;
+    font-size: 13px !important;
+  }
+
+  #doflow-book-page .book-section {
+    margin-top: 24px;
+  }
+
+  #doflow-book-page .book-section-title {
+    font-size: 19px;
+    font-weight: 800;
+    margin-bottom: 12px;
+  }
+
+  #doflow-book-page .chapter-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  #doflow-book-page .chapter-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 14px 15px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 15px;
+    background: rgba(18, 18, 26, 0.65);
+    cursor: pointer;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    transition: transform 0.18s ease, border-color 0.18s ease;
+  }
+
+  #doflow-book-page .chapter-item:active {
+    transform: scale(0.98);
+    border-color: rgba(167, 139, 250, 0.45);
+  }
+
+  #doflow-book-page .chapter-name {
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  #doflow-book-page .chapter-status {
+    font-size: 11.5px;
+    font-weight: 700;
+    padding: 5px 10px;
+    border-radius: 999px;
+  }
+
+  #doflow-book-page .chapter-free {
+    color: #6ee7b7;
+    background: rgba(16, 185, 129, 0.12);
+  }
+
+  #doflow-book-page .chapter-locked {
+    color: #fbbf24;
+    background: rgba(245, 158, 11, 0.12);
+  }
+
+  #doflow-book-page .full-unlock-card {
+    margin-top: 14px;
+    padding: 16px;
+    border: 1px solid rgba(139, 92, 246, 0.35);
+    border-radius: 18px;
+    background: rgba(139, 92, 246, 0.10);
+    text-align: center;
+  }
+
+  #doflow-book-page .full-unlock-title {
+    font-size: 15px;
+    font-weight: 800;
+    margin-bottom: 5px;
+  }
+
+  #doflow-book-page .full-unlock-text {
+    color: #a1a1aa;
+    font-size: 12.5px;
+    margin-bottom: 13px;
+  }
+
+  #doflow-book-page .book-tabs {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 6px;
+    margin-bottom: 14px;
+    scrollbar-width: none;
+  }
+
+  #doflow-book-page .book-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  #doflow-book-page .book-tab {
+    flex: 0 0 auto;
+    padding: 9px 14px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(18, 18, 26, 0.65);
+    color: #d4d4d8;
+    font-size: 12.5px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  #doflow-book-page .book-tab.active {
+    background: linear-gradient(135deg, #8b5cf6, #6366f1);
+    border-color: transparent;
+    color: #ffffff;
+  }
+
+  #doflow-book-page .book-panel {
+    display: none;
+  }
+
+  #doflow-book-page .book-panel.active {
+    display: block;
+  }
+
+  #doflow-book-page .review-item,
+  #doflow-book-page .comment-item,
+  #doflow-book-page .theory-item {
+    padding: 14px 15px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 15px;
+    background: rgba(18, 18, 26, 0.65);
+    margin-bottom: 10px;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+
+  #doflow-book-page .item-name {
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 5px;
+  }
+
+  #doflow-book-page .item-text {
+    color: #d4d4d8;
+    font-size: 13px;
+    line-height: 1.55;
+  }
+
+  #doflow-book-page .theory-vote {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+  }
+
+  #doflow-book-page .vote-button {
+    width: auto !important;
+    padding: 7px 12px !important;
+    border-radius: 10px !important;
+    font-size: 12px !important;
+  }
+</style>
+<div id="doflow-book-page">
+  <div class="container">
+    <button
+      class="btn btn-ghost book-action"
+      onclick="closeBookPage()">
+      Back
+    </button>
+
+    <div class="book-hero">
+      <img
+        id="doflow-book-cover"
+        class="book-hero-cover"
+        src=""
+        alt="Book cover">
+
+      <div class="book-hero-info">
+        <h1 id="doflow-book-title" class="book-hero-title">
+          Book title
+        </h1>
+
+        <p id="doflow-book-author" class="book-hero-author">
+          by Author
+        </p>
+
+        <div id="doflow-book-tags" class="book-tags"></div>
+
+        <p id="doflow-book-description" class="book-description">
+          Book description will appear here.
+        </p>
+
+        <div class="book-actions">
+          <button
+            class="btn book-action"
+            onclick="startDoflowReading()">
+            Read now
+          </button>
+
+          <button
+            class="btn btn-ghost book-action"
+            onclick="followDoflowAuthor()">
+            Follow author
+          </button>
+
+          <button
+            class="btn btn-ghost book-action"
+            onclick="tipDoflowAuthor()">
+            Tip author
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="book-section">
+      <h2 class="book-section-title">Chapters</h2>
+
+      <div id="doflow-chapter-list" class="chapter-list"></div>
+
+      <div id="doflow-full-unlock" class="full-unlock-card hidden">
+        <div class="full-unlock-title">
+          Unlock full book
+        </div>
+
+        <div class="full-unlock-text">
+          Unlock every chapter in this book with Codo Bills.
+        </div>
+
+        <button
+          class="btn"
+          onclick="unlockDoflowFullBook()">
+          Unlock full book
+        </button>
+      </div>
+    </div>
+
+    <div class="book-section">
+      <h2 class="book-section-title">Community</h2>
+
+      <div class="book-tabs">
+        <button
+          class="book-tab active"
+          data-tab="reviews"
+          onclick="openDoflowBookTab('reviews')">
+          Reviews
+        </button>
+
+        <button
+          class="book-tab"
+          data-tab="comments"
+          onclick="openDoflowBookTab('comments')">
+          Comments
+        </button>
+
+        <button
+          class="book-tab"
+          data-tab="theories"
+          onclick="openDoflowBookTab('theories')">
+          Fan theories
+        </button>
+      </div>
+
+      <div id="doflow-panel-reviews" class="book-panel active">
+        <div id="doflow-reviews-list">
+          <p class="muted">Loading reviews...</p>
+        </div>
+      </div>
+
+      <div id="doflow-panel-comments" class="book-panel">
+        <div id="doflow-comments-list">
+          <p class="muted">Loading comments...</p>
+        </div>
+      </div>
+
+      <div id="doflow-panel-theories" class="book-panel">
+        <div id="doflow-theories-list">
+          <p class="muted">Loading fan theories...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+(function () {
+  let doflowActiveBook = null;
+
+  function escapeValue(value) {
+    return String(value || "")
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#039;");
+  }
+
+  function getBookAuthor(book) {
+    return book.authorName || book.penName || "Unknown author";
+  }
+
+  function closeBookPage() {
+    const bookPage = document.getElementById("doflow-book-page");
+
+    if (bookPage) {
+      bookPage.classList.remove("active");
+    }
+  }
+
+  function openDoflowBookTab(tabName) {
+    const tabs = document.querySelectorAll("#doflow-book-page .book-tab");
+    const panels = document.querySelectorAll("#doflow-book-page .book-panel");
+
+    tabs.forEach(function (tab) {
+      tab.classList.toggle(
+        "active",
+        tab.dataset.tab === tabName
+      );
+    });
+
+    panels.forEach(function (panel) {
+      panel.classList.toggle(
+        "active",
+        panel.id === "doflow-panel-" + tabName
+      );
+    });
+  }
+
+  function renderDoflowChapters(book) {
+    const chapterList = document.getElementById("doflow-chapter-list");
+    const fullUnlock = document.getElementById("doflow-full-unlock");
+
+    if (!chapterList || !book) return;
+
+    const chapters = book.chapters || [];
+
+    if (chapters.length === 0) {
+      chapterList.innerHTML =
+        '<p class="muted">No chapters available yet.</p>';
+
+      if (fullUnlock) {
+        fullUnlock.classList.add("hidden");
+      }
+
+      return;
+    }
+
+    let html = "";
+
+    chapters.forEach(function (chapter, index) {
+      const isFree = index < Number(book.freeChapters || 0);
+      const chapterTitle = escapeValue(
+        chapter.title || "Chapter " + (index + 1)
+      );
+
+      html += `
+        <div
+          class="chapter-item"
+          onclick="openDoflowChapter(${index})">
+          <div class="chapter-name">${chapterTitle}</div>
+
+          <div class="chapter-status ${
+            isFree ? "chapter-free" : "chapter-locked"
+          }">
+            ${isFree ? "Free" : "Locked"}
+          </div>
+        </div>
+      `;
+    });
+
+    chapterList.innerHTML = html;
+
+    if (fullUnlock) {
+      if (book.fullBookUnlock && book.fullBookCodoBills) {
+        fullUnlock.classList.remove("hidden");
+      } else {
+        fullUnlock.classList.add("hidden");
+      }
+    }
+  }
+
+  function renderDoflowReviews() {
+    const container = document.getElementById("doflow-reviews-list");
+
+    if (!container) return;
+
+    container.innerHTML =
+      '<p class="muted">No reviews yet. Be the first to review this book.</p>';
+  }
+
+  function renderDoflowComments() {
+    const container = document.getElementById("doflow-comments-list");
+
+    if (!container) return;
+
+    container.innerHTML =
+      '<p class="muted">No comments yet. Start the conversation.</p>';
+  }
+
+  function renderDoflowTheories() {
+    const container = document.getElementById("doflow-theories-list");
+
+    if (!container) return;
+
+    container.innerHTML =
+      '<p class="muted">No fan theories yet. Share your theory.</p>';
+  }
+
+  function openDoflowBook(book) {
+    doflowActiveBook = book;
+
+    const bookPage = document.getElementById("doflow-book-page");
+    const cover = document.getElementById("doflow-book-cover");
+    const title = document.getElementById("doflow-book-title");
+    const author = document.getElementById("doflow-book-author");
+    const tags = document.getElementById("doflow-book-tags");
+    const description = document.getElementById("doflow-book-description");
+
+    if (!bookPage || !book) return;
+
+    if (cover) {
+      cover.src = book.cover || LOGO_URL;
+    }
+
+    if (title) {
+      title.textContent = book.title || "Untitled";
+    }
+
+    if (author) {
+      author.textContent = "by " + getBookAuthor(book);
+    }
+
+    if (tags) {
+      const genre = escapeValue(book.genre || "Story");
+      const mood = escapeValue(book.mood || book.vibe || "");
+
+      tags.innerHTML =
+        '<span class="book-tag">' + genre + "</span>" +
+        (mood
+          ? '<span class="book-tag">' + mood + "</span>"
+          : "");
+    }
+
+    if (description) {
+      description.textContent =
+        book.synopsis ||
+        book.description ||
+        "No description available yet.";
+    }
+
+    renderDoflowChapters(book);
+    renderDoflowReviews();
+    renderDoflowComments();
+    renderDoflowTheories();
+    openDoflowBookTab("reviews");
+
+    bookPage.classList.add("active");
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  }
+
+  function startDoflowReading() {
+    if (!doflowActiveBook) return;
+
+    if (typeof openBook === "function") {
+      openBook(doflowActiveBook.id);
+      return;
+    }
+
+    showToast("Book reader will open in a later batch.");
+  }
+
+  function openDoflowChapter(index) {
+    if (!doflowActiveBook) return;
+
+    const chapters = doflowActiveBook.chapters || [];
+    const chapter = chapters[index];
+
+    if (!chapter) return;
+
+    const isFree = index < Number(doflowActiveBook.freeChapters || 0);
+
+    if (isFree) {
+      startDoflowReading();
+      return;
+    }
+
+    showToast(
+      "This chapter is locked. Codo Bill unlocking will open in a later batch."
+    );
+  }
+
+  function unlockDoflowFullBook() {
+    showToast(
+      "Full-book Codo Bill unlocking will open in a later batch."
+    );
+  }
+
+  function followDoflowAuthor() {
+    showToast("Following authors will open in a later batch.");
+  }
+
+  function tipDoflowAuthor() {
+    if (
+      doflowActiveBook &&
+      doflowActiveBook.tipLink
+    ) {
+      window.open(doflowActiveBook.tipLink, "_blank");
+      return;
+    }
+
+    showToast("This author has not added a tip link.");
+  }
+
+  window.closeBookPage = closeBookPage;
+  window.openDoflowBookTab = openDoflowBookTab;
+  window.openDoflowBook = openDoflowBook;
+  window.startDoflowReading = startDoflowReading;
+  window.openDoflowChapter = openDoflowChapter;
+  window.unlockDoflowFullBook = unlockDoflowFullBook;
+  window.followDoflowAuthor = followDoflowAuthor;
+  window.tipDoflowAuthor = tipDoflowAuthor;
+
+  const originalOpenBook = window.openBook;
+
+  window.openBook = function (bookId) {
+    if (!window.firebase || !firebase.firestore) {
+      if (typeof originalOpenBook === "function") {
+        return originalOpenBook(bookId);
+      }
+
+      return;
+    }
+
+    const db = firebase.firestore();
+
+    db.collection("books")
+      .doc(bookId)
+      .get()
+      .then(function (document) {
+        if (!document.exists) {
+          showToast("Book not found.");
+          return;
+        }
+
+        openDoflowBook({
+          id: document.id,
+          ...document.data()
+        });
+      })
+      .catch(function (error) {
+        console.error("Open book error:", error);
+        showToast("Could not open this book.");
+      });
+  };
+})();
+</script>
+<style>
+  #doflow-reader-profile {
+    display: none;
+  }
+
+  #doflow-reader-profile.active {
+    display: block;
+  }
+
+  #doflow-reader-profile .profile-hero {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    background: rgba(18, 18, 26, 0.72);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 22px;
+    padding: 18px;
+    margin-bottom: 18px;
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.30);
+  }
+
+  #doflow-reader-profile .profile-avatar {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex: 0 0 auto;
+  }
+
+  #doflow-reader-profile .profile-name {
+    font-size: 19px;
+    font-weight: 800;
+    margin-bottom: 4px;
+  }
+
+  #doflow-reader-profile .profile-subtitle {
+    color: #a1a1aa;
+    font-size: 12.5px;
+  }
+
+  #doflow-reader-profile .profile-section {
+    margin-top: 18px;
+  }
+
+  #doflow-reader-profile .profile-section-title {
+    font-size: 19px;
+    font-weight: 800;
+    margin-bottom: 12px;
+  }
+
+  #doflow-reader-profile .profile-card {
+    padding: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 18px;
+    background: rgba(18, 18, 26, 0.65);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+
+  #doflow-reader-profile .profile-card-title {
+    font-size: 15px;
+    font-weight: 800;
+    margin-bottom: 6px;
+  }
+
+  #doflow-reader-profile .profile-card-text {
+    color: #a1a1aa;
+    font-size: 13px;
+    line-height: 1.6;
+    margin-bottom: 14px;
+  }
+
+  #doflow-reader-profile .profile-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+
+  #doflow-reader-profile .profile-stat {
+    padding: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    background: rgba(18, 18, 26, 0.65);
+    text-align: center;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+
+  #doflow-reader-profile .profile-stat-number {
+    font-size: 20px;
+    font-weight: 900;
+  }
+
+  #doflow-reader-profile .profile-stat-label {
+    color: #a1a1aa;
+    font-size: 11px;
+    font-weight: 600;
+    margin-top: 4px;
+  }
+
+  #doflow-reader-profile .profile-book {
+    display: flex;
+    gap: 12px;
+    padding: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 15px;
+    background: rgba(18, 18, 26, 0.65);
+    margin-bottom: 10px;
+    cursor: pointer;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    transition: transform 0.18s ease;
+  }
+
+  #doflow-reader-profile .profile-book:active {
+    transform: scale(0.98);
+  }
+
+  #doflow-reader-profile .profile-book-cover {
+    width: 52px;
+    height: 78px;
+    object-fit: cover;
+    border-radius: 9px;
+    flex: 0 0 auto;
+  }
+
+  #doflow-reader-profile .profile-book-title {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 3px;
+  }
+
+  #doflow-reader-profile .profile-book-author {
+    color: #a1a1aa;
+    font-size: 12px;
+  }
+
+  #doflow-reader-profile .author-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  #doflow-reader-profile .author-input {
+    width: 100%;
+    padding: 14px;
+    border-radius: 13px;
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    background: rgba(0, 0, 0, 0.28);
+    color: #f4f4f5;
+    font-size: 14px;
+    outline: none;
+  }
+
+  #doflow-reader-profile .author-input:focus {
+    border-color: #8b5cf6;
+  }
+
+  #doflow-reader-profile .author-label {
+    color: #a1a1aa;
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  #doflow-reader-profile .author-submit {
+    margin-top: 4px;
+  }
+</style>
+
+<div id="doflow-reader-profile">
+  <div class="container">
+    <button
+      class="btn btn-ghost"
+      onclick="closeReaderProfile()">
+      Back
+    </button>
+
+    <div class="profile-hero">
+      <img
+        id="doflow-profile-avatar"
+        class="profile-avatar"
+        src=""
+        alt="Reader avatar">
+
+      <div>
+        <div id="doflow-profile-name" class="profile-name">
+          Reader
+        </div>
+
+        <div id="doflow-profile-subtitle" class="profile-subtitle">
+          Welcome to Doflownovels
+        </div>
+      </div>
+    </div>
+
+    <div class="profile-stats">
+      <div class="profile-stat">
+        <div id="doflow-profile-books" class="profile-stat-number">
+          0
+        </div>
+
+        <div class="profile-stat-label">
+          Books read
+        </div>
+      </div>
+
+      <div class="profile-stat">
+        <div id="doflow-profile-following" class="profile-stat-number">
+          0
+        </div>
+
+        <div class="profile-stat-label">
+          Following
+        </div>
+      </div>
+
+      <div class="profile-stat">
+        <div id="doflow-profile-codo" class="profile-stat-number">
+          0
+        </div>
+
+        <div class="profile-stat-label">
+          Codo Bills
+        </div>
+      </div>
+    </div>
+
+    <div class="profile-section">
+      <h2 class="profile-section-title">
+        Continue reading
+      </h2>
+
+      <div id="doflow-profile-continue">
+        <p class="muted">
+          No books in progress yet.
+        </p>
+      </div>
+    </div>
+
+    <div class="profile-section">
+      <h2 class="profile-section-title">
+        Your library
+      </h2>
+
+      <div id="doflow-profile-library">
+        <p class="muted">
+          No saved books yet.
+        </p>
+      </div>
+    </div>
+
+    <div class="profile-section">
+      <h2 class="profile-section-title">
+        Become an author
+      </h2>
+
+      <div class="profile-card">
+        <div class="profile-card-title">
+          Publish your own stories
+        </div>
+
+        <div class="profile-card-text">
+          Create an author profile, upload your manuscript, and share your books with readers.
+        </div>
+
+        <button
+          class="btn"
+          onclick="openDoflowAuthorSetup()">
+          Become an author
+        </button>
+      </div>
+    </div>
+
+    <div id="doflow-author-setup" class="hidden">
+      <div class="profile-section">
+        <div class="profile-card">
+          <div class="profile-card-title">
+            Create author profile
+          </div>
+
+          <div class="profile-card-text">
+            Choose the pen name readers will see on your author page.
+          </div>
+
+          <div class="author-form">
+            <div>
+              <div class="author-label">
+                Pen name
+              </div>
+
+              <input
+                id="doflow-author-pen-name"
+                class="author-input"
+                placeholder="e.g. dominion-white">
+            </div>
+
+            <button
+              class="btn author-submit"
+              onclick="createDoflowAuthorProfile()">
+              Create author profile
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  function escapeValue(value) {
+    return String(value || "")
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#039;");
+  }
+
+  function closeReaderProfile() {
+    const profile = document.getElementById("doflow-reader-profile");
+
+    if (profile) {
+      profile.classList.remove("active");
+    }
+  }
+
+  function openReaderProfile() {
+    const profile = document.getElementById("doflow-reader-profile");
+
+    if (!profile) return;
+
+    const user = window.doflowCurrentUser;
+
+    const name = document.getElementById("doflow-profile-name");
+    const subtitle = document.getElementById("doflow-profile-subtitle");
+    const avatar = document.getElementById("doflow-profile-avatar");
+
+    if (user) {
+      if (name) {
+        name.textContent = user.displayName || "Reader";
+      }
+
+      if (subtitle) {
+        subtitle.textContent = user.email || "Signed in reader";
+      }
+
+      if (avatar) {
+        avatar.src =
+          user.photoURL ||
+          "https://ui-avatars.com/api/?name=" +
+          encodeURIComponent(user.displayName || "Reader");
+      }
+    }
+
+    profile.classList.add("active");
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  }
+
+  function openDoflowAuthorSetup() {
+    const setup = document.getElementById("doflow-author-setup");
+
+    if (setup) {
+      setup.classList.remove("hidden");
+    }
+  }
+
+  function createDoflowAuthorProfile() {
+    const input = document.getElementById("doflow-author-pen-name");
+    const user = window.doflowCurrentUser;
+
+    if (!user) {
+      showToast("Please sign in first.");
+      return;
+    }
+
+    if (!input || !input.value.trim()) {
+      showToast("Please enter a pen name.");
+      return;
+    }
+
+    const penName = input.value
+      .trim()
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "");
+
+    if (!penName) {
+      showToast("Please enter a valid pen name.");
+      return;
+    }
+
+    if (!window.firebase || !firebase.firestore) {
+      showToast("Firebase is not ready yet.");
+      return;
+    }
+
+    const db = firebase.firestore();
+
+    db.collection("authors")
+      .doc(user.uid)
+      .set({
+        email: user.email,
+        displayName: user.displayName || "Author",
+        penName: penName,
+        isPro: false,
+        updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+      }, { merge: true })
+      .then(function () {
+        showToast("Author profile created.");
+
+        const setup = document.getElementById("doflow-author-setup");
+
+        if (setup) {
+          setup.classList.add("hidden");
+        }
+
+        input.value = "";
+      })
+      .catch(function (error) {
+        console.error("Author profile error:", error);
+        showToast("Could not create author profile.");
+      });
+  }
+
+  window.closeReaderProfile = closeReaderProfile;
+  window.openReaderProfile = openReaderProfile;
+  window.openDoflowAuthorSetup = openDoflowAuthorSetup;
+  window.createDoflowAuthorProfile = createDoflowAuthorProfile;
+
+  const originalOpenBook = window.openBook;
+
+  window.openBook = function (bookId) {
+    if (!window.firebase || !firebase.firestore) {
+      if (typeof originalOpenBook === "function") {
+        return originalOpenBook(bookId);
+      }
+
+      return;
+    }
+
+    const db = firebase.firestore();
+
+    db.collection("books")
+      .doc(bookId)
+      .get()
+      .then(function (document) {
+        if (!document.exists) {
+          showToast("Book not found.");
+          return;
+        }
+
+        if (typeof window.openDoflowBook === "function") {
+          window.openDoflowBook({
+            id: document.id,
+            ...document.data()
+          });
+        }
+      })
+      .catch(function (error) {
+        console.error("Open book error:", error);
+        showToast("Could not open this book.");
+      });
+  };
+})();
+</script>
+<script>
+(function () {
+  function getDoflowUser() {
+    return window.doflowCurrentUser || null;
+  }
+
+  function loadDoflowProfileData() {
+    const user = getDoflowUser();
+
+    if (!user) return;
+
+    const booksRead = document.getElementById("doflow-profile-books");
+    const following = document.getElementById("doflow-profile-following");
+    const codo = document.getElementById("doflow-profile-codo");
+
+    if (booksRead) {
+      booksRead.textContent = "0";
+    }
+
+    if (following) {
+      following.textContent = "0";
+    }
+
+    if (codo) {
+      codo.textContent = "0";
+    }
+  }
+
+  function openDoflowProfile() {
+    if (typeof window.openReaderProfile === "function") {
+      window.openReaderProfile();
+      loadDoflowProfileData();
+    }
+  }
+
+  function openDoflowLibrary() {
+    showToast("Your library will open in a later batch.");
+  }
+
+  function openDoflowCodoBills() {
+    showToast("Codo Bills will open in a later batch.");
+  }
+
+  function openDoflowAuthorDashboard() {
+    const user = getDoflowUser();
+
+    if (!user) {
+      showToast("Please sign in first.");
+      return;
+    }
+
+    if (!window.firebase || !firebase.firestore) {
+      showToast("Firebase is not ready yet.");
+      return;
+    }
+
+    const db = firebase.firestore();
+
+    db.collection("authors")
+      .doc(user.uid)
+      .get()
+      .then(function (document) {
+        if (!document.exists) {
+          if (typeof window.openReaderProfile === "function") {
+            window.openReaderProfile();
+          }
+
+          if (typeof window.openDoflowAuthorSetup === "function") {
+            window.openDoflowAuthorSetup();
+          }
+
+          return;
+        }
+
+        const authorData = document.data();
+
+        if (!authorData.penName) {
+          if (typeof window.openReaderProfile === "function") {
+            window.openReaderProfile();
+          }
+
+          if (typeof window.openDoflowAuthorSetup === "function") {
+            window.openDoflowAuthorSetup();
+          }
+
+          return;
+        }
+
+        if (typeof window.switchPage === "function") {
+          window.switchPage("shelf");
+        }
+
+        showToast("Author dashboard opened.");
+      })
+      .catch(function (error) {
+        console.error("Author dashboard error:", error);
+        showToast("Could not open author dashboard.");
+      });
+  }
+
+  window.openDoflowProfile = openDoflowProfile;
+  window.openDoflowLibrary = openDoflowLibrary;
+  window.openDoflowCodoBills = openDoflowCodoBills;
+  window.openDoflowAuthorDashboard = openDoflowAuthorDashboard;
+
+  function addDoflowNavigation() {
+    const profileButton = document.querySelector(
+      '[onclick="openDoflowProfile()"]'
+    );
+
+    if (!profileButton) return;
+
+    profileButton.addEventListener("click", function () {
+      openDoflowProfile();
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", addDoflowNavigation);
+  } else {
+    addDoflowNavigation();
+  }
+
+  const originalOnAuthStateChanged = window.doflowOnAuthStateChanged;
+
+  window.doflowOnAuthStateChanged = function (user) {
+    window.doflowCurrentUser = user;
+
+    if (typeof originalOnAuthStateChanged === "function") {
+      originalOnAuthStateChanged(user);
+    }
+
+    if (user) {
+      loadDoflowProfileData();
+    }
+  };
+})();
+</script>
+<style>
+  #doflow-reader-home-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 14px;
+    margin-bottom: 20px;
+    overflow-x: auto;
+    padding-bottom: 5px;
+    scrollbar-width: none;
+  }
+
+  #doflow-reader-home-actions::-webkit-scrollbar {
+    display: none;
+  }
+
+  #doflow-reader-home-actions .home-action {
+    flex: 0 0 auto;
+    width: auto !important;
+    margin: 0 !important;
+    padding: 11px 15px !important;
+    border-radius: 999px !important;
+    font-size: 13px !important;
+    font-weight: 800 !important;
+    border: 1px solid rgba(255, 255, 255, 0.09) !important;
+    background: rgba(18, 18, 26, 0.72) !important;
+    color: #f4f4f5 !important;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+
+  #doflow-reader-home-actions .home-action.primary {
+    background: linear-gradient(135deg, #8b5cf6, #6366f1) !important;
+    border-color: transparent !important;
+    color: #ffffff !important;
+  }
+</style>
+
+<script>
+(function () {
+  function addReaderHomeActions() {
+    const readerHome = document.getElementById("doflow-reader-home");
+
+    if (!readerHome) return;
+
+    if (
+      document.getElementById("doflow-reader-home-actions")
+    ) {
+      return;
+    }
+
+    const actions = document.createElement("div");
+    actions.id = "doflow-reader-home-actions";
+
+    actions.innerHTML = `
+      <button
+        class="btn home-action primary"
+        onclick="openDoflowProfile()">
+        Profile
+      </button>
+
+      <button
+        class="btn home-action"
+        onclick="openDoflowLibrary()">
+        Library
+      </button>
+
+      <button
+        class="btn home-action"
+        onclick="openDoflowCodoBills()">
+        Codo Bills
+      </button>
+
+      <button
+        class="btn home-action"
+        onclick="openDoflowAuthorDashboard()">
+        Become an author
+      </button>
+    `;
+
+    const hero =
+      readerHome.querySelector(".reader-hero") ||
+      readerHome.firstElementChild;
+
+    if (hero && hero.nextElementSibling) {
+      hero.parentNode.insertBefore(
+        actions,
+        hero.nextElementSibling
+      );
+    } else {
+      readerHome.appendChild(actions);
+    }
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener(
+      "DOMContentLoaded",
+      addReaderHomeActions
+    );
+  } else {
+    addReaderHomeActions();
+  }
+
+  const observer = new MutationObserver(function () {
+    addReaderHomeActions();
+  });
+
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true
+  });
+})();
+</script>
+<style>
+  #doflow-library-page {
+    display: none;
+  }
+
+  #doflow-library-page.active {
+    display: block;
+  }
+
+  #doflow-library-page .library-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+
+  #doflow-library-page .library-title {
+    font-size: 26px;
+    font-weight: 900;
+  }
+
+  #doflow-library-page .library-subtitle {
+    color: #a1a1aa;
+    font-size: 13px;
+    margin-top: 4px;
+  }
+
+  #doflow-library-page .library-tabs {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 6px;
+    margin-bottom: 16px;
+    scrollbar-width: none;
+  }
+
+  #doflow-library-page .library-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  #doflow-library-page .library-tab {
+    flex: 0 0 auto;
+    padding: 10px 15px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(18, 18, 26, 0.65);
+    color: #d4d4d8;
+    font-size: 12.5px;
+    font-weight: 700;
+    cursor: pointer;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+
+  #doflow-library-page .library-tab.active {
+    background: linear-gradient(135deg, #8b5cf6, #6366f1);
+    border-color: transparent;
+    color: #ffffff;
+  }
+
+  #doflow-library-page .library-panel {
+    display: none;
+  }
+
+  #doflow-library-page .library-panel.active {
+    display: block;
+  }
+
+  #doflow-library-page .library-book {
+    display: flex;
+    gap: 12px;
+    padding: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    background: rgba(18, 18, 26, 0.65);
+    margin-bottom: 10px;
+    cursor: pointer;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    transition: transform 0.18s ease;
+  }
+
+  #doflow-library-page .library-book:active {
+    transform: scale(0.98);
+  }
+
+  #doflow-library-page .library-cover {
+    width: 56px;
+    height: 84px;
+    object-fit: cover;
+    border-radius: 10px;
+    flex: 0 0 auto;
+  }
+
+  #doflow-library-page .library-book-title {
+    font-size: 14.5px;
+    font-weight: 800;
+    margin-bottom: 3px;
+  }
+
+  #doflow-library-page .library-book-author {
+    color: #a1a1aa;
+    font-size: 12px;
+    margin-bottom: 8px;
+  }
+
+  #doflow-library-page .library-progress {
+    height: 6px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.08);
+    overflow: hidden;
+    margin-bottom: 6px;
+  }
+
+  #doflow-library-page .library-progress-fill {
+    height: 100%;
+    background: linear-gradient(135deg, #8b5cf6, #6366f1);
+    border-radius: 999px;
+  }
+
+  #doflow-library-page .library-progress-text {
+    color: #a1a1aa;
+    font-size: 11.5px;
+    font-weight: 600;
+  }
+
+  #doflow-library-page .library-empty {
+    padding: 30px 20px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 18px;
+    background: rgba(18, 18, 26, 0.65);
+    text-align: center;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+
+  #doflow-library-page .library-empty-title {
+    font-size: 16px;
+    font-weight: 800;
+    margin-bottom: 6px;
+  }
+
+  #doflow-library-page .library-empty-text {
+    color: #a1a1aa;
+    font-size: 13px;
+    line-height: 1.55;
+  }
+</style>
+
+<div id="doflow-library-page">
+  <div class="container">
+    <div class="library-header">
+      <div>
+        <div class="library-title">
+          Library
+        </div>
+
+        <div class="library-subtitle">
+          Your reading activity and saved books
+        </div>
+      </div>
+
+      <button
+        class="btn btn-ghost"
+        onclick="closeDoflowLibrary()">
+        Back
+      </button>
+    </div>
+
+    <div class="library-tabs">
+      <button
+        class="library-tab active"
+        data-library-tab="continue"
+        onclick="openDoflowLibraryTab('continue')">
+        Continue reading
+      </button>
+
+      <button
+        class="library-tab"
+        data-library-tab="saved"
+        onclick="openDoflowLibraryTab('saved')">
+        Saved
+      </button>
+
+      <button
+        class="library-tab"
+        data-library-tab="finished"
+        onclick="openDoflowLibraryTab('finished')">
+        Finished
+      </button>
+    </div>
+
+    <div
+      id="doflow-library-continue"
+      class="library-panel active">
+      <div id="doflow-library-continue-list">
+        <div class="library-empty">
+          <div class="library-empty-title">
+            No books in progress
+          </div>
+
+          <div class="library-empty-text">
+            Books you start reading will appear here.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      id="doflow-library-saved"
+      class="library-panel">
+      <div id="doflow-library-saved-list">
+        <div class="library-empty">
+          <div class="library-empty-title">
+            No saved books
+          </div>
+
+          <div class="library-empty-text">
+            Save books from Reader Home to find them here.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      id="doflow-library-finished"
+      class="library-panel">
+      <div id="doflow-library-finished-list">
+        <div class="library-empty">
+          <div class="library-empty-title">
+            No finished books
+          </div>
+
+          <div class="library-empty-text">
+            Books you complete will appear here.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  function closeDoflowLibrary() {
+    const library = document.getElementById("doflow-library-page");
+
+    if (library) {
+      library.classList.remove("active");
+    }
+  }
+
+  function openDoflowLibraryTab(tabName) {
+    const tabs = document.querySelectorAll(
+      "#doflow-library-page .library-tab"
+    );
+
+    const panels = document.querySelectorAll(
+      "#doflow-library-page .library-panel"
+    );
+
+    tabs.forEach(function (tab) {
+      tab.classList.toggle(
+        "active",
+        tab.dataset.libraryTab === tabName
+      );
+    });
+
+    panels.forEach(function (panel) {
+      panel.classList.toggle(
+        "active",
+        panel.id === "doflow-library-" + tabName
+      );
+    });
+  }
+
+  function openDoflowLibrary() {
+    const library = document.getElementById("doflow-library-page");
+
+    if (!library) return;
+
+    library.classList.add("active");
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  }
+
+  window.closeDoflowLibrary = closeDoflowLibrary;
+  window.openDoflowLibraryTab = openDoflowLibraryTab;
+  window.openDoflowLibrary = openDoflowLibrary;
+})();
+</script>
+<style>
+  #doflow-codo-page {
+    display: none;
+  }
+
+  #doflow-codo-page.active {
+    display: block;
+  }
+
+  #doflow-codo-page .codo-hero {
+    padding: 22px;
+    border: 1px solid rgba(139, 92, 246, 0.35);
+    border-radius: 22px;
+    background: linear-gradient(
+      135deg,
+      rgba(139, 92, 246, 0.18),
+      rgba(99, 102, 241, 0.12)
+    );
+    text-align: center;
+    margin-bottom: 18px;
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.30);
+  }
+
+  #doflow-codo-page .codo-label {
+    color: #a1a1aa;
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  #doflow-codo-page .codo-balance {
+    font-size: 38px;
+    font-weight: 900;
+    margin-bottom: 6px;
+  }
+
+  #doflow-codo-page .codo-subtitle {
+    color: #a1a1aa;
+    font-size: 12.5px;
+  }
+
+  #doflow-codo-page .codo-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 16px;
+  }
+
+  #doflow-codo-page .codo-action {
+    flex: 1;
+    margin: 0 !important;
+    padding: 12px !important;
+    border-radius: 13px !important;
+    font-size: 13px !important;
+  }
+
+  #doflow-codo-page .codo-section {
+    margin-top: 22px;
+  }
+
+  #doflow-codo-page .codo-section-title {
+    font-size: 19px;
+    font-weight: 800;
+    margin-bottom: 12px;
+  }
+
+  #doflow-codo-page .codo-card {
+    padding: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 18px;
+    background: rgba(18, 18, 26, 0.65);
+    margin-bottom: 10px;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+
+  #doflow-codo-page .codo-card-title {
+    font-size: 14.5px;
+    font-weight: 800;
+    margin-bottom: 5px;
+  }
+
+  #doflow-codo-page .codo-card-text {
+    color: #a1a1aa;
+    font-size: 12.5px;
+    line-height: 1.55;
+    margin-bottom: 12px;
+  }
+
+  #doflow-codo-page .codo-transaction {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 14px 15px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 15px;
+    background: rgba(18, 18, 26, 0.65);
+    margin-bottom: 10px;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+
+  #doflow-codo-page .transaction-title {
+    font-size: 13.5px;
+    font-weight: 700;
+    margin-bottom: 3px;
+  }
+
+  #doflow-codo-page .transaction-date {
+    color: #a1a1aa;
+    font-size: 11.5px;
+  }
+
+  #doflow-codo-page .transaction-amount {
+    font-size: 14px;
+    font-weight: 900;
+  }
+
+  #doflow-codo-page .transaction-positive {
+    color: #6ee7b7;
+  }
+
+  #doflow-codo-page .transaction-negative {
+    color: #f87171;
+  }
+
+  #doflow-codo-page .codo-empty {
+    padding: 26px 20px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 18px;
+    background: rgba(18, 18, 26, 0.65);
+    text-align: center;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+
+  #doflow-codo-page .codo-empty-title {
+    font-size: 15px;
+    font-weight: 800;
+    margin-bottom: 6px;
+  }
+
+  #doflow-codo-page .codo-empty-text {
+    color: #a1a1aa;
+    font-size: 12.5px;
+    line-height: 1.55;
+  }
+</style>
+
+<div id="doflow-codo-page">
+  <div class="container">
+    <div class="codo-hero">
+      <div class="codo-label">
+        Codo Bills balance
+      </div>
+
+      <div id="doflow-codo-balance" class="codo-balance">
+        0
+      </div>
+
+      <div class="codo-subtitle">
+        Use Codo Bills to unlock chapters and full books.
+      </div>
+
+      <div class="codo-actions">
+        <button
+          class="btn codo-action"
+          onclick="topUpDoflowCodoBills()">
+          Top up
+        </button>
+
+        <button
+          class="btn btn-ghost codo-action"
+          onclick="closeDoflowCodoPage()">
+          Back
+        </button>
+      </div>
+    </div>
+
+    <div class="codo-section">
+      <h2 class="codo-section-title">
+        How Codo Bills work
+      </h2>
+
+      <div class="codo-card">
+        <div class="codo-card-title">
+          Unlock chapters
+        </div>
+
+        <div class="codo-card-text">
+          Spend Codo Bills to unlock individual locked chapters.
+        </div>
+      </div>
+
+      <div class="codo-card">
+        <div class="codo-card-title">
+          Unlock full books
+        </div>
+
+        <div class="codo-card-text">
+          Spend Codo Bills once to unlock every chapter in a book.
+        </div>
+      </div>
+
+      <div class="codo-card">
+        <div class="codo-card-title">
+          Support authors
+        </div>
+
+        <div class="codo-card-text">
+          Codo Bills help readers support the authors whose stories they enjoy.
+        </div>
+      </div>
+    </div>
+
+    <div class="codo-section">
+      <h2 class="codo-section-title">
+        Recent activity
+      </h2>
+
+      <div id="doflow-codo-transactions">
+        <div class="codo-empty">
+          <div class="codo-empty-title">
+            No transactions yet
+          </div>
+
+          <div class="codo-empty-text">
+            Your Codo Bill top-ups and unlocks will appear here.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  function closeDoflowCodoPage() {
+    const codoPage = document.getElementById("doflow-codo-page");
+
+    if (codoPage) {
+      codoPage.classList.remove("active");
+    }
+  }
+
+  function openDoflowCodoBills() {
+    const codoPage = document.getElementById("doflow-codo-page");
+
+    if (!codoPage) return;
+
+    codoPage.classList.add("active");
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  }
+
+  function topUpDoflowCodoBills() {
+    showToast(
+      "Codo Bill top-up will open in a later batch."
+    );
+  }
+
+  window.closeDoflowCodoPage = closeDoflowCodoPage;
+  window.openDoflowCodoBills = openDoflowCodoBills;
+  window.topUpDoflowCodoBills = topUpDoflowCodoBills;
+})();
+</script>
+<style>
+  #doflow-reader-search {
+    margin-bottom: 18px;
+  }
+
+  #doflow-reader-search .search-box {
+    position: relative;
+    margin-bottom: 12px;
+  }
+
+  #doflow-reader-search .search-input {
+    width: 100%;
+    padding: 15px 16px;
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    background: rgba(18, 18, 26, 0.72);
+    color: #f4f4f5;
+    font-size: 14px;
+    outline: none;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+
+  #doflow-reader-search .search-input:focus {
+    border-color: #8b5cf6;
+  }
+
+  #doflow-reader-search .search-input::placeholder {
+    color: #71717a;
+  }
+
+  #doflow-reader-search .filter-row {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 5px;
+    scrollbar-width: none;
+  }
+
+  #doflow-reader-search .filter-row::-webkit-scrollbar {
+    display: none;
+  }
+
+  #doflow-reader-search .filter-button {
+    flex: 0 0 auto;
+    padding: 9px 14px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(18, 18, 26, 0.65);
+    color: #d4d4d8;
+    font-size: 12.5px;
+    font-weight: 700;
+    cursor: pointer;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    transition: transform 0.18s ease;
+  }
+
+  #doflow-reader-search .filter-button:active {
+    transform: scale(0.96);
+  }
+
+  #doflow-reader-search .filter-button.active {
+    background: linear-gradient(135deg, #8b5cf6, #6366f1);
+    border-color: transparent;
+    color: #ffffff;
+  }
+
+  #doflow-reader-search .search-empty {
+    padding: 26px 20px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 18px;
+    background: rgba(18, 18, 26, 0.65);
+    text-align: center;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+
+  #doflow-reader-search .search-empty-title {
+    font-size: 15px;
+    font-weight: 800;
+    margin-bottom: 6px;
+  }
+
+  #doflow-reader-search .search-empty-text {
+    color: #a1a1aa;
+    font-size: 12.5px;
+    line-height: 1.55;
+  }
+</style>
+
+<script>
+(function () {
+  let doflowSearchText = "";
+  let doflowActiveGenre = "All";
+
+  function addReaderSearch() {
+    const readerHome = document.getElementById("doflow-reader-home");
+
+    if (!readerHome) return;
+
+    if (
+      document.getElementById("doflow-reader-search")
+    ) {
+      return;
+    }
+
+    const search = document.createElement("div");
+    search.id = "doflow-reader-search";
+
+    search.innerHTML = `
+      <div class="search-box">
+        <input
+          id="doflow-search-input"
+          class="search-input"
+          placeholder="Search books, authors, or genres"
+          oninput="handleDoflowSearch(this.value)">
+      </div>
+
+      <div class="filter-row">
+        <button
+          class="filter-button active"
+          data-genre="All"
+          onclick="selectDoflowGenre('All')">
+          All
+        </button>
+
+        <button
+          class="filter-button"
+          data-genre="Romance"
+          onclick="selectDoflowGenre('Romance')">
+          Romance
+        </button>
+
+        <button
+          class="filter-button"
+          data-genre="Thriller"
+          onclick="selectDoflowGenre('Thriller')">
+          Thriller
+        </button>
+
+        <button
+          class="filter-button"
+          data-genre="Fantasy"
+          onclick="selectDoflowGenre('Fantasy')">
+          Fantasy
+        </button>
+
+        <button
+          class="filter-button"
+          data-genre="Mystery"
+          onclick="selectDoflowGenre('Mystery')">
+          Mystery
+        </button>
+
+        <button
+          class="filter-button"
+          data-genre="Sci-fi"
+          onclick="selectDoflowGenre('Sci-fi')">
+          Sci-fi
+        </button>
+
+        <button
+          class="filter-button"
+          data-genre="Drama"
+          onclick="selectDoflowGenre('Drama')">
+          Drama
+        </button>
+      </div>
+    `;
+
+    const actions =
+      document.getElementById("doflow-reader-home-actions");
+
+    if (actions && actions.nextElementSibling) {
+      actions.parentNode.insertBefore(
+        search,
+        actions.nextElementSibling
+      );
+    } else {
+      readerHome.appendChild(search);
+    }
+  }
+
+  function handleDoflowSearch(value) {
+    doflowSearchText = String(value || "")
+      .toLowerCase()
+      .trim();
+
+    filterDoflowBooks();
+  }
+
+  function selectDoflowGenre(genre) {
+    doflowActiveGenre = genre || "All";
+
+    const buttons = document.querySelectorAll(
+      "#doflow-reader-search .filter-button"
+    );
+
+    buttons.forEach(function (button) {
+      button.classList.toggle(
+        "active",
+        button.dataset.genre === doflowActiveGenre
+      );
+    });
+
+    filterDoflowBooks();
+  }
+
+  function filterDoflowBooks() {
+    const bookGrid =
+      document.getElementById("doflow-reader-book-grid");
+
+    if (!bookGrid) return;
+
+    const books = Array.from(
+      bookGrid.querySelectorAll(".reader-book-card")
+    );
+
+    let visibleCount = 0;
+
+    books.forEach(function (book) {
+      const title =
+        book
+          .querySelector(".reader-book-title")
+          ?.textContent.toLowerCase() || "";
+
+      const author =
+        book
+          .querySelector(".reader-book-author")
+          ?.textContent.toLowerCase() || "";
+
+      const genre =
+        book
+          .querySelector(".reader-book-genre")
+          ?.textContent.toLowerCase() || "";
+
+      const matchesSearch =
+        !doflowSearchText ||
+        title.includes(doflowSearchText) ||
+        author.includes(doflowSearchText) ||
+        genre.includes(doflowSearchText);
+
+      const matchesGenre =
+        doflowActiveGenre === "All" ||
+        genre.includes(doflowActiveGenre.toLowerCase());
+
+      const shouldShow =
+        matchesSearch && matchesGenre;
+
+      book.style.display = shouldShow ? "" : "none";
+
+      if (shouldShow) {
+        visibleCount++;
+      }
+    });
+
+    let emptyMessage =
+      document.getElementById("doflow-search-empty");
+
+    if (visibleCount === 0) {
+      if (!emptyMessage) {
+        emptyMessage = document.createElement("div");
+        emptyMessage.id = "doflow-search-empty";
+        emptyMessage.className = "search-empty";
+
+        emptyMessage.innerHTML = `
+          <div class="search-empty-title">
+            No books found
+          </div>
+
+          <div class="search-empty-text">
+            Try another search term or genre.
+          </div>
+        `;
+
+        bookGrid.parentNode.insertBefore(
+          emptyMessage,
+          bookGrid.nextSibling
+        );
+      }
+    } else if (emptyMessage) {
+      emptyMessage.remove();
+    }
+  }
+
+  window.handleDoflowSearch = handleDoflowSearch;
+  window.selectDoflowGenre = selectDoflowGenre;
+
+  if (document.readyState === "loading") {
+    document.addEventListener(
+      "DOMContentLoaded",
+      addReaderSearch
+    );
+  } else {
+    addReaderSearch();
+  }
+
+  const observer = new MutationObserver(function () {
+    addReaderSearch();
+  });
+
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true
+  });
+})();
+</script>
+<script>
+(function () {
+  function getDoflowUser() {
+    return window.doflowCurrentUser || null;
+  }
+
+  function getDoflowLibrary() {
+    try {
+      return JSON.parse(
+        localStorage.getItem("doflowLibrary") || "[]"
+      );
+    } catch (error) {
+      return [];
+    }
+  }
+
+  function saveDoflowLibrary(library) {
+    localStorage.setItem(
+      "doflowLibrary",
+      JSON.stringify(library || [])
+    );
+  }
+
+  function isBookSaved(bookId) {
+    const library = getDoflowLibrary();
+
+    return library.some(function (item) {
+      return item.bookId === bookId;
+    });
+  }
+
+  function saveDoflowBook(bookId) {
+    const user = getDoflowUser();
+
+    if (!user) {
+      showToast("Please sign in to save books.");
+      return;
+    }
+
+    if (!bookId) {
+      showToast("Book not found.");
+      return;
+    }
+
+    if (isBookSaved(bookId)) {
+      showToast("This book is already in your library.");
+      return;
+    }
+
+    const library = getDoflowLibrary();
+
+    library.push({
+      bookId: bookId,
+      savedAt: Date.now()
+    });
+
+    saveDoflowLibrary(library);
+
+    showToast("Book saved to your library.");
+  }
+
+  function removeDoflowBook(bookId) {
+    const library = getDoflowLibrary();
+
+    const updatedLibrary = library.filter(function (item) {
+      return item.bookId !== bookId;
+    });
+
+    saveDoflowLibrary(updatedLibrary);
+
+    showToast("Book removed from your library.");
+  }
+
+  function saveDoflowReadingProgress(
+    bookId,
+    chapterIndex,
+    totalChapters
+  ) {
+    if (!bookId) return;
+
+    const progress = JSON.parse(
+      localStorage.getItem("doflowReadingProgress") || "{}"
+    );
+
+    progress[bookId] = {
+      chapterIndex: Number(chapterIndex || 0),
+      totalChapters: Number(totalChapters || 0),
+      updatedAt: Date.now()
+    };
+
+    localStorage.setItem(
+      "doflowReadingProgress",
+      JSON.stringify(progress)
+    );
+  }
+
+  function getDoflowReadingProgress(bookId) {
+    const progress = JSON.parse(
+      localStorage.getItem("doflowReadingProgress") || "{}"
+    );
+
+    return progress[bookId] || null;
+  }
+
+  function renderDoflowLibrary() {
+    const continueList = document.getElementById(
+      "doflow-library-continue-list"
+    );
+
+    const savedList = document.getElementById(
+      "doflow-library-saved-list"
+    );
+
+    const finishedList = document.getElementById(
+      "doflow-library-finished-list"
+    );
+
+    if (!continueList || !savedList || !finishedList) return;
+
+    const library = getDoflowLibrary();
+    const progressData = JSON.parse(
+      localStorage.getItem("doflowReadingProgress") || "{}"
+    );
+
+    let continueHtml = "";
+    let savedHtml = "";
+    let finishedHtml = "";
+
+    library.forEach(function (item) {
+      const progress = progressData[item.bookId];
+
+      const percent = progress && progress.totalChapters
+        ? Math.min(
+            100,
+            Math.round(
+              (progress.chapterIndex / progress.totalChapters) * 100
+            )
+          )
+        : 0;
+
+      const isFinished =
+        progress &&
+        progress.totalChapters > 0 &&
+        progress.chapterIndex >= progress.totalChapters;
+
+      const bookCard = `
+        <div
+          class="library-book"
+          onclick="openDoflowBook('${item.bookId}')">
+          <img
+            class="library-cover"
+            src="https://via.placeholder.com/100x150?text=Book"
+            alt="Book cover">
+
+          <div>
+            <div class="library-book-title">
+              Saved book
+            </div>
+
+            <div class="library-book-author">
+              Tap to continue reading
+            </div>
+
+            <div class="library-progress">
+              <div
+                class="library-progress-fill"
+                style="width: ${percent}%"></div>
+            </div>
+
+            <div class="library-progress-text">
+              ${percent}% complete
+            </div>
+          </div>
+        </div>
+      `;
+
+      if (isFinished) {
+        finishedHtml += bookCard;
+      } else if (progress && progress.chapterIndex > 0) {
+        continueHtml += bookCard;
+      } else {
+        savedHtml += bookCard;
+      }
+    });
+
+    continueList.innerHTML =
+      continueHtml ||
+      `
+        <div class="library-empty">
+          <div class="library-empty-title">
+            No books in progress
+          </div>
+
+          <div class="library-empty-text">
+            Books you start reading will appear here.
+          </div>
+        </div>
+      `;
+
+    savedList.innerHTML =
+      savedHtml ||
+      `
+        <div class="library-empty">
+          <div class="library-empty-title">
+            No saved books
+          </div>
+
+          <div class="library-empty-text">
+            Save books from Reader Home to find them here.
+          </div>
+        </div>
+      `;
+
+    finishedList.innerHTML =
+      finishedHtml ||
+      `
+        <div class="library-empty">
+          <div class="library-empty-title">
+            No finished books
+          </div>
+
+          <div class="library-empty-text">
+            Books you complete will appear here.
+          </div>
+        </div>
+      `;
+  }
+
+  window.saveDoflowBook = saveDoflowBook;
+  window.removeDoflowBook = removeDoflowBook;
+  window.saveDoflowReadingProgress = saveDoflowReadingProgress;
+  window.getDoflowReadingProgress = getDoflowReadingProgress;
+  window.renderDoflowLibrary = renderDoflowLibrary;
+
+  const originalOpenDoflowLibrary =
+    window.openDoflowLibrary;
+
+  window.openDoflowLibrary = function () {
+    if (typeof originalOpenDoflowLibrary === "function") {
+      originalOpenDoflowLibrary();
+    }
+
+    renderDoflowLibrary();
+  };
+
+  const originalOpenDoflowBook = window.openDoflowBook;
+
+  window.openDoflowBook = function (bookId) {
+    if (typeof originalOpenDoflowBook === "function") {
+      originalOpenDoflowBook(bookId);
+    }
+  };
+})();
+</script>
+<script>
+(function () {
+  function addSaveButtonToBookPage() {
+    const bookPage = document.getElementById("doflow-book-page");
+
+    if (!bookPage) return;
+
+    const actions = bookPage.querySelector(".book-actions");
+
+    if (!actions) return;
+
+    if (
+      document.getElementById("doflow-save-book-button")
+    ) {
+      return;
+    }
+
+    const saveButton = document.createElement("button");
+    saveButton.id = "doflow-save-book-button";
+    saveButton.className = "btn btn-ghost book-action";
+    saveButton.textContent = "Save book";
+    saveButton.onclick = function () {
+      saveCurrentDoflowBook();
+    };
+
+    actions.appendChild(saveButton);
+  }
+
+  function saveCurrentDoflowBook() {
+    const bookPage = document.getElementById("doflow-book-page");
+
+    if (!bookPage) return;
+
+    const title =
+      document.getElementById("doflow-book-title")?.textContent;
+
+    if (!title || title === "Book title") {
+      showToast("Open a book first.");
+      return;
+    }
+
+    const bookId =
+      window.doflowActiveBook?.id ||
+      window.doflowCurrentBookId;
+
+    if (!bookId) {
+      showToast("Book not found.");
+      return;
+    }
+
+    if (typeof saveDoflowBook === "function") {
+      saveDoflowBook(bookId);
+
+      const saveButton =
+        document.getElementById("doflow-save-book-button");
+
+      if (saveButton) {
+        saveButton.textContent = "Saved";
+      }
+    }
+  }
+
+  window.saveCurrentDoflowBook = saveCurrentDoflowBook;
+
+  if (document.readyState === "loading") {
+    document.addEventListener(
+      "DOMContentLoaded",
+      addSaveButtonToBookPage
+    );
+  } else {
+    addSaveButtonToBookPage();
+  }
+
+  const observer = new MutationObserver(function () {
+    addSaveButtonToBookPage();
+  });
+
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true
+  });
+
+  const originalOpenDoflowBook = window.openDoflowBook;
+
+  window.openDoflowBook = function (bookId) {
+    window.doflowCurrentBookId = bookId;
+
+    if (typeof originalOpenDoflowBook === "function") {
+      originalOpenDoflowBook(bookId);
+    }
+
+    const saveButton =
+      document.getElementById("doflow-save-book-button");
+
+    if (saveButton) {
+      saveButton.textContent = "Save book";
+    }
+  };
+})();
+</script>
+<script>
+(function () {
+  function getDoflowUser() {
+    return window.doflowCurrentUser || null;
+  }
+
+  function getDoflowProgress() {
+    try {
+      return JSON.parse(
+        localStorage.getItem("doflowReadingProgress") || "{}"
+      );
+    } catch (error) {
+      return {};
+    }
+  }
+
+  function saveDoflowProgress(progress) {
+    localStorage.setItem(
+      "doflowReadingProgress",
+      JSON.stringify(progress || {})
+    );
+  }
+
+  function updateDoflowReadingProgress(
+    bookId,
+    chapterIndex,
+    totalChapters
+  ) {
+    if (!bookId) return;
+
+    const progress = getDoflowProgress();
+
+    progress[bookId] = {
+      chapterIndex: Number(chapterIndex || 0),
+      totalChapters: Number(totalChapters || 0),
+      updatedAt: Date.now()
+    };
+
+    saveDoflowProgress(progress);
+
+    if (typeof renderDoflowLibrary === "function") {
+      renderDoflowLibrary();
+    }
+  }
+
+  function markDoflowBookFinished(bookId, totalChapters) {
+    if (!bookId) return;
+
+    const progress = getDoflowProgress();
+
+    progress[bookId] = {
+      chapterIndex: Number(totalChapters || 0),
+      totalChapters: Number(totalChapters || 0),
+      finished: true,
+      updatedAt: Date.now()
+    };
+
+    saveDoflowProgress(progress);
+
+    if (typeof renderDoflowLibrary === "function") {
+      renderDoflowLibrary();
+    }
+  }
+
+  function connectSaveButton() {
+    const saveButton = document.getElementById(
+      "doflow-save-book-button"
+    );
+
+    if (!saveButton) return;
+
+    saveButton.addEventListener("click", function () {
+      const bookId =
+        window.doflowActiveBook?.id ||
+        window.doflowCurrentBookId;
+
+      if (!bookId) {
+        showToast("Open a book first.");
+        return;
+      }
+
+      if (typeof saveDoflowBook === "function") {
+        saveDoflowBook(bookId);
+
+        saveButton.textContent = "Saved";
+      }
+    });
+  }
+
+  function connectReadingProgress() {
+    const readerContent =
+      document.getElementById("reader-content");
+
+    if (!readerContent) return;
+
+    const nextButton = readerContent.querySelector(
+      '[onclick="nextChapter()"]'
+    );
+
+    const prevButton = readerContent.querySelector(
+      '[onclick="prevChapter()"]'
+    );
+
+    if (nextButton) {
+      nextButton.addEventListener("click", function () {
+        const bookId =
+          window.doflowActiveBook?.id ||
+          window.doflowCurrentBookId;
+
+        if (!bookId) return;
+
+        const currentBook = window.currentBook;
+
+        if (!currentBook) return;
+
+        updateDoflowReadingProgress(
+          bookId,
+          currentChapterIndex + 1,
+          currentBook.chapters?.length || 0
+        );
+      });
+    }
+
+    if (prevButton) {
+      prevButton.addEventListener("click", function () {
+        const bookId =
+          window.doflowActiveBook?.id ||
+          window.doflowCurrentBookId;
+
+        if (!bookId) return;
+
+        const currentBook = window.currentBook;
+
+        if (!currentBook) return;
+
+        updateDoflowReadingProgress(
+          bookId,
+          currentChapterIndex,
+          currentBook.chapters?.length || 0
+        );
+      });
+    }
+  }
+
+  window.updateDoflowReadingProgress =
+    updateDoflowReadingProgress;
+
+  window.markDoflowBookFinished =
+    markDoflowBookFinished;
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", function () {
+      connectSaveButton();
+      connectReadingProgress();
+    });
+  } else {
+    connectSaveButton();
+    connectReadingProgress();
+  }
+
+  const observer = new MutationObserver(function () {
+    connectSaveButton();
+    connectReadingProgress();
+  });
+
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true
+  });
+})();
+</script>
+<script>
+(function () {
+  function getDoflowUser() {
+    return window.doflowCurrentUser || null;
+  }
+
+  function getDoflowCodoBalance() {
+    try {
+      return Number(
+        localStorage.getItem("doflowCodoBalance") || 0
+      );
+    } catch (error) {
+      return 0;
+    }
+  }
+
+  function saveDoflowCodoBalance(balance) {
+    localStorage.setItem(
+      "doflowCodoBalance",
+      String(Number(balance || 0))
+    );
+
+    const balanceElement = document.getElementById(
+      "doflow-codo-balance"
+    );
+
+    if (balanceElement) {
+      balanceElement.textContent = Number(balance || 0);
+    }
+  }
+
+  function getDoflowUnlockedChapters() {
+    try {
+      return JSON.parse(
+        localStorage.getItem("doflowUnlockedChapters") || "{}"
+      );
+    } catch (error) {
+      return {};
+    }
+  }
+
+  function saveDoflowUnlockedChapters(data) {
+    localStorage.setItem(
+      "doflowUnlockedChapters",
+      JSON.stringify(data || {})
+    );
+  }
+
+  function isChapterUnlocked(bookId, chapterIndex) {
+    const unlocked = getDoflowUnlockedChapters();
+
+    return Boolean(
+      unlocked[bookId] &&
+      unlocked[bookId].includes(Number(chapterIndex))
+    );
+  }
+
+  function unlockDoflowChapter(
+    bookId,
+    chapterIndex,
+    cost
+  ) {
+    const user = getDoflowUser();
+
+    if (!user) {
+      showToast("Please sign in to unlock chapters.");
+      return;
+    }
+
+    if (!bookId) {
+      showToast("Book not found.");
+      return;
+    }
+
+    if (isChapterUnlocked(bookId, chapterIndex)) {
+      showToast("This chapter is already unlocked.");
+      return;
+    }
+
+    const balance = getDoflowCodoBalance();
+    const chapterCost = Number(cost || 0);
+
+    if (balance < chapterCost) {
+      showToast(
+        "Not enough Codo Bills. Top up to unlock this chapter."
+      );
+      return;
+    }
+
+    const unlocked = getDoflowUnlockedChapters();
+
+    if (!unlocked[bookId]) {
+      unlocked[bookId] = [];
+    }
+
+    if (
+      !unlocked[bookId].includes(Number(chapterIndex))
+    ) {
+      unlocked[bookId].push(Number(chapterIndex));
+    }
+
+    saveDoflowUnlockedChapters(unlocked);
+
+    saveDoflowCodoBalance(balance - chapterCost);
+
+    showToast("Chapter unlocked.");
+
+    if (
+      typeof renderDoflowChapters === "function"
+    ) {
+      renderDoflowChapters(window.doflowActiveBook);
+    }
+  }
+
+  function isFullBookUnlocked(bookId) {
+    const unlocked = getDoflowUnlockedChapters();
+
+    return Boolean(
+      unlocked[bookId] &&
+      unlocked[bookId].includes("full")
+    );
+  }
+
+  function unlockDoflowFullBook() {
+    const user = getDoflowUser();
+
+    if (!user) {
+      showToast("Please sign in to unlock full books.");
+      return;
+    }
+
+    const book = window.doflowActiveBook;
+
+    if (!book || !book.id) {
+      showToast("Open a book first.");
+      return;
+    }
+
+    if (isFullBookUnlocked(book.id)) {
+      showToast("This book is already fully unlocked.");
+      return;
+    }
+
+    const balance = getDoflowCodoBalance();
+    const cost = Number(book.fullBookCodoBills || 0);
+
+    if (balance < cost) {
+      showToast(
+        "Not enough Codo Bills. Top up to unlock the full book."
+      );
+      return;
+    }
+
+    const unlocked = getDoflowUnlockedChapters();
+
+    if (!unlocked[book.id]) {
+      unlocked[book.id] = [];
+    }
+
+    unlocked[book.id].push("full");
+
+    saveDoflowUnlockedChapters(unlocked);
+
+    saveDoflowCodoBalance(balance - cost);
+
+    showToast("Full book unlocked.");
+
+    if (
+      typeof renderDoflowChapters === "function"
+    ) {
+      renderDoflowChapters(book);
+    }
+  }
+
+  function topUpDoflowCodoBills() {
+    showToast(
+      "Codo Bill top-up will open in a later batch."
+    );
+  }
+
+  window.getDoflowCodoBalance =
+    getDoflowCodoBalance;
+
+  window.saveDoflowCodoBalance =
+    saveDoflowCodoBalance;
+
+  window.isChapterUnlocked =
+    isChapterUnlocked;
+
+  window.unlockDoflowChapter =
+    unlockDoflowChapter;
+
+  window.isFullBookUnlocked =
+    isFullBookUnlocked;
+
+  window.unlockDoflowFullBook =
+    unlockDoflowFullBook;
+
+  window.topUpDoflowCodoBills =
+    topUpDoflowCodoBills;
+
+  const originalOpenDoflowBook =
+    window.openDoflowBook;
+
+  window.openDoflowBook = function (bookId) {
+    if (
+      typeof originalOpenDoflowBook === "function"
+    ) {
+      originalOpenDoflowBook(bookId);
+    }
+
+    const balanceElement = document.getElementById(
+      "doflow-codo-balance"
+    );
+
+    if (balanceElement) {
+      balanceElement.textContent =
+        getDoflowCodoBalance();
+    }
+  };
+
+  const originalOpenDoflowChapter =
+    window.openDoflowChapter;
+
+  window.openDoflowChapter = function (index) {
+    const book = window.doflowActiveBook;
+
+    if (!book || !book.id) {
+      showToast("Open a book first.");
+      return;
+    }
+
+    const chapters = book.chapters || [];
+    const chapter = chapters[index];
+
+    if (!chapter) {
+      showToast("Chapter not found.");
+      return;
+    }
+
+    const isFree =
+      index < Number(book.freeChapters || 0);
+
+    const isUnlocked =
+      isChapterUnlocked(book.id, index) ||
+      isFullBookUnlocked(book.id);
+
+    if (isFree || isUnlocked) {
+      if (
+        typeof startDoflowReading === "function"
+      ) {
+        startDoflowReading();
+      }
+
+      return;
+    }
+
+    const cost = Number(chapter.codoBills || 0);
+
+    if (cost > 0) {
+      unlockDoflowChapter(
+        book.id,
+        index,
+        cost
+      );
+
+      return;
+    }
+
+    showToast(
+      "This chapter is locked. Codo Bill unlocking will open in a later batch."
+    );
+  };
+})();
+</script>
+<script>
+(function () {
+  function getDoflowUser() {
+    return window.doflowCurrentUser || null;
+  }
+
+  function getDoflowCommunityData() {
+    try {
+      return JSON.parse(
+        localStorage.getItem("doflowCommunityData") || "{}"
+      );
+    } catch (error) {
+      return {};
+    }
+  }
+
+  function saveDoflowCommunityData(data) {
+    localStorage.setItem(
+      "doflowCommunityData",
+      JSON.stringify(data || {})
+    );
+  }
+
+  function getBookCommunity(bookId) {
+    const data = getDoflowCommunityData();
+
+    if (!data[bookId]) {
+      data[bookId] = {
+        reviews: [],
+        comments: [],
+        theories: []
+      };
+    }
+
+    return data[bookId];
+  }
+
+  function escapeValue(value) {
+    return String(value || "")
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#039;");
+  }
+
+  function renderDoflowReviews() {
+    const book = window.doflowActiveBook;
+
+    if (!book || !book.id) return;
+
+    const container = document.getElementById(
+      "doflow-reviews-list"
+    );
+
+    if (!container) return;
+
+    const community = getBookCommunity(book.id);
+    const reviews = community.reviews || [];
+
+    if (reviews.length === 0) {
+      container.innerHTML =
+        '<p class="muted">No reviews yet. Be the first to review this book.</p>';
+      return;
+    }
+
+    let html = "";
+
+    reviews.forEach(function (review) {
+      html += `
+        <div class="review-item">
+          <div class="item-name">
+            ${escapeValue(review.name)}
+          </div>
+
+          <div class="item-text">
+            ${escapeValue(review.text)}
+          </div>
+        </div>
+      `;
+    });
+
+    container.innerHTML = html;
+  }
+
+  function renderDoflowComments() {
+    const book = window.doflowActiveBook;
+
+    if (!book || !book.id) return;
+
+    const container = document.getElementById(
+      "doflow-comments-list"
+    );
+
+    if (!container) return;
+
+    const community = getBookCommunity(book.id);
+    const comments = community.comments || [];
+
+    if (comments.length === 0) {
+      container.innerHTML =
+        '<p class="muted">No comments yet. Start the conversation.</p>';
+      return;
+    }
+
+    let html = "";
+
+    comments.forEach(function (comment) {
+      html += `
+        <div class="comment-item">
+          <div class="item-name">
+            ${escapeValue(comment.name)}
+          </div>
+
+          <div class="item-text">
+            ${escapeValue(comment.text)}
+          </div>
+        </div>
+      `;
+    });
+
+    container.innerHTML = html;
+  }
+
+  function renderDoflowTheories() {
+    const book = window.doflowActiveBook;
+
+    if (!book || !book.id) return;
+
+    const container = document.getElementById(
+      "doflow-theories-list"
+    );
+
+    if (!container) return;
+
+    const community = getBookCommunity(book.id);
+    const theories = community.theories || [];
+
+    if (theories.length === 0) {
+      container.innerHTML =
+        '<p class="muted">No fan theories yet. Share your theory.</p>';
+      return;
+    }
+
+    let html = "";
+
+    theories.forEach(function (theory, index) {
+      html += `
+        <div class="theory-item">
+          <div class="item-name">
+            ${escapeValue(theory.name)}
+          </div>
+
+          <div class="item-text">
+            ${escapeValue(theory.text)}
+          </div>
+
+          <div class="theory-vote">
+            <button
+              class="btn btn-ghost vote-button"
+              onclick="voteDoflowTheory(${index})">
+              Upvote
+            </button>
+
+            <span class="item-text">
+              ${Number(theory.votes || 0)} votes
+            </span>
+          </div>
+        </div>
+      `;
+    });
+
+    container.innerHTML = html;
+  }
+
+  function addDoflowReview() {
+    const book = window.doflowActiveBook;
+
+    if (!book || !book.id) {
+      showToast("Open a book first.");
+      return;
+    }
+
+    const user = getDoflowUser();
+
+    if (!user) {
+      showToast("Please sign in to review books.");
+      return;
+    }
+
+    const text = prompt("Write your review:");
+
+    if (!text || !text.trim()) {
+      showToast("Review cannot be empty.");
+      return;
+    }
+
+    const community = getBookCommunity(book.id);
+
+    community.reviews.push({
+      name: user.displayName || "Reader",
+      text: text.trim(),
+      createdAt: Date.now()
+    });
+
+    saveDoflowCommunityData(
+      getDoflowCommunityData()
+    );
+
+    renderDoflowReviews();
+
+    showToast("Review added.");
+  }
+
+  function addDoflowComment() {
+    const book = window.doflowActiveBook;
+
+    if (!book || !book.id) {
+      showToast("Open a book first.");
+      return;
+    }
+
+    const user = getDoflowUser();
+
+    if (!user) {
+      showToast("Please sign in to comment.");
+      return;
+    }
+
+    const text = prompt("Write your comment:");
+
+    if (!text || !text.trim()) {
+      showToast("Comment cannot be empty.");
+      return;
+    }
+
+    const community = getBookCommunity(book.id);
+
+    community.comments.push({
+      name: user.displayName || "Reader",
+      text: text.trim(),
+      createdAt: Date.now()
+    });
+
+    saveDoflowCommunityData(
+      getDoflowCommunityData()
+    );
+
+    renderDoflowComments();
+
+    showToast("Comment added.");
+  }
+
+  function addDoflowTheory() {
+    const book = window.doflowActiveBook;
+
+    if (!book || !book.id) {
+      showToast("Open a book first.");
+      return;
+    }
+
+    const user = getDoflowUser();
+
+    if (!user) {
+      showToast("Please sign in to share a theory.");
+      return;
+    }
+
+    const text = prompt("Share your fan theory:");
+
+    if (!text || !text.trim()) {
+      showToast("Theory cannot be empty.");
+      return;
+    }
+
+    const community = getBookCommunity(book.id);
+
+    community.theories.push({
+      name: user.displayName || "Reader",
+      text: text.trim(),
+      votes: 0,
+      createdAt: Date.now()
+    });
+
+    saveDoflowCommunityData(
+      getDoflowCommunityData()
+    );
+
+    renderDoflowTheories();
+
+    showToast("Fan theory added.");
+  }
+
+  function voteDoflowTheory(index) {
+    const book = window.doflowActiveBook;
+
+    if (!book || !book.id) return;
+
+    const community = getBookCommunity(book.id);
+    const theory = community.theories[index];
+
+    if (!theory) return;
+
+    theory.votes = Number(theory.votes || 0) + 1;
+
+    saveDoflowCommunityData(
+      getDoflowCommunityData()
+    );
+
+    renderDoflowTheories();
+
+    showToast("Vote added.");
+  }
+
+  window.addDoflowReview = addDoflowReview;
+  window.addDoflowComment = addDoflowComment;
+  window.addDoflowTheory = addDoflowTheory;
+  window.voteDoflowTheory = voteDoflowTheory;
+
+  const originalOpenDoflowBook =
+    window.openDoflowBook;
+
+  window.openDoflowBook = function (bookId) {
+    if (
+      typeof originalOpenDoflowBook === "function"
+    ) {
+      originalOpenDoflowBook(bookId);
+    }
+
+    renderDoflowReviews();
+    renderDoflowComments();
+    renderDoflowTheories();
+  };
+})();
+</script>
+<script>
+(function () {
+  function getDoflowUser() {
+    return window.doflowCurrentUser || null;
+  }
+
+  function getDoflowFollowing() {
+    try {
+      return JSON.parse(
+        localStorage.getItem("doflowFollowing") || "[]"
+      );
+    } catch (error) {
+      return [];
+    }
+  }
+
+  function saveDoflowFollowing(list) {
+    localStorage.setItem(
+      "doflowFollowing",
+      JSON.stringify(list || [])
+    );
+  }
+
+  function isAuthorFollowed(authorId) {
+    const following = getDoflowFollowing();
+
+    return following.includes(authorId);
+  }
+
+  function followDoflowAuthor() {
+    const user = getDoflowUser();
+
+    if (!user) {
+      showToast("Please sign in to follow authors.");
+      return;
+    }
+
+    const book = window.doflowActiveBook;
+
+    if (!book || !book.authorId) {
+      showToast("Author not found.");
+      return;
+    }
+
+    const authorId = book.authorId;
+
+    if (isAuthorFollowed(authorId)) {
+      showToast("You already follow this author.");
+      return;
+    }
+
+    const following = getDoflowFollowing();
+
+    following.push(authorId);
+
+    saveDoflowFollowing(following);
+
+    showToast("Author followed.");
+
+    updateFollowButton();
+  }
+
+  function unfollowDoflowAuthor() {
+    const user = getDoflowUser();
+
+    if (!user) {
+      showToast("Please sign in first.");
+      return;
+    }
+
+    const book = window.doflowActiveBook;
+
+    if (!book || !book.authorId) {
+      showToast("Author not found.");
+      return;
+    }
+
+    const authorId = book.authorId;
+
+    const following = getDoflowFollowing();
+
+    const updatedFollowing = following.filter(
+      function (id) {
+        return id !== authorId;
+      }
+    );
+
+    saveDoflowFollowing(updatedFollowing);
+
+    showToast("Author unfollowed.");
+
+    updateFollowButton();
+  }
+
+  function updateFollowButton() {
+    const book = window.doflowActiveBook;
+
+    if (!book || !book.authorId) return;
+
+    const followButton = document.querySelector(
+      '#doflow-book-page .book-actions button[onclick="followDoflowAuthor()"]'
+    );
+
+    if (!followButton) return;
+
+    if (isAuthorFollowed(book.authorId)) {
+      followButton.textContent = "Following";
+      followButton.onclick = unfollowDoflowAuthor;
+    } else {
+      followButton.textContent = "Follow author";
+      followButton.onclick = followDoflowAuthor;
+    }
+  }
+
+  function connectReaderAccount() {
+    if (!window.firebase || !firebase.auth) return;
+
+    firebase.auth().onAuthStateChanged(function (user) {
+      window.doflowCurrentUser = user;
+
+      if (user) {
+        updateFollowButton();
+      }
+    });
+  }
+
+  window.followDoflowAuthor = followDoflowAuthor;
+  window.unfollowDoflowAuthor = unfollowDoflowAuthor;
+
+  const originalOpenDoflowBook =
+    window.openDoflowBook;
+
+  window.openDoflowBook = function (bookId) {
+    if (
+      typeof originalOpenDoflowBook === "function"
+    ) {
+      originalOpenDoflowBook(bookId);
+    }
+
+    setTimeout(function () {
+      updateFollowButton();
+    }, 100);
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener(
+      "DOMContentLoaded",
+      connectReaderAccount
+    );
+  } else {
+    connectReaderAccount();
+  }
+})();
+</script>
+<script>
+(function () {
+  function finalDoflowCleanup() {
+    if (
+      typeof window.openDoflowBook !== "function"
+    ) {
+      console.warn("Doflow Book Page not loaded.");
+    }
+
+    if (
+      typeof window.openDoflowLibrary !== "function"
+    ) {
+      console.warn("Doflow Library not loaded.");
+    }
+
+    if (
+      typeof window.openDoflowCodoBills !== "function"
+    ) {
+      console.warn("Doflow Codo Bills not loaded.");
+    }
+
+    if (
+      typeof window.openDoflowProfile !== "function"
+    ) {
+      console.warn("Doflow Profile not loaded.");
+    }
+
+    if (
+      typeof window.saveDoflowBook !== "function"
+    ) {
+      console.warn("Doflow Save Book not loaded.");
+    }
+
+    if (
+      typeof window.unlockDoflowChapter !== "function"
+    ) {
+      console.warn("Doflow Chapter Unlock not loaded.");
+    }
+
+    if (
+      typeof window.addDoflowReview !== "function"
+    ) {
+      console.warn("Doflow Reviews not loaded.");
+    }
+
+    if (
+      typeof window.followDoflowAuthor !== "function"
+    ) {
+      console.warn("Doflow Follow Author not loaded.");
+    }
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener(
+      "DOMContentLoaded",
+      finalDoflowCleanup
+    );
+  } else {
+    finalDoflowCleanup();
+  }
+
+  window.doflowReaderAppReady = true;
+})();
+</script>
 </body>
     </html>
